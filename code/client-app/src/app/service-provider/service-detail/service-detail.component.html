@@ -1,0 +1,90 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Service request information</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                        <div class="m-b-20">
+                            <div class="contact-grid">
+                                <div class="profile-header bg-dark">
+                                    <div class="name-center">Request By</div>
+                                    <div class="user-name">{{dataInfo.fullName}}</div>
+                                </div>
+                                <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+
+                                <div>
+                                    <span class="phone">
+                                        <i class="material-icons">phone</i>{{dataInfo.mobile}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+             <div class="col-lg-8 col-md-12">
+                <div class="card">
+                        <div aria-expanded="true">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2>Summary</h2>
+                                        </div>
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-4 col-6 b-r">
+                                                    <strong>Full Name</strong>
+                                                    <br>
+                                                    <p>{{dataInfo.fullName}}</p>
+                                                </div>
+                                                <div class="col-md-4 col-6 b-r">
+                                                    <strong>Mobile</strong>
+                                                    <br>
+                                                    <p>{{dataInfo.mobile}}</p>
+                                                </div>
+                                                <div class="col-md-4 col-6 b-r">
+                                                    <strong>Email</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.email}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-3 col-6 b-r">
+                                                    <strong>address</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.address}}</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-6 b-r">
+                                                    <strong>Service Type</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.serviceType}}</p>
+                                                </div>
+                                                <div class="col-md-6 col-6 b-r">
+                                                    <strong>Service Status</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.status}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                </div>
+            </div> 
+        </div>
+    </div>
+</section>

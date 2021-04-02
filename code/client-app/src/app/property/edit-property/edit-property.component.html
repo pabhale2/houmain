@@ -1,0 +1,104 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Edit Property</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/main">
+                                <i class="fas fa-home"></i> Property</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong> Property Information</strong></h2>
+                        <!-- <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="#" onClick="return false;" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="#" onClick="return false;">Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onClick="return false;">Another action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onClick="return false;">Something else here</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul> -->
+                    </div>
+                    <div class="body">
+                        <form class="register-form m-4" [formGroup]="propertyDetails" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Property name</mat-label>
+                                        <input matInput formControlName="propertyName" required>
+                                        <mat-icon matSuffix>face</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.propertyName">
+                                            <ng-container *ngIf="propertyDetails.get('propertyName').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Property Sub Type</mat-label>
+                                        <mat-select formControlName="propertyType">
+                                            <mat-option *ngFor="let x of propertyTypeData" (onSelectionChange)="loadData(x.propertyType)" [value]="x.propertyType">
+                                                {{x.propertyType}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix>flag</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.propertyType">
+                                            <ng-container *ngIf="propertyDetails.get('propertyType').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Property Sub Type</mat-label>
+                                        <mat-select formControlName="propertySubType">
+                                            <mat-option *ngFor="let x of PropertySubTypeData" [value]="x.propertySubType">
+                                                {{x.propertySubType}}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-icon matSuffix>flag</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.propertySubType">
+                                            <ng-container *ngIf="propertyDetails.get('propertySubType').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <button class="mr-6" [disabled]="!propertyDetails.valid" mat-raised-button
+                                        color="primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

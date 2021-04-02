@@ -1,0 +1,207 @@
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <span class="login100-form-title p-b-30">
+          Register
+        </span>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Firstname</mat-label>
+          <input matInput formControlName="firstName" required>
+          <mat-icon matSuffix>face</mat-icon>
+          <mat-error *ngIf="loginForm.get('firstName').hasError('required')">
+            Firstname is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Lastname</mat-label>
+          <input matInput formControlName="lastName" required>
+          <mat-icon matSuffix>face</mat-icon>
+          <mat-error *ngIf="loginForm.get('lastName').hasError('required')">
+            Lastname is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Date of Birth</mat-label>
+          <span matPrefix>
+              <mat-icon class="mr-2">date_range</mat-icon>
+          </span>
+          <input  type="date" formControlName="dob" [min]="minDate"  [max]="maxDate"
+          matInput placeholder="EX: 10/07/2020" mask="00/00/0000"/>
+      </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Primary Email</mat-label>
+          <input matInput formControlName="primaryEmail" required>
+          <mat-icon matSuffix>mail</mat-icon>
+          <mat-error *ngIf="loginForm.get('primaryEmail').hasError('required') || loginForm.get('email').touched">
+            Please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Alternate Email</mat-label>
+          <input matInput formControlName="alternateEmail" >
+          <mat-icon matSuffix>mail</mat-icon>
+          
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="mobileNumber" required>
+          <mat-icon matSuffix>call</mat-icon>
+          <mat-error *ngIf="loginForm.get('mobileNumber').hasError('required')">
+            Mobile number required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Office Number</mat-label>
+          <input matInput formControlName="officeNumber">
+          <mat-icon matSuffix>call</mat-icon>
+          
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Street Address</mat-label>
+          <input matInput formControlName="streetAddress" required>
+          <mat-icon matSuffix>home</mat-icon>
+          <mat-error *ngIf="loginForm.get('streetAddress').hasError('required')">
+            Street Address is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" required>
+          <mat-icon matSuffix>location_city</mat-icon>
+          <mat-error *ngIf="loginForm.get('city').hasError('required')">
+            City is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state" required>
+          
+          <mat-error *ngIf="loginForm.get('state').hasError('required')">
+            State is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" required>
+          <mat-icon matSuffix>location</mat-icon>
+          <mat-error *ngIf="loginForm.get('country').hasError('required')">
+            Country is required
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Zip</mat-label>
+          <input matInput formControlName="zip" required>
+          <mat-icon matSuffix>flag</mat-icon>
+          <mat-error *ngIf="loginForm.get('zip').hasError('required')">
+            Zip is required
+          </mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Company Name</mat-label>
+          <input matInput formControlName="companyName" required>
+          <mat-icon matSuffix>location_city</mat-icon>
+          <mat-error *ngIf="loginForm.get('companyName').hasError('required')">
+            Company Name is required
+          </mat-error>
+        </mat-form-field>
+
+        
+          
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Type</mat-label>
+            <mat-select #type formControlName="ownerType">
+              <mat-option *ngFor="let x of ownerTypeData" 
+                [value]="x.ownerType">
+                {{x.ownerType}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="loginForm.get('ownerType').hasError('required')">
+              Type is required
+            </mat-error>
+            <mat-icon matSuffix>flag</mat-icon>
+          </mat-form-field>
+        
+
+          <div *ngIf="type.value=='Service Provider'">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Type of Service</mat-label>
+              <input matInput formControlName="typeofService" required>
+              <mat-error *ngIf="loginForm.get('typeofService').hasError('required')">
+                Type of Service is required
+              </mat-error>
+            </mat-form-field>
+    
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Experience</mat-label>
+              <input matInput formControlName="experience">
+            </mat-form-field>
+          </div>
+
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
+          <mat-icon matSuffix (click)="hide = !hide">
+            {{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="loginForm.get('password').hasError('required')">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
+          <mat-icon matSuffix (click)="chide = !chide">
+            {{chide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <mat-error *ngIf="loginForm.get('cpassword').hasError('required')">
+            Confirm Password is required
+          </mat-error>
+        </mat-form-field>
+
+        
+      
+        <div class="flex-sb-m w-full p-t-15 p-b-20">
+          <div>
+            <span>Already Registered? <a routerLink="/authentication/signin">
+                Login
+              </a></span>
+          </div>
+        </div>
+        <div class="container-login100-form-btn">
+          <button mat-flat-button color="primary" class="login100-form-btn" type="submit">
+            Register
+          </button>
+        </div>
+        <div class="text-center p-t-30 p-b-20">
+          <span class="txt2">
+            or sign up using
+          </span>
+        </div>
+        <div class="login100-form-social flex-c-m">
+          <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </div>
+      </form>
+      <div class="login100-more" style="background-image: url('assets/images/pages/bg-02.png');">
+      </div>
+    </div>
+  </div>
+</div>

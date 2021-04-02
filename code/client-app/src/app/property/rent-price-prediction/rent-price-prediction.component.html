@@ -1,0 +1,128 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Price Prediction</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/applicant">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a routerLink="#">Property</a>
+                        </li>
+                        <li class="breadcrumb-item active">Price Prediction</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="header">
+                <h2>Add Owner Form </h2>
+            </div>
+            <div class="body">
+                <form class="register-form m-4" [formGroup]="propertyDetails" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Area in squ feet</mat-label>
+                                <input matInput formControlName="area" required>
+                                <mat-icon matSuffix>layers</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.area">
+                                    <ng-container *ngIf="propertyDetails.get('area').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>bedroomCount</mat-label>
+                                <input matInput formControlName="bedroomCount" required>
+                                <mat-icon matSuffix>local_hotel</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.bedroomCount">
+                                    <ng-container *ngIf="propertyDetails.get('bedroomCount').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>security</mat-label>
+                                <input matInput formControlName="security">
+                                <mat-icon matSuffix>security</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.security">
+                                    <ng-container *ngIf="propertyDetails.get('security').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>maintenanceStaff</mat-label>
+                                <input matInput formControlName="maintenanceStaff">
+                                <mat-icon matSuffix>portrait</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.maintenanceStaff">
+                                    <ng-container *ngIf="propertyDetails.get('maintenanceStaff').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>latitude</mat-label>
+                                <input matInput formControlName="latitude">
+                                <mat-icon matSuffix>place</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.latitude">
+                                    <ng-container *ngIf="propertyDetails.get('latitude').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>longitude</mat-label>
+                                <input matInput formControlName="longitude">
+                                <mat-icon matSuffix>place</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.longitude">
+                                    <ng-container *ngIf="propertyDetails.get('longitude').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <button class="mr-6" [disabled]="!propertyDetails.valid" mat-raised-button
+                                color="primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+                <div *ngIf="resultFlag==true">
+                    <div class="card">
+                    <div class="block-header">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <h1 class="page-title">Result {{result}} lakhs</h1>
+                                <h1 class="page-title">Rent should be 2.5% - 3% of market value per month </h1>
+                                <h1 class="page-title">i.e between {{minRent}}₹ - {{maxRent}}₹</h1>
+                            </div>
+                        </div>
+                    </div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

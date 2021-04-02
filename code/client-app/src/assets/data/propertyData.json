@@ -1,0 +1,22 @@
+{
+        "propertyId":"1",
+        "propertyName" : "XYZ Apartment",
+        "propertyType" : "Residential - Single Family",
+        "city":"Pune",
+        "state":"Maharashtra",
+        "country":"India",
+        "zipCode":"411039",
+        "lat":"18.535607",
+        "long":"73.898410",
+        "lastName":"XYZ",
+        "primaryEmail":"abc@gmail.com",
+        "mobile":"123456789",
+        "streetAddress":"ABC company , Xyz road, pqr_nagar,near abc shop",
+        "rentalFirstName":"ABCDEF",
+        "rentalLastName":"XYZqwerty",
+        "rentalPrimaryEmail":"xyz@gmail.com",
+        "rentalMobile":"999999999",
+        "propertyDesp":"qwertyuiopasdfghjklzxcvbnm",
+        "notes":"hello hello hello hi"
+ }
+

@@ -1,0 +1,311 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Add Owner</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/applicant">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a routerLink="/rentals/rentalowners">Rental Owners</a>
+                        </li>
+                        <li class="breadcrumb-item active">Add Owner</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="header">
+                <h2>Add Owner Form </h2>
+            </div>
+            <div class="body">
+                <form class="register-form m-4" [formGroup]="ownerDetails" (ngSubmit)="onSubmit()">
+                    <!--firstname,lastname-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>First name</mat-label>
+                                <input matInput formControlName="firstName" required>
+                                <mat-icon matSuffix>face</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.firstName">
+                                    <ng-container *ngIf="ownerDetails.get('firstName').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Last name</mat-label>
+                                <input matInput formControlName="lastName" required>
+                                <mat-icon matSuffix>account_circle</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.lastName">
+                                    <ng-container *ngIf="ownerDetails.get('lastName').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--companyname,DOB-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Company name</mat-label>
+                                <input matInput formControlName="companyName">
+                                <mat-icon matSuffix>account_balance</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.companyName">
+                                    <ng-container *ngIf="ownerDetails.get('companyName').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Date of Birth</mat-label>
+                                <span matPrefix>
+                                    <mat-icon class="mr-2">date_range</mat-icon>
+                                </span>
+                                <input  type="date" formControlName="dob" [min]="minDate"  [max]="maxDate"
+                                matInput placeholder="EX: 10/07/2020" mask="00/00/0000"/>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--start date, end date-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Start Date</mat-label>
+                                <span matPrefix>
+                                    <mat-icon class="mr-2">date_range</mat-icon>
+                                </span>
+                                <input type="date" formControlName="startDate" [min]="minDate"  [max]="maxDate"
+                                matInput placeholder="EX: 10/07/2020" mask="00/00/0000"/>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>End Date</mat-label>
+                                <span matPrefix>
+                                    <mat-icon class="mr-2">date_range</mat-icon>
+                                </span>
+                                <input type="date"  formControlName="endDate" [min]="minDate"  [max]="maxDate"
+                                matInput placeholder="EX: 10/07/2020" mask="00/00/0000"/>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <!--primaryEmail-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Primary Email</mat-label>
+                                <input matInput formControlName="primaryEmail" required>
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.primaryEmail">
+                                    <ng-container *ngIf="ownerDetails.get('primaryEmail').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--alternate email-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Alternate Email</mat-label>
+                                <input matInput formControlName="alternateEmail">
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.alternateEmail">
+                                    <ng-container *ngIf="ownerDetails.get('alternateEmail').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--mobile,homenumber-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput formControlName="mobile" >
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.mobile">
+                                    <ng-container *ngIf="ownerDetails.get('mobile').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Home Number</mat-label>
+                                <input matInput formControlName="homeNumber">
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.homeNumber">
+                                    <ng-container *ngIf="ownerDetails.get('homeNumber').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                     <!--officenumber,number-->
+                     <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Office Number</mat-label>
+                                <input matInput formControlName="officeNumber">
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.officeNumber">
+                                    <ng-container *ngIf="ownerDetails.get('officeNumber').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Number</mat-label>
+                                <input matInput formControlName="number">
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.number">
+                                    <ng-container *ngIf="ownerDetails.get('number').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--streetaddress-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Street Address</mat-label>
+                                <textarea matInput formControlName="streetAddress"></textarea>
+                                <mat-error *ngFor="let error of errormessage.streetAddress">
+                                    <ng-container *ngIf="ownerDetails.get('streetAddress').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--city,state-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>City</mat-label>
+                                <input matInput formControlName="city" >
+                                <mat-icon matSuffix>location_city</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.city">
+                                    <ng-container *ngIf="ownerDetails.get('city').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>map</mat-label>
+                                <input matInput formControlName="state">
+                                <mat-icon matSuffix>business</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.state">
+                                    <ng-container *ngIf="ownerDetails.get('state').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--zip,country-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Zip</mat-label>
+                                <input matInput formControlName="zip">
+                                <mat-icon matSuffix>flag</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.zip">
+                                    <ng-container *ngIf="ownerDetails.get('zip').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Country</mat-label>
+                                <mat-select formControlName="country">
+                                    <mat-option *ngFor="let x of sharedData" [value]="'India'">
+                                        {{x.country}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-icon matSuffix>flag</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.city">
+                                    <ng-container *ngIf="ownerDetails.get('country').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--comments-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Comments</mat-label>
+                                <textarea matInput formControlName="comments"></textarea>
+                                <mat-error *ngFor="let error of errormessage.comments">
+                                    <ng-container *ngIf="ownerDetails.get('comments').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--taxpayerID,taxindentity ype-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Taxpayer ID</mat-label>
+                                <input matInput formControlName="taxpayerID" >
+                                <mat-icon matSuffix>credit_card</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.taxpayerID">
+                                    <ng-container *ngIf="ownerDetails.get('taxpayerID').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Tax Indentity Type</mat-label>
+                                <input matInput formControlName="taxIndentityType">
+                                <mat-icon matSuffix>credit_card</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.taxIndentityType">
+                                    <ng-container *ngIf="ownerDetails.get('taxIndentityType').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <button class="mr-6" [disabled]="!ownerDetails.valid" mat-raised-button
+                                color="primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

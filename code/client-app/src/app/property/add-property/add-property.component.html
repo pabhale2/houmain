@@ -1,0 +1,356 @@
+<section class=content>
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Add Property</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <a routerLink="/dashboard/applicant">
+                <i class="fas fa-home"></i> Home</a>
+            </li>
+            <li class="breadcrumb-item bcrumb-2">
+              <a routerLink="/rentals/rentalowners">Properties</a>
+            </li>
+            <li class="breadcrumb-item active">Add Property</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="header">
+        <h2>Add Property form</h2>
+      </div>
+      <div class="body">
+        <form [formGroup]="addPropertyForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-label>
+                <h5>What is the property Name?</h5>
+              </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Property Name</mat-label>
+                <input matInput formControlName="propertyName">
+                <mat-error *ngFor="let error of errormessage.propertyName">
+                  <ng-container *ngIf="addPropertyForm.get('propertyName').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-label>
+                <h5>Describe your property</h5>
+              </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Description</mat-label>
+                <textarea matInput formControlName="propertDescription"></textarea>
+                <mat-error *ngFor="let error of errormessage.propertDescription">
+                  <ng-container *ngIf="addPropertyForm.get('propertDescription').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-label>
+                <h5>select property Type</h5>
+              </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Property Type</mat-label>
+                <mat-select #type formControlName="propertyType">
+                  <mat-option *ngFor="let x of propertyTypeData" (onSelectionChange)="loadData(x.propertyType)"
+                    [value]="x.propertyType">
+                    {{x.propertyType}}
+                  </mat-option>
+                </mat-select>
+                <mat-icon matSuffix>flag</mat-icon>
+                <mat-error *ngFor="let error of errormessage.propertyType">
+                  <ng-container *ngIf="addPropertyForm.get('propertyType').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+              <mat-label>
+                <h5>Select property Sub-Type</h5>
+              </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Property Sub Type</mat-label>
+                <mat-select #subtype formControlName="propertySubType">
+                  <mat-option *ngFor="let x of PropertySubTypeData" [value]="x.propertySubType">
+                    {{x.propertySubType}}
+                  </mat-option>
+                </mat-select>
+                <mat-icon matSuffix>flag</mat-icon>
+                <mat-error *ngFor="let error of errormessage.propertySubType">
+                  <ng-container *ngIf="addPropertyForm.get('propertySubType').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div *ngIf="type.value=='Residential'">
+            <div *ngIf="subtype.value=='Condo / Town Home' ||subtype.value=='MultiFamily'" >
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Unit Count</mat-label>
+                    <input matInput formControlName="unitCount">
+                    <mat-error *ngFor="let error of errormessage.unitCount">
+                      <ng-container *ngIf="addPropertyForm.get('unitCount').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Hall</mat-label>
+                  <input matInput formControlName="HallNum">
+                  <mat-error *ngFor="let error of errormessage.HallNum">
+                    <ng-container *ngIf="addPropertyForm.get('HallNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Bed</mat-label>
+                  <input matInput formControlName="BedNum" required>
+                  <mat-error *ngFor="let error of errormessage.BedNum">
+                    <ng-container *ngIf="addPropertyForm.get('BedNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Galleries</mat-label>
+                  <input matInput formControlName="GalleriesNum" required>
+                  <mat-error *ngFor="let error of errormessage.GalleriesNum">
+                    <ng-container *ngIf="addPropertyForm.get('GalleriesNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Kitchen</mat-label>
+                  <input matInput formControlName="KitchenNum" required>
+                  <mat-error *ngFor="let error of errormessage.KitchenNum">
+                    <ng-container *ngIf="addPropertyForm.get('KitchenNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Bathroom</mat-label>
+                  <input matInput formControlName="BathroomNum" required>
+                  <mat-error *ngFor="let error of errormessage.BathroomNum">
+                    <ng-container *ngIf="addPropertyForm.get('BathroomNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>No. of Toilet</mat-label>
+                  <input matInput formControlName="ToiletNum" required>
+                  <mat-error *ngFor="let error of errormessage.ToiletNum">
+                    <ng-container *ngIf="addPropertyForm.get('ToiletNum').hasError(error.type)">
+                      {{error.message}}
+                    </ng-container>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="type.value=='Commercial'">
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>No. of entry gate</mat-label>
+                <input matInput formControlName="EntryGateNum" required>
+                <mat-error *ngFor="let error of errormessage.EntryGateNum">
+                  <ng-container *ngIf="addPropertyForm.get('EntryGateNum').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <!-- Street address -->
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-label>
+                    <h5>What is the property address?</h5>
+                  </mat-label>
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Street address</mat-label>
+                    <input matInput formControlName="streetAddress">
+                    <mat-error *ngFor="let error of errormessage.streetAddress">
+                      <ng-container *ngIf="addPropertyForm.get('streetAddress').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- City -->
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city" required>
+                    <mat-error *ngFor="let error of errormessage.city">
+                      <ng-container *ngIf="addPropertyForm.get('city').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- State -->
+                <div class="col">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>State</mat-label>
+                    <input matInput formControlName="state" required>
+                    <mat-error *ngFor="let error of errormessage.state">
+                      <ng-container *ngIf="addPropertyForm.get('state').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <!-- Zip -->
+                <div class="col">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Zip</mat-label>
+                    <input matInput formControlName="zip" required>
+                    <mat-error *ngFor="let error of errormessage.zip">
+                      <ng-container *ngIf="addPropertyForm.get('zip').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <!-- Country -->
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country" required>
+                    <mat-error *ngFor="let error of errormessage.country">
+                      <ng-container *ngIf="addPropertyForm.get('country').hasError(error.type)">
+                        {{error.message}}
+                      </ng-container>
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+
+            <!-- Map -->
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <agm-map [latitude]="latitude" [longitude]="longitude" style="height: 250px;"
+                (mapClick)="onMapClick($event)">
+                <agm-marker [latitude]="latitude" [longitude]="longitude">
+                </agm-marker>
+              </agm-map>
+            </div>
+
+          </div>
+          <!-- <div *ngIf="propertyType == 'Condo/Town Home'">
+            <mat-label> Enter Units </mat-label>
+          </div> -->
+          <!--table-->
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive">
+                    <div class="materialTableHeader">
+                      <div class="row">
+                        <div class="col-8">
+                          <ul class="header-buttons-left ml-0">
+                            <li class="dropdown">
+                              <h2>
+                                <strong>Photos</strong>
+                              </h2>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-4">
+                          <ul class="header-buttons">
+                            <li>
+                              <div class="icon-button-demo">
+                                <button mat-mini-fab color="primary" (click)="addPhoto()">
+                                  <mat-icon class="col-white">add</mat-icon>
+                                </button>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-table [dataSource]="container" matSort class="mat-cell">
+                      <ng-container matColumnDef="Photo Type">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photo Type</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.firstName}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Photos">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photos</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <button class="mr-6" [disabled]="container.data.length<2 || container.data.length>10" mat-raised-button
+                color="primary">Upload</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
