@@ -5,11 +5,18 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.youricsoft.houmain.customenum.RegistrationEnum;
+import com.youricsoft.houmain.dto.RegistrationDTO;
+import com.youricsoft.houmain.mapper.OwnerMapper;
+import com.youricsoft.houmain.mapper.TenantMapper;
 import com.youricsoft.houmain.model.ContactEntity;
 import com.youricsoft.houmain.model.Role;
+import com.youricsoft.houmain.model.Tenant;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.model.UserRole;
 import com.youricsoft.houmain.model.Owner;
@@ -21,31 +28,37 @@ import com.youricsoft.houmain.repository.UserRoleRepository;
 import com.youricsoft.houmain.repository.OwnerRepository;
 import com.youricsoft.houmain.repository.PropertyRepository;
 import com.youricsoft.houmain.service.GenericService;
+import com.youricsoft.houmain.service.OwnerService;
+import com.youricsoft.houmain.service.TenantService;
 
 @Service
 public class GenericServiceImpl implements GenericService {
 	
-	@Resource 
-    private UserRepository userRepository;
-
-	@Resource
-    private RoleRepository roleRepository;
+	@Resource private UserRepository userRepository;
+	@Resource private RoleRepository roleRepository;    
+	@Resource private UserRoleRepository userRoleRepository;
+	@Resource private ContactRepository contactRepository;
+	@Resource private OwnerRepository ownerRepository;
+	@Resource private PropertyRepository propertyRepository;
     
-	@Resource
-    private UserRoleRepository userRoleRepository;
-    
-	@Resource
-    private ContactRepository contactRepository;
-    
-	@Resource
-    private OwnerRepository ownerRepository;
+	@Resource private OwnerService ownerService;
+	@Resource private TenantService tenantService;
 	
-	@Resource
-	private PropertyRepository propertyRepository;
-    
     @Override
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+    
+    @Transactional
+    public void invokeTest() {
+    	User user = new User();
+    	user.setFirstName("awe2r");
+    	user.setLastName("abhale");
+    	user.setUsername("username2@gmail.com");
+    	user.setPassword("123456");
+    	user.setUserStatus(true);
+    	userRepository.save(user);
+    	throw new RuntimeException("Exception throws rollback ");	
     }
     
     @Override
@@ -130,8 +143,29 @@ public class GenericServiceImpl implements GenericService {
 		return properties;
 	}
 
-	
-	
-	
+	@Override
+	@Transactional
+	public User registerUser(RegistrationDTO registrationDTO) {
+		User user = new User();
+		user.setFirstName(registrationDTO.getFirstName());
+		user.setLastName(registrationDTO.getLastName());
+		user.setUsername(registrationDTO.getUserName());
+		user.setPassword(registrationDTO.getPassword());
+		user.setUserStatus(true);
+		User savedUser = saveUser(user);
+		if(savedUser!=null) {
+			if(RegistrationEnum.OWNER.equals(registrationDTO.getType())) {
+				Owner owner = OwnerMapper.INSTANCE.registrationDTOtoOwner(registrationDTO);
+				owner.setPrimaryEmail(user.getUsername());
+				owner.setStatus(1);
+				ownerService.save(owner);
+			} else if(RegistrationEnum.TENANT.equals(registrationDTO.getType())) {
+				Tenant tenant = TenantMapper.INSTANCE.registrationDTOToTenant(registrationDTO);
+				tenant.setUserId(user.getId());
+				tenantService.save(tenant);
+			}
+		}
+		return savedUser;
+	}
 
 }

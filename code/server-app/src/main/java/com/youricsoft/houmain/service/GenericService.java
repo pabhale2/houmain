@@ -2,6 +2,7 @@ package com.youricsoft.houmain.service;
 
 import java.util.List;
 
+import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.model.ContactEntity;
 import com.youricsoft.houmain.model.Owner;
 import com.youricsoft.houmain.model.Property;
@@ -23,4 +24,5 @@ public interface GenericService {
 	Property saveProperty(Property property);
 	Property findbyIdProperty(long id);
 	List<Property> findAllProperties();
+	User registerUser(RegistrationDTO registrationDTO);
 }

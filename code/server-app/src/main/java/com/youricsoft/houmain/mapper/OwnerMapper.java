@@ -6,6 +6,7 @@ import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
 import com.youricsoft.houmain.dto.OwnerDTO;
+import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.model.Owner;
 
 @Mapper(componentModel="spring")
@@ -22,4 +23,8 @@ public interface OwnerMapper {
     })
 	Owner ownerDTOTOOwner(OwnerDTO ownerDto);
     
+    @Mappings({
+    	@Mapping(target = "primaryEmail", source = "userName")
+    })
+    Owner registrationDTOtoOwner(RegistrationDTO registrationDTO);
 }
