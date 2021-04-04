@@ -1,8 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { serverURL, clientIdSecretKey } from '../url';
-import { TokenStorageService } from './token-storage.service';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -31,10 +29,17 @@ export class AuthenticationService {
   getPropertyType(){
     return [
        { "ownerType": "Property Owner" },
-       { "ownerType": "Tenant" },
-       { "ownerType": "Service Provider" }
+       { "ownerType": "Tenant" }
       ]
   }
-
-  
+  registration(registerOption){
+    const body = registerOption;
+    const requestOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+        ,Authorization: ('Basic ' + btoa(clientIdSecretKey))
+      })
+    };
+     return this.http.post(serverURL + "userMgt/register", body, requestOptions);
+  }
 }

@@ -21,19 +21,22 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.youricsoft.houmain.bo.Email;
 import com.youricsoft.houmain.bo.GenericModel;
 import com.youricsoft.houmain.bo.ServerResponse;
+import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.dto.UserDTO;
 import com.youricsoft.houmain.dto.UserInterface;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
+import com.youricsoft.houmain.service.OwnerService;
+import com.youricsoft.houmain.service.TenantService;
 import com.youricsoft.houmain.util.BCryptPasswordUtility;
 import com.youricsoft.houmain.util.EmailFactory;
 
 @RestController
 @RequestMapping(value="/service/user")
 public class UserManagement {
-	@Resource
-    private GenericService userService;
-	
+	@Resource private GenericService userService;
+	@Resource private TenantService tanentService;
+	@Resource private OwnerService ownerService;
 	@Resource(name="bCryptPasswordUtility")
 	private BCryptPasswordUtility passwordUtility;
 	
@@ -219,4 +222,5 @@ public class UserManagement {
 		return response;
 	    
 	}
+	
 }

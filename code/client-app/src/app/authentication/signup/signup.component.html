@@ -24,28 +24,12 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Date of Birth</mat-label>
-          <span matPrefix>
-              <mat-icon class="mr-2">date_range</mat-icon>
-          </span>
-          <input  type="date" formControlName="dob" [min]="minDate"  [max]="maxDate"
-          matInput placeholder="EX: 10/07/2020" mask="00/00/0000"/>
-      </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Primary Email</mat-label>
-          <input matInput formControlName="primaryEmail" required>
+          <mat-label>Username (Email)</mat-label>
+          <input matInput formControlName="userName" required>
           <mat-icon matSuffix>mail</mat-icon>
-          <mat-error *ngIf="loginForm.get('primaryEmail').hasError('required') || loginForm.get('email').touched">
+          <mat-error *ngIf="loginForm.get('userName').hasError('required') || loginForm.get('userName').touched">
             Please enter a valid email address
           </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Alternate Email</mat-label>
-          <input matInput formControlName="alternateEmail" >
-          <mat-icon matSuffix>mail</mat-icon>
-          
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
@@ -58,60 +42,6 @@
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Office Number</mat-label>
-          <input matInput formControlName="officeNumber">
-          <mat-icon matSuffix>call</mat-icon>
-          
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Street Address</mat-label>
-          <input matInput formControlName="streetAddress" required>
-          <mat-icon matSuffix>home</mat-icon>
-          <mat-error *ngIf="loginForm.get('streetAddress').hasError('required')">
-            Street Address is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>City</mat-label>
-          <input matInput formControlName="city" required>
-          <mat-icon matSuffix>location_city</mat-icon>
-          <mat-error *ngIf="loginForm.get('city').hasError('required')">
-            City is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>State</mat-label>
-          <input matInput formControlName="state" required>
-          
-          <mat-error *ngIf="loginForm.get('state').hasError('required')">
-            State is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Country</mat-label>
-          <input matInput formControlName="country" required>
-          <mat-icon matSuffix>location</mat-icon>
-          <mat-error *ngIf="loginForm.get('country').hasError('required')">
-            Country is required
-          </mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Zip</mat-label>
-          <input matInput formControlName="zip" required>
-          <mat-icon matSuffix>flag</mat-icon>
-          <mat-error *ngIf="loginForm.get('zip').hasError('required')">
-            Zip is required
-          </mat-error>
-        </mat-form-field>
-
-
-
-        <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Company Name</mat-label>
           <input matInput formControlName="companyName" required>
           <mat-icon matSuffix>location_city</mat-icon>
@@ -119,40 +49,23 @@
             Company Name is required
           </mat-error>
         </mat-form-field>
-
-        
+      
           
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Type</mat-label>
-            <mat-select #type formControlName="ownerType">
-              <mat-option *ngFor="let x of ownerTypeData" 
-                [value]="x.ownerType">
+            <mat-select #type formControlName="type">
+              <mat-option *ngFor="let x of ownerTypeData"  [value]="x.ownerType">
                 {{x.ownerType}}
               </mat-option>
             </mat-select>
-            <mat-error *ngIf="loginForm.get('ownerType').hasError('required')">
+            <mat-error *ngIf="loginForm.get('type').hasError('required')">
               Type is required
             </mat-error>
             <mat-icon matSuffix>flag</mat-icon>
           </mat-form-field>
         
 
-          <div *ngIf="type.value=='Service Provider'">
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Type of Service</mat-label>
-              <input matInput formControlName="typeofService" required>
-              <mat-error *ngIf="loginForm.get('typeofService').hasError('required')">
-                Type of Service is required
-              </mat-error>
-            </mat-form-field>
-    
-            <mat-form-field class="example-full-width" appearance="outline">
-              <mat-label>Experience</mat-label>
-              <input matInput formControlName="experience">
-            </mat-form-field>
-          </div>
-
-
+          
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>

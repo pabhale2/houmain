@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
@@ -32,7 +32,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
@@ -48,7 +48,7 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
-    title: 'Tanent',
+    title: 'Tenant',
     icon: 'fas fa-clipboard-list',
     class: 'menu-toggle',
     accessControl: [],
@@ -56,11 +56,11 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '',
-        title: 'Add Tanent',
+        title: 'Add Tenant',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','TENANT'],
         submenu: []
       },
       {
@@ -88,7 +88,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
@@ -97,7 +97,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
@@ -106,7 +106,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: [],
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER','TENANT'],
         submenu: []
       }
     ]

@@ -85,3 +85,21 @@ CREATE TABLE `property` (
   `otherInfo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id_property`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2;
+
+ALTER TABLE `tanent` 
+CHANGE COLUMN `tanent_id` `tenant_id` INT(11) NOT NULL AUTO_INCREMENT , RENAME TO  `tenant` ;
+
+ALTER TABLE `tenant` 
+CHANGE COLUMN `phone_number` `mobile_number` VARCHAR(15) NULL DEFAULT NULL ;
+
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('3', 'Inspector', 'INSPECTOR');
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('4', 'Local guide', 'LOCAL_GUIDE');
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('5', 'Vendor - service Provider', 'VENDOR');
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('6', 'Owner', 'OWNER');
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('7', 'Tenent ', 'TENANT');
+DELETE FROM `app_role` WHERE `id`='1';
+DELETE FROM `app_role` WHERE `id`='2';
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('1', 'Admin User - Has permission to perform admin tasks', 'ADMIN_USER');
+INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('2', 'Standard User - Has no admin rights', 'STANDARD_USER');
+
+

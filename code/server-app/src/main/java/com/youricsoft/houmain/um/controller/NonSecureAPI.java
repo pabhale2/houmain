@@ -21,6 +21,7 @@ import com.youricsoft.houmain.bo.Email;
 import com.youricsoft.houmain.bo.GenericModel;
 import com.youricsoft.houmain.bo.ServerResponse;
 import com.youricsoft.houmain.dto.UserInterface;
+import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.dto.UserDTO;
 import com.youricsoft.houmain.model.ContactEntity;
 import com.youricsoft.houmain.model.User;
@@ -205,5 +206,30 @@ public class NonSecureAPI {
 		
         return ResponseEntity.ok()
                  .body(new ByteArrayResource(user.getUserProfile()));
+    }
+	
+	@RequestMapping(value ="/register", method=RequestMethod.POST)
+    public ServerResponse<UserInterface> registerUser(@RequestBody RegistrationDTO registrationDTO){
+		ServerResponse<UserInterface> response = new ServerResponse<>();
+		
+		User existingUser = genericService.findByUsername(registrationDTO.getUserName());
+		if(existingUser!=null) {
+			response.setStatus(HttpStatus.CONFLICT);
+			response.setResponseCode(HttpStatus.CONFLICT.value());
+		}else {
+			User user = genericService.registerUser(registrationDTO);
+			if(user!=null && user.getId()>0) {
+				response.setStatus(HttpStatus.OK);
+				response.setResponseCode(HttpStatus.OK.value());
+				user.setPassword("");
+				response.setData(user);
+			} else {
+				response.setStatus(HttpStatus.BAD_REQUEST);
+				response.setResponseCode(HttpStatus.BAD_REQUEST.value());
+				user.setPassword("");
+				response.setData(user);
+			}
+		}
+		return response;
     }
 }
