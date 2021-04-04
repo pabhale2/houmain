@@ -28,8 +28,8 @@ export class AuthenticationService {
 
   getPropertyType(){
     return [
-       { "ownerType": "Property Owner" },
-       { "ownerType": "Tenant" }
+       { "ownerType": "OWNER" },
+       { "ownerType": "TENANT" }
       ]
   }
   registration(registerOption){
@@ -37,9 +37,8 @@ export class AuthenticationService {
     const requestOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
-        ,Authorization: ('Basic ' + btoa(clientIdSecretKey))
       })
     };
-     return this.http.post(serverURL + "userMgt/register", body, requestOptions);
+     return this.http.post(serverURL + "userMgt/register", body);
   }
 }

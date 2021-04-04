@@ -10,7 +10,7 @@ export class TokenInterceptorService implements HttpInterceptor {
 
   intercept(req, next){
     let tokenizedReq =  req.clone();
-    if(req.url.indexOf('oauth/token')===-1) {
+    if(req.url.indexOf('oauth/token')===-1 && req.url.indexOf('userMgt')===-1) {
       let tokenStorageService = this.injector.get(TokenStorageService);
       tokenizedReq = req.clone({
         setHeaders: {
