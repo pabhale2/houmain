@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.youricsoft.houmain.dto.UserInterface;
+import com.youricsoft.houmain.util.BCryptPasswordUtility;
 
 @Entity
 @Table(name = "app_user")
@@ -81,7 +82,7 @@ public class User implements UserInterface {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        this.password = BCryptPasswordUtility.encryptPassword(password);
     }
 
     public String getFirstName() {
@@ -115,7 +116,7 @@ public class User implements UserInterface {
 	public void setUserStatus(boolean userStatus) {
 		this.userStatus = userStatus;
 	}
-    
+	
 	public String getUserProfilePath() {
 		return userProfilePath;
 	}
