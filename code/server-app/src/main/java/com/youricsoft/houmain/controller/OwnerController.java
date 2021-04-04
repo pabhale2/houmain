@@ -1,6 +1,7 @@
 package com.youricsoft.houmain.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -16,33 +17,57 @@ import com.youricsoft.houmain.dto.OwnerDTO;
 import com.youricsoft.houmain.dto.OwnerInterface;
 import com.youricsoft.houmain.mapper.OwnerMapper;
 import com.youricsoft.houmain.model.Owner;
+import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
+import com.youricsoft.houmain.service.OwnerService;
 
 
 @RestController
 @RequestMapping(value="/service/owner")
 public class OwnerController {
 	
-	@Resource
-    private GenericService genericService;
+	@Resource private GenericService genericService;
+	@Resource private OwnerService ownerService;
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ServerResponse<OwnerInterface> saveOwner(@RequestBody OwnerDTO ownerDTO){
 		ServerResponse<OwnerInterface> response = new ServerResponse<>();
-		Owner owner = OwnerMapper.INSTANCE.ownerDTOTOOwner(ownerDTO);
-		Owner existingUser = genericService.findbyId(owner.getId());
-		if (existingUser==null) {
-			owner.setStatus(1);
-			genericService.saveOwner(owner);
+		Optional<Owner> existingUser = ownerService.findByPrimaryEmail(ownerDTO.getPrimaryEmail());
+		if (existingUser.isPresent()) {
+			populateExistingOwner(existingUser.get(), ownerDTO);
+			ownerService.save(existingUser.get());
 			response.setStatus(HttpStatus.OK);
 			response.setResponseCode(HttpStatus.OK.value());
-			response.setData(owner);
+			response.setData(existingUser.get());
 		} else {
-			response.setStatus(HttpStatus.CONFLICT);
-			response.setResponseCode(HttpStatus.CONFLICT.value());
-		}
+			Owner savedOwner = ownerService.registerOwner(ownerDTO);
+			if(savedOwner!=null && savedOwner.getId()>0) {
+				response.setStatus(HttpStatus.OK);
+				response.setResponseCode(HttpStatus.OK.value());
+				response.setData(savedOwner);
+			} else {
+				response.setStatus(HttpStatus.NOT_MODIFIED);
+				response.setResponseCode(HttpStatus.NOT_MODIFIED.value());
+				response.setData(savedOwner);
+			}
+		} 
 		return response;
     }
+	
+	private void populateExistingOwner(Owner owner, OwnerDTO ownerDTO) {
+		owner.setCompanyName(ownerDTO.getCompanyName()==null ? owner.getCompanyName() : ownerDTO.getCompanyName());
+		owner.setCity(ownerDTO.getCity()==null ? owner.getCity() : ownerDTO.getCity());
+		owner.setCountry(ownerDTO.getCountry()==null ? owner.getCountry() : ownerDTO.getCountry());
+		owner.setHomeNumber(ownerDTO.getHomeNumber()==null ? owner.getHomeNumber() : ownerDTO.getHomeNumber());
+		owner.setMobileNumber(ownerDTO.getMobileNumber()==null ? owner.getMobileNumber() : ownerDTO.getMobileNumber());
+		owner.setOfficeNumber(ownerDTO.getOfficeNumber()==null ? owner.getOfficeNumber() : ownerDTO.getOfficeNumber());
+		owner.setState(ownerDTO.getState() ==null ? owner.getState() : ownerDTO.getState());
+		owner.setStreetAddress(ownerDTO.getStreetAddress() ==null ? owner.getStreetAddress() : ownerDTO.getStreetAddress());
+		owner.setTaxIdentityType(ownerDTO.getTaxIdentityType() ==null ? owner.getTaxIdentityType() : ownerDTO.getTaxIdentityType());
+		owner.setTaxpayerId(ownerDTO.getTaxpayerId() ==null ? owner.getTaxpayerId() : ownerDTO.getTaxpayerId());
+		owner.setZip(ownerDTO.getZip() == null ? owner.getZip() : ownerDTO.getZip());
+		owner.setStatus(1);
+	}
 	
 	@RequestMapping(value="/update", method=RequestMethod.PUT)
 	public ServerResponse<List<String>> updateOwner(){

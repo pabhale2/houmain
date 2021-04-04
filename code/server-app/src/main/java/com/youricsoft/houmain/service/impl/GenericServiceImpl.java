@@ -103,12 +103,6 @@ public class GenericServiceImpl implements GenericService {
     }
 
 	@Override
-	public Owner saveOwner(Owner Owner) {
-		ownerRepository.save(Owner);
-		return Owner;
-	}
-
-	@Override
 	public List<Owner> findAllOwners() {
 		List<Owner> owners = new ArrayList();
 		ownerRepository.findAll().forEach(owners::add);

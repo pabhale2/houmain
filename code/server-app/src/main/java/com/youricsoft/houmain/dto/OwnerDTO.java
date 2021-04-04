@@ -9,17 +9,18 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
-public class OwnerDTO implements OwnerInterface{
+public class OwnerDTO implements OwnerInterface {
+	private long id;
 	private String firstName;
 	private String lastName;
+	private long userId;
 	private String companyName;
-	private Boolean company;
 	private String primaryEmail;
+	private String password;
 	private String alternameEmail;
 	private String mobileNumber;
 	private String homeNumber;
 	private String officeNumber;
-	private String number;
 	private String streetAddress;
 	private String city;
 	private String state;
@@ -29,7 +30,5 @@ public class OwnerDTO implements OwnerInterface{
 	private String taxpayerId;
 	private String taxIdentityType;
 	private int status;
-	private Date dob;
-	private Date startDate;
-	private Date endDate;
+	
 }

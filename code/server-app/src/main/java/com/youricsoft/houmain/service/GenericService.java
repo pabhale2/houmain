@@ -17,8 +17,7 @@ public interface GenericService {
     List<Role> findAllRoles();
     UserRole saveUserRole(UserRole userRole);
     ContactEntity saveContact(ContactEntity contact);
-    Owner saveOwner(Owner Owner);
-	Owner findbyId(long id);
+    Owner findbyId(long id);
 	List<Owner> findAllOwners();
 	Owner disableOwner(Owner owner);
 	Property saveProperty(Property property);
