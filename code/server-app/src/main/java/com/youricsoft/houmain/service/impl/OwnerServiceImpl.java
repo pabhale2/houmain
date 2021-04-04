@@ -24,6 +24,11 @@ public class OwnerServiceImpl implements OwnerService {
 	@Resource GenericService genericService;
 	
 	@Override
+	public Optional<Owner> findById(long id) {
+		return ownerRepository.findById(id);
+	}
+	
+	@Override
 	public Owner save(Owner owner) {
 		return ownerRepository.save(owner);
 	}

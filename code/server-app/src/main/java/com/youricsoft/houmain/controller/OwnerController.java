@@ -69,25 +69,28 @@ public class OwnerController {
 		owner.setStatus(1);
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.PUT)
-	public ServerResponse<List<String>> updateOwner(){
-		ServerResponse<List<String>> serverResponse = new ServerResponse<>();
-		return serverResponse;
-	}
-	
 	@RequestMapping(value="/get", method=RequestMethod.GET, consumes="application/json")
-	public ServerResponse<Owner> getOwner(@RequestParam("ownerId") long id){
-		ServerResponse<Owner> response = new ServerResponse<Owner>();
-		Owner existingOwner = genericService.findbyId(id);
-		if(existingOwner==null) {
-			response.setStatus(HttpStatus.NOT_FOUND);
-			response.setResponseCode(HttpStatus.NOT_FOUND.value());
-		}else {
+	public ServerResponse<OwnerDTO> getOwner(@RequestParam("ownerId") long id){
+		ServerResponse<OwnerDTO> response = new ServerResponse<OwnerDTO>();
+		Optional<Owner> existingOwner = ownerService.findById(id);
+		if(existingOwner.isPresent()) {
+			OwnerDTO dto = OwnerMapper.INSTANCE.ownerTOOwnerDTO(existingOwner.get());
+			Optional<User> user = genericService.findById(existingOwner.get().getUserId());
+			populateUserDetails(dto, user.get());
 			response.setStatus(HttpStatus.OK);
 			response.setResponseCode(HttpStatus.OK.value());
-			response.setData(existingOwner);
+			response.setData(dto);
+		}else {
+			response.setStatus(HttpStatus.NOT_FOUND);
+			response.setResponseCode(HttpStatus.NOT_FOUND.value());
 		}
 		return response;
+	}
+	
+	private void populateUserDetails(OwnerDTO ownerDTO, User user) {
+		ownerDTO.setFirstName(user.getFirstName());
+		ownerDTO.setLastName(user.getLastName());
+		ownerDTO.setStatus(user.isUserStatus()?1:0);
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET)
@@ -109,12 +112,12 @@ public class OwnerController {
 	@RequestMapping(value="/get", method=RequestMethod.PUT, consumes="application/json")
 	public ServerResponse<Owner> disableOwner(@RequestParam("OwnerId") long id){
 		ServerResponse<Owner> response = new ServerResponse<Owner>();
-		Owner existingOwner = genericService.findbyId(id);
+		Optional<Owner> existingOwner = ownerService.findById(id);
 		if(existingOwner==null) {
 			response.setStatus(HttpStatus.NOT_FOUND);
 			response.setResponseCode(HttpStatus.NOT_FOUND.value());
 		}else {
-			Owner updatedOwner = genericService.disableOwner(existingOwner);
+			Owner updatedOwner = genericService.disableOwner(existingOwner.get());
 			response.setStatus(HttpStatus.OK);
 			response.setResponseCode(HttpStatus.OK.value());
 			response.setData(updatedOwner);
