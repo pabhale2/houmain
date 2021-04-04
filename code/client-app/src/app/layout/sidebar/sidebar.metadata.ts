@@ -5,6 +5,6 @@ export interface RouteInfo {
   icon: string;
   class: string;
   groupTitle: boolean;
-  accessControl: [];
+  accessControl: string[];
   submenu: RouteInfo[];
 }

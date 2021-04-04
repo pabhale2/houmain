@@ -223,29 +223,4 @@ public class UserManagement {
 	    
 	}
 	
-	@RequestMapping(value ="/register", method=RequestMethod.POST, consumes = {"application/json"})
-    public ServerResponse<UserInterface> registerUser(@RequestBody RegistrationDTO registrationDTO){
-		ServerResponse<UserInterface> response = new ServerResponse<>();
-		
-		User existingUser = userService.findByUsername(registrationDTO.getUserName());
-		if(existingUser!=null) {
-			response.setStatus(HttpStatus.CONFLICT);
-			response.setResponseCode(HttpStatus.CONFLICT.value());
-		}else {
-			User user = userService.registerUser(registrationDTO);
-			if(user!=null && user.getId()>0) {
-				response.setStatus(HttpStatus.OK);
-				response.setResponseCode(HttpStatus.OK.value());
-				user.setPassword("");
-				response.setData(user);
-			} else {
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				response.setResponseCode(HttpStatus.BAD_REQUEST.value());
-				user.setPassword("");
-				response.setData(user);
-			}
-		}
-		return response;
-    }
-	
 }
