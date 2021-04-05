@@ -10,7 +10,6 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthenticationService {
-
   constructor(private http:HttpClient) { }
 
   login(user){
@@ -28,8 +27,8 @@ export class AuthenticationService {
 
   getPropertyType(){
     return [
-       { "ownerType": "Property Owner" },
-       { "ownerType": "Tenant" }
+       { "ownerType": "OWNER" },
+       { "ownerType": "TENANT" }
       ]
   }
   registration(registerOption){
@@ -37,9 +36,17 @@ export class AuthenticationService {
     const requestOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded'
-        ,Authorization: ('Basic ' + btoa(clientIdSecretKey))
       })
     };
-     return this.http.post(serverURL + "userMgt/register", body, requestOptions);
+     return this.http.post(serverURL + "userMgt/register", body);
+  }
+
+  getUserDetailsByUsername(username: String) {
+    const requestOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+    return this.http.get(serverURL + "service/user/get?username="+username, requestOptions);
   }
 }

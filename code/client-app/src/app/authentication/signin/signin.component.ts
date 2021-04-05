@@ -60,15 +60,10 @@ export class SigninComponent implements OnInit {
       data => {
       const helper = new JwtHelperService();
       const decodedToken = helper.decodeToken(data['access_token']);
-      console.log(decodedToken);
-
-        this.tokenStorage.saveToken(data['access_token']);
-        this.tokenStorage.saveUser(data);
-
+       console.log(decodedToken);
+        this.StoreLoggedUserDetails(data,decodedToken);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
-        console.log(data);
-        this.roles = this.tokenStorage.getUser().roles;
         this.popupText="Login Succesfull";
         this.iconText="success";
         this.openDialog(this.popupText,this.iconText);
@@ -98,5 +93,31 @@ export class SigninComponent implements OnInit {
       icon: iconText,
       title: popupText,
     });
+  }
+
+  StoreLoggedUserDetails(data,decodedToken){
+    this.tokenStorage.saveToken(data['access_token']);
+    this.authService.getUserDetailsByUsername(decodedToken.user_name).subscribe(
+      data => {
+        this.tokenStorage.saveUser(data['data']);
+      },
+      err => {
+        this.iconText="error";
+        if(err.status === 401 ){
+          this.popupText=" Unauthorized - Username or Password is Incorrect";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 404){
+          this.popupText="Not Found - The Authentication URL is not valid";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 500){
+          this.popupText="Internal Server Error at Server Side.";
+          this.openDialog(this.popupText,this.iconText);
+        }
+        else{
+          this.popupText="Application Problem Please contact to Application Administrator ";
+          this.openDialog(this.popupText,this.iconText);
+        }
+      }
+    );
   }
 }

@@ -58,9 +58,9 @@ export class SignupComponent implements OnInit {
     } else {
       this.authService.registration(this.loginForm.value).subscribe(
         result=> {
-          this.router.navigate(['/dashboard/login']);
-          this.popupText="Login Succesfull";
-          this.iconText="success";
+          this.router.navigate(['/authentication/signin']);
+          this.popupText="Registration Succesfully";
+          this.iconText="sccess";
           this.openDialog(this.popupText,this.iconText);
         },
         error=> {
