@@ -1,6 +1,7 @@
 package com.youricsoft.houmain.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.model.ContactEntity;
@@ -12,14 +13,13 @@ import com.youricsoft.houmain.model.UserRole;
 
 public interface GenericService {
     User findByUsername(String username);
+    Optional<User> findById(long id);
     List<User> findAllUsers();
     User saveUser(User user);
     List<Role> findAllRoles();
     UserRole saveUserRole(UserRole userRole);
     ContactEntity saveContact(ContactEntity contact);
-    Owner saveOwner(Owner Owner);
-	Owner findbyId(long id);
-	List<Owner> findAllOwners();
+    List<Owner> findAllOwners();
 	Owner disableOwner(Owner owner);
 	Property saveProperty(Property property);
 	Property findbyIdProperty(long id);

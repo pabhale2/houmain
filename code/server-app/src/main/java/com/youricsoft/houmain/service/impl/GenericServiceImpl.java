@@ -96,17 +96,9 @@ public class GenericServiceImpl implements GenericService {
 	}
 
 	@Override
-	public Owner findbyId(long id) {
-		Optional<Owner> returnedOwner = ownerRepository.findById(id);
-//		return returnedOwner.get();
-		return returnedOwner.isPresent() ? returnedOwner.get() : null;
+	public Optional<User> findById(long id) {
+		return userRepository.findById(id);
     }
-
-	@Override
-	public Owner saveOwner(Owner Owner) {
-		ownerRepository.save(Owner);
-		return Owner;
-	}
 
 	@Override
 	public List<Owner> findAllOwners() {

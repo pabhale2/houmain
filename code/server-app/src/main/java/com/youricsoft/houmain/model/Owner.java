@@ -2,11 +2,15 @@ package com.youricsoft.houmain.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import com.youricsoft.houmain.dto.OwnerInterface;
@@ -22,20 +26,19 @@ public class Owner implements OwnerInterface {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="idapp_owner")
+	@Column(name="id")
 	private long id;
 	
-	@Column(name="first_name")
-	private String firstName;
+//	@Column(name="user_id")
+//	private long userId;
 	
-	@Column(name="last_name")
-	private String lastName;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
+	
 	
 	@Column(name="company_name")
 	private String companyName;
-	
-	@Column(name="company")
-	private Boolean company;
 	
 	@Column(name="primary_email")
 	private String primaryEmail;
@@ -51,15 +54,6 @@ public class Owner implements OwnerInterface {
 	
 	@Column(name="office_number")
 	private String officeNumber;
-	
-	@Column(name="number")
-	private String number;
-	
-	@Column(name="dob")
-	private Date dob;
-	
-	@Column(name="enddate")
-	private Date endDate;
 	
 	@Column(name="street_address")
 	private String streetAddress;

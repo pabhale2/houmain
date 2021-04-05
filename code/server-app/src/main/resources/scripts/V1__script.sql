@@ -102,4 +102,41 @@ DELETE FROM `app_role` WHERE `id`='2';
 INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('1', 'Admin User - Has permission to perform admin tasks', 'ADMIN_USER');
 INSERT INTO `app_role` (`id`, `description`, `role_name`) VALUES ('2', 'Standard User - Has no admin rights', 'STANDARD_USER');
 
+ALTER TABLE `app_owner` 
+DROP COLUMN `number`,
+DROP COLUMN `enddate`,
+DROP COLUMN `dob`,
+DROP COLUMN `company`,
+DROP COLUMN `last_name`,
+DROP COLUMN `first_name`;
+
+ALTER TABLE `app_owner` 
+CHANGE COLUMN `idapp_owner` `id` INT(11) NOT NULL ;
+
+ALTER TABLE `app_owner` 
+ADD COLUMN `user_id` INT NOT NULL AFTER `id`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`id`, `user_id`);
+
+
+ALTER TABLE `propertyownermapping` 
+DROP FOREIGN KEY `ownerOd`;
+ALTER TABLE `propertyownermapping` 
+DROP INDEX `ownerOd_idx` ;
+
+ALTER TABLE `app_owner` 
+CHANGE COLUMN `id` `id` INT(11) NOT NULL AUTO_INCREMENT ;
+
+ALTER TABLE `propertyownermapping` 
+ADD INDEX `OWNER_PROPERTY_MAPPING_OWNER_ID_idx` (`ownerId` ASC);
+ALTER TABLE `propertyownermapping` 
+ADD CONSTRAINT `OWNER_PROPERTY_MAPPING_OWNER_ID`
+  FOREIGN KEY (`ownerId`)
+  REFERENCES `app_owner` (`id`)
+  ON DELETE NO ACTION
+  ON UPDATE NO ACTION;
+
+
+
+
 

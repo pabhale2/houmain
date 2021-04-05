@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 @Component("bCryptPasswordUtility")
 public class BCryptPasswordUtility {
-	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-	public String encryptPassword(String password) {
+	private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	public static String encryptPassword(String password) {
 		return encoder.encode(password);
 	}
 	public Boolean match(String encodedPassword, String newSource) {
