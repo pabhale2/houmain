@@ -2,6 +2,7 @@ package com.youricsoft.houmain.um.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.youricsoft.houmain.bo.Email;
 import com.youricsoft.houmain.bo.GenericModel;
 import com.youricsoft.houmain.bo.ServerResponse;
+import com.youricsoft.houmain.customenum.RoleEnum;
 import com.youricsoft.houmain.dto.UserInterface;
 import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.dto.UserDTO;
@@ -217,17 +219,17 @@ public class NonSecureAPI {
 			response.setStatus(HttpStatus.CONFLICT);
 			response.setResponseCode(HttpStatus.CONFLICT.value());
 		}else {
-			User user = genericService.registerUser(registrationDTO);
-			if(user!=null && user.getId()>0) {
+			User savedUser = genericService.registerUser(registrationDTO);
+			if(savedUser!=null && savedUser.getId()>0) {
+				Optional<User> user = genericService.findById(savedUser.getId());
 				response.setStatus(HttpStatus.OK);
 				response.setResponseCode(HttpStatus.OK.value());
-				user.setPassword("");
-				response.setData(user);
+				user.get().setPassword("");
+				response.setData(user.get());
 			} else {
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				response.setResponseCode(HttpStatus.BAD_REQUEST.value());
-				user.setPassword("");
-				response.setData(user);
+				response.setData(savedUser);
 			}
 		}
 		return response;

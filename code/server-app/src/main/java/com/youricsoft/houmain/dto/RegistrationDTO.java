@@ -1,6 +1,6 @@
 package com.youricsoft.houmain.dto;
 
-import com.youricsoft.houmain.customenum.RegistrationEnum;
+import com.youricsoft.houmain.customenum.RoleEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,5 +12,5 @@ import lombok.NoArgsConstructor;
 public class RegistrationDTO extends UserDTO {
 	private String companyName;
 	private String mobileNumber;
-	private RegistrationEnum type;
+	private RoleEnum type;
 }
