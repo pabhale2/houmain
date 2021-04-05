@@ -29,9 +29,6 @@ public class Owner implements OwnerInterface {
 	@Column(name="id")
 	private long id;
 	
-//	@Column(name="user_id")
-//	private long userId;
-	
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;

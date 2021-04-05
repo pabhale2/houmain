@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.youricsoft.houmain.customenum.RegistrationEnum;
+import com.youricsoft.houmain.customenum.RoleEnum;
 import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.mapper.OwnerMapper;
 import com.youricsoft.houmain.mapper.TenantMapper;
@@ -69,14 +69,6 @@ public class GenericServiceImpl implements GenericService {
 	@Override
 	public User saveUser(User user) {
 		User savedUser = userRepository.save(user);
-		List<Role> roleList = findAllRoles();
-		UserRole userRole  =new UserRole();
-		userRole.setRoleId(roleList.get(0).getId());
-		userRole.setUserId(savedUser.getId());
-		UserRole savedRole = saveUserRole(userRole);
-		savedRole.setRoleId(savedRole.getRoleId());
-		
-		// TODO : send mail functionality implementation 
 		return savedUser;
 	}
 	
@@ -144,14 +136,20 @@ public class GenericServiceImpl implements GenericService {
 		user.setUsername(registrationDTO.getUserName());
 		user.setPassword(registrationDTO.getPassword());
 		user.setUserStatus(true);
+		user.setRoles(new ArrayList<Role>());
+		Role role = new Role();
+		role.setId(registrationDTO.getType().getId());
+		role.setRoleName(registrationDTO.getType().getValue());
+		user.getRoles().add(role);
 		User savedUser = saveUser(user);
 		if(savedUser!=null) {
-			if(RegistrationEnum.OWNER.equals(registrationDTO.getType())) {
+			if(RoleEnum.OWNER.equals(registrationDTO.getType())) {
 				Owner owner = OwnerMapper.INSTANCE.registrationDTOtoOwner(registrationDTO);
 				owner.setPrimaryEmail(user.getUsername());
 				owner.setStatus(1);
+				owner.setUser(user);
 				ownerService.save(owner);
-			} else if(RegistrationEnum.TENANT.equals(registrationDTO.getType())) {
+			} else if(RoleEnum.TENANT.equals(registrationDTO.getType())) {
 				Tenant tenant = TenantMapper.INSTANCE.registrationDTOToTenant(registrationDTO);
 				tenant.setUserId(user.getId());
 				tenantService.save(tenant);

@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.youricsoft.houmain.customenum.RegistrationEnum;
+import com.youricsoft.houmain.customenum.RoleEnum;
 import com.youricsoft.houmain.dto.OwnerDTO;
 import com.youricsoft.houmain.mapper.OwnerMapper;
 import com.youricsoft.houmain.model.Owner;
@@ -48,7 +48,7 @@ public class OwnerServiceImpl implements OwnerService {
 		User savedUser = genericService.saveUser(user);
 		
 		UserRole userRole = new UserRole();
-		userRole.setRoleId(RegistrationEnum.OWNER.getId());
+		userRole.setRoleId(RoleEnum.OWNER.getId());
 		userRole.setUserId(savedUser.getId());
 		UserRole savedUserRole = genericService.saveUserRole(userRole);
 		
