@@ -93,7 +93,7 @@ public class UserManagement {
 		return serverResponse;
 	}
 	
-	@RequestMapping(value="/user", method=RequestMethod.GET, consumes = {"application/json"})
+	@RequestMapping(value="/get", method=RequestMethod.GET, consumes = {"application/json"})
 	public ServerResponse<UserInterface> getUserDeatils(@RequestBody String username){
 		ServerResponse<UserInterface> response = new ServerResponse<>();
 		
@@ -147,17 +147,6 @@ public class UserManagement {
 		}
 		return response;
     }
-	
-	@RequestMapping(value="/user", method=RequestMethod.GET)
-	public ServerResponse<UserInterface> getUser(@RequestParam("username") String username){
-		ServerResponse<UserInterface> response = new ServerResponse<>();
-		response.setResponseCode(HttpStatus.OK.value());
-		response.setStatus(HttpStatus.OK);
-		User user = userService.findByUsername(username);			
-		user.setUserProfile(null);
-		response.setData(user);	
-		return response;
-	}
 	
 	@RequestMapping(value = "/resetPwd", method = RequestMethod.POST, consumes = {"application/json"})
 	public ServerResponse<UserInterface> resetPwd(@RequestBody GenericModel genericModel){

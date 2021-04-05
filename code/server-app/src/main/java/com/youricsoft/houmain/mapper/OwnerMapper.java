@@ -16,6 +16,13 @@ public interface OwnerMapper {
 	
 	OwnerMapper INSTANCE = Mappers.getMapper(OwnerMapper.class);
     
+	@Mappings({
+    	@Mapping(target = "firstName", source = "user.firstName"),
+    	@Mapping(target = "lastName", source = "user.lastName"),
+    	@Mapping(target = "primaryEmail", source = "user.username"),
+    	@Mapping(target = "userId", source = "user.id")
+    	
+    })
 	OwnerDTO ownerTOOwnerDTO(Owner owner);
     
     Owner ownerDTOTOOwner(OwnerDTO ownerDto);
