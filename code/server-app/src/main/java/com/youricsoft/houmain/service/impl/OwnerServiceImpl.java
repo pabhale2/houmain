@@ -54,7 +54,7 @@ public class OwnerServiceImpl implements OwnerService {
 		
 		if(savedUser!=null && savedUser.getId()>0) {
 			owner.setStatus(1);
-			owner.setUserId(savedUser.getId());
+			//owner.setUserId(savedUser.getId());
 			return save(owner);
 		}
 		return owner;

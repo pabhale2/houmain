@@ -75,8 +75,6 @@ public class OwnerController {
 		Optional<Owner> existingOwner = ownerService.findById(id);
 		if(existingOwner.isPresent()) {
 			OwnerDTO dto = OwnerMapper.INSTANCE.ownerTOOwnerDTO(existingOwner.get());
-			Optional<User> user = genericService.findById(existingOwner.get().getUserId());
-			populateUserDetails(dto, user.get());
 			response.setStatus(HttpStatus.OK);
 			response.setResponseCode(HttpStatus.OK.value());
 			response.setData(dto);
