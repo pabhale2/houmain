@@ -4,13 +4,15 @@ import { FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { TokenStorageService } from '../../shared/services/token-storage.service';
 @Component({
   selector: 'app-add-owner',
   templateUrl: './add-owner.component.html',
   styleUrls: ['./add-owner.component.sass']
 })
 export class AddOwnerComponent implements OnInit {
-  constructor(private fb : FormBuilder,private httpClient: HttpClient,private ownerService:OwnersService,private dialog: MatDialog) { 
+  dataInfo: any;
+  constructor(private fb : FormBuilder,private httpClient: HttpClient,private ownerService:OwnersService,private dialog: MatDialog, private tokenStorageService: TokenStorageService) { 
     this.initForm();
     this.loadData();
   }
@@ -90,9 +92,9 @@ export class AddOwnerComponent implements OnInit {
       lastName: ['', [Validators.required,Validators.pattern('[a-zA-Z]{3,50}')]],
       companyName: ['',[Validators.pattern('[a-zA-Z]{0,200}')]],
       company : [''],
-      dob : [''],
-      startDate : [''],
-      endDate : [''],
+      // dob : [''],
+      // startDate : [''],
+      // endDate : [''],
       primaryEmail: ['',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
       alternateEmail: ['',[Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
       mobile:['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
@@ -110,6 +112,10 @@ export class AddOwnerComponent implements OnInit {
     });
   }
   ngOnInit(): void {
+    let currentUser = this.tokenStorageService.getUser();
+    if(currentUser.roles.some(e => e.roleName === "OWNER")){
+      this.getOwnerInfo(currentUser.id);
+    }
   }
   onSubmit(){
     this.ownerService.addOwners(this.ownerDetails.value).subscribe(
@@ -141,5 +147,40 @@ export class AddOwnerComponent implements OnInit {
       icon: iconText,
       title: popupText,
     });
+  }
+
+  getOwnerInfo(userId){
+    this.ownerService.getOwner(userId)
+    .subscribe
+    (
+      data =>
+      {
+        if(data && data.responseCode === 200)
+         { this.dataInfo = data.data;
+          this.ownerDetails.patchValue(this.dataInfo);
+        }
+        else{
+          this.popupText="Please try again";
+          this.openDialog(this.popupText,this.iconText);
+        }
+      },
+      err => {
+        this.iconText="error";
+        if(err.status === 401 ){
+          this.popupText=" Unauthorized - Username or Password is Incorrect";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 404){
+          this.popupText="Not Found - The Authentication URL is not valid";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 500){
+          this.popupText="Internal Server Error at Server Side.";
+          this.openDialog(this.popupText,this.iconText);
+        }
+        else{
+          this.popupText="Application Problem Please contact to Application Administrator ";
+          this.openDialog(this.popupText,this.iconText);
+        }
+    }
+  )
   }
 }

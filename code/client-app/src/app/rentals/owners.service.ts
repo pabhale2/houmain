@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { serverURL, clientIdSecretKey } from '../shared/services/constants';
+import { serverURL, clientIdSecretKey } from '../shared/url';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Owners } from './owners.model';
 import { HttpClient, HttpParams } from '@angular/common/http';

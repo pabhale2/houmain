@@ -94,7 +94,7 @@ public class UserManagement {
 	}
 	
 	@RequestMapping(value="/get", method=RequestMethod.GET, consumes = {"application/json"})
-	public ServerResponse<UserInterface> getUserDeatils(@RequestBody String username){
+	public ServerResponse<UserInterface> getUserDeatils(@RequestParam String username){
 		ServerResponse<UserInterface> response = new ServerResponse<>();
 		
 		User existingUser = userService.findByUsername(username);
