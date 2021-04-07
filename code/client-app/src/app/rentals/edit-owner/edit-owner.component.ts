@@ -33,7 +33,7 @@ export class EditOwnerComponent implements OnInit {
     alternateEmail: [
       {type : 'pattern' , message: 'Alternate Email is not valid'},
     ],
-    mobile: [
+    mobileNumber: [
       {type : 'pattern' , message: 'Mobile number is not valid'},
     ],
     homeNumber: [
@@ -79,14 +79,9 @@ export class EditOwnerComponent implements OnInit {
     this.ownerDetails = this.fb.group({
       firstName: ['', [Validators.required,Validators.pattern('[a-zA-Z]{3,50}')]],
       lastName: ['', [Validators.required,Validators.pattern('[a-zA-Z]{3,50}')]],
-      companyName: ['',[Validators.pattern('[a-zA-Z]{0,200}')]],
-      company : [''],
-      dob : [''],
-      startDate : [''],
-      endDate : [''],
       primaryEmail: ['',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
       alternateEmail: ['',[Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
-      mobile:['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
+      mobileNumber:['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
       homeNumber: ['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
       officeNumber: ['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
       number: ['',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
@@ -108,20 +103,7 @@ export class EditOwnerComponent implements OnInit {
       data =>
       {
           this.dataInfo = data.data;
-          this.ownerDetails.controls['firstName'].setValue(this.dataInfo.firstName);
-          this.ownerDetails.controls['lastName'].setValue(this.dataInfo.lastName);
-          this.ownerDetails.controls['companyName'].setValue(this.dataInfo.companyName);
-          this.ownerDetails.controls['primaryEmail'].setValue(this.dataInfo.primaryEmail);
-          this.ownerDetails.controls['alternateEmail'].setValue(this.dataInfo.alternameEmail);
-          this.ownerDetails.controls['mobile'].setValue(this.dataInfo.mobileNumber);
-          this.ownerDetails.controls['homeNumber'].setValue(this.dataInfo.homeNumber);
-          this.ownerDetails.controls['officeNumber'].setValue(this.dataInfo.officeNumber);
-          this.ownerDetails.controls['streetAddress'].setValue(this.dataInfo.streetAddress);
-          this.ownerDetails.controls['city'].setValue(this.dataInfo.city);
-          this.ownerDetails.controls['state'].setValue(this.dataInfo.state);
-          this.ownerDetails.controls['zip'].setValue(this.dataInfo.zip);
-          this.ownerDetails.controls['taxpayerID'].setValue(this.dataInfo.taxpayerId);
-          this.ownerDetails.controls['taxIndentityType'].setValue(this.dataInfo.taxIdentityType);
+          this.ownerDetails.patchValue(this.dataInfo);
       }
   );
   }

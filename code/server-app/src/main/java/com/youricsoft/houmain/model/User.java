@@ -81,7 +81,7 @@ public class User implements UserInterface {
     }
 
     public void setPassword(String password) {
-        this.password = BCryptPasswordUtility.encryptPassword(password);
+        this.password = (password==null || password=="") ? password :  BCryptPasswordUtility.encryptPassword(password);
     }
 
     public String getFirstName() {

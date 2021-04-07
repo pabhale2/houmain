@@ -25,7 +25,7 @@ public class OwnerServiceImpl implements OwnerService {
 	
 	@Override
 	public Optional<Owner> findById(long id) {
-		return ownerRepository.findById(id);
+		return ownerRepository.findByUserId(id);
 	}
 	
 	@Override
@@ -42,9 +42,10 @@ public class OwnerServiceImpl implements OwnerService {
 	@Transactional
 	public Owner registerOwner(OwnerDTO ownerDTO) {
 		Owner owner = OwnerMapper.INSTANCE.ownerDTOTOOwner(ownerDTO);
-		
 		User user = OwnerMapper.INSTANCE.registrationDTOToUser(ownerDTO);
 		user.setUserStatus(true);
+		//ToDo :: share the login details with user and change to random password
+		user.setPassword("123456");
 		User savedUser = genericService.saveUser(user);
 		
 		UserRole userRole = new UserRole();
@@ -54,6 +55,7 @@ public class OwnerServiceImpl implements OwnerService {
 		
 		if(savedUser!=null && savedUser.getId()>0) {
 			owner.setStatus(1);
+			owner.setUser(savedUser);
 			//owner.setUserId(savedUser.getId());
 			return save(owner);
 		}
