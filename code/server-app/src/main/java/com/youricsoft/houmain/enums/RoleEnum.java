@@ -1,4 +1,4 @@
-package com.youricsoft.houmain.customenum;
+package com.youricsoft.houmain.enums;
 
 import java.util.HashMap;
 import java.util.Map;

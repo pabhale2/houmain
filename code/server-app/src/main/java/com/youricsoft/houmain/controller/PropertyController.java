@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.youricsoft.houmain.bo.ServerResponse;
 import com.youricsoft.houmain.dto.PropertyDTO;
-import com.youricsoft.houmain.dto.PropertyInterface;
 import com.youricsoft.houmain.mapper.PropertyMapper;
 import com.youricsoft.houmain.model.Property;
+import com.youricsoft.houmain.model.PropertyInterface;
 import com.youricsoft.houmain.service.GenericService;
 
 @RestController
@@ -26,10 +26,10 @@ public class PropertyController {
     private GenericService genericService;
 		
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public ServerResponse<PropertyInterface> saveProperty(@RequestBody PropertyDTO propertyDTO){
+	public ServerResponse<PropertyInterface> saveProperty(@RequestBody PropertyDTO propertyDTO) {
 		ServerResponse<PropertyInterface> serverResponse = new ServerResponse<>();
 		Property property = PropertyMapper.INSTANCE.propertyDTOTOproperty(propertyDTO);
-		Property existingProperty = genericService.findbyIdProperty(property.getId());
+		Property existingProperty = genericService.findbyIdProperty(property.getPropertyId());
 		if ( existingProperty == null){
 			genericService.saveProperty(property);
 			serverResponse.setStatus(HttpStatus.OK);
