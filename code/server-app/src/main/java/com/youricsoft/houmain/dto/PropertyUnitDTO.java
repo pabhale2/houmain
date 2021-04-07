@@ -9,6 +9,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class PropertyUnitDTO {
 	private long unit;
+	private long typdId;
+	private long propertyId;
+	private String address;
 	private int bed;
 	private int gallary;
 	private int bath;

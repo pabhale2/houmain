@@ -11,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -34,7 +34,7 @@ public class Property implements PropertyInterface {
 	@Column(name="property_name")
 	private String propertyName;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.MERGE)
 	@JoinColumn(name = "property_type_id" ,referencedColumnName = "type_id")
 	PropertyType propertyType;
 	
@@ -45,7 +45,7 @@ public class Property implements PropertyInterface {
 	private double lng;
 	
 	@Column(name="status")
-	private PropertyStatusEnum propertyStatusEnum;
+	private String status;
 	
 	@Column(name="property_description")
 	private String propertyDescription;
@@ -65,18 +65,21 @@ public class Property implements PropertyInterface {
 	@Column(name="zip_code")
 	private String zipCode;
 	
-	@OneToOne(cascade =CascadeType.ALL)
-	@JoinColumn(name="updatedBy", referencedColumnName = "id")
-	User user;
+	@Column(name="updatedBy")
+	private long updatedBy;
 	
-	/**
-     * Roles are being eagerly loaded here because
-     * they are a fairly small collection of items for this example.
-     */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-    	name = "propertyownermapping", 
-    	joinColumns = @JoinColumn(name = "property_id", referencedColumnName = "property_id"),
-        inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
+	@Column(name="property_code")
+	private String propertyCode;
+	
+//	@OneToOne(fetch = FetchType.EAGER)
+//    @JoinTable(
+//    	name = "propertyownermapping", 
+//    	joinColumns = @JoinColumn(name = "propertyId", referencedColumnName = "property_id"),
+//        inverseJoinColumns = @JoinColumn(name = "ownerId", referencedColumnName = "id"))
+//    private PropertyOwnerMapping propertyOwnerMapping;
+    
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name="property_id", referencedColumnName = "property_id")
     private List<PropertyUnit> propertyUnit;
+    
 }

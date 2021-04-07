@@ -28,6 +28,10 @@ public class PropertyDTO implements PropertyInterface {
 	private String zipCode;
 	List<PropertyUnitDTO> propertyUnit;
 	private boolean active;
+	private String propertyCode;
 	
+	public void setPropertyCode(String propertyCode) {
+		this.propertyCode = String.join("-", String.valueOf(this.typeId), this.city, this.state, this.country);
+	}
 		
 }

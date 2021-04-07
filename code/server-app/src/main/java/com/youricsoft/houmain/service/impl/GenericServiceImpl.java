@@ -21,6 +21,7 @@ import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.model.UserRole;
 import com.youricsoft.houmain.model.Owner;
 import com.youricsoft.houmain.model.Property;
+import com.youricsoft.houmain.model.PropertyUnit;
 import com.youricsoft.houmain.repository.ContactRepository;
 import com.youricsoft.houmain.repository.RoleRepository;
 import com.youricsoft.houmain.repository.UserRepository;
@@ -109,6 +110,9 @@ public class GenericServiceImpl implements GenericService {
 	@Override
 	public Property saveProperty(Property property) {
 		// TODO Auto-generated method stub
+		for(PropertyUnit unit : property.getPropertyUnit()) {
+			unit.setTypeId(property.getPropertyType().getTypeId());
+		}
 		propertyRepository.save(property);
 		return property;
 	}
