@@ -123,6 +123,7 @@ export class AddOwnerComponent implements OnInit {
         this.iconText="success";
         this.popupText=" User added successfully";
         this.openDialog(this.popupText,this.iconText);
+        this.ownerDetails.reset();
       },
       err => {
         this.iconText="error";
