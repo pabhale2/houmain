@@ -1,6 +1,6 @@
 package com.youricsoft.houmain.dto;
 
-import com.youricsoft.houmain.customenum.RoleEnum;
+import com.youricsoft.houmain.enums.RoleEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

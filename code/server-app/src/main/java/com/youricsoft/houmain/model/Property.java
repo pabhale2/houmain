@@ -1,13 +1,21 @@
 package com.youricsoft.houmain.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.youricsoft.houmain.dto.PropertyInterface;
+import com.youricsoft.houmain.enums.PropertyStatusEnum;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,11 +28,24 @@ public class Property implements PropertyInterface {
 	
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	@Column(name="id_property")
-	private long id;
+	@Column(name="property_id")
+	private long propertyId;
 	
 	@Column(name="property_name")
 	private String propertyName;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "property_type_id" ,referencedColumnName = "type_id")
+	PropertyType propertyType;
+	
+	@Column(name="lat")
+	private double lat;
+	
+	@Column(name="lng")
+	private double lng;
+	
+	@Column(name="status")
+	private PropertyStatusEnum propertyStatusEnum;
 	
 	@Column(name="property_description")
 	private String propertyDescription;
@@ -44,34 +65,18 @@ public class Property implements PropertyInterface {
 	@Column(name="zip_code")
 	private String zipCode;
 	
-	@Column(name="property_type")
-	private String propertyType;
+	@OneToOne(cascade =CascadeType.ALL)
+	@JoinColumn(name="updatedBy", referencedColumnName = "id")
+	User user;
 	
-	@Column(name="unitcount")
-	private int unitcount;
-	
-	@Column(name="hallcount")
-	private int hallcount;
-	
-	@Column(name="bedcount")
-	private int bedcount;
-	
-	@Column(name="gallerycount")
-	private int gallerycount;
-	
-	@Column(name="kitchencount")
-	private int kitchencount;
-	
-	@Column(name="bathroomcount")
-	private int bathroomcount;
-	
-	@Column(name="toiletcount")
-	private int toiletcount;
-	
-	@Column(name="entrygatenum")
-	private int entrygatenum;
-	
-	@Column(name="otherInfo")
-	private String otherInfo;
-
+	/**
+     * Roles are being eagerly loaded here because
+     * they are a fairly small collection of items for this example.
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+    	name = "propertyownermapping", 
+    	joinColumns = @JoinColumn(name = "property_id", referencedColumnName = "property_id"),
+        inverseJoinColumns = @JoinColumn(name = "owner_id", referencedColumnName = "id"))
+    private List<PropertyUnit> propertyUnit;
 }

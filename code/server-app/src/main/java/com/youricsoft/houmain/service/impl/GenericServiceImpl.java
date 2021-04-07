@@ -10,8 +10,8 @@ import javax.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import com.youricsoft.houmain.customenum.RoleEnum;
 import com.youricsoft.houmain.dto.RegistrationDTO;
+import com.youricsoft.houmain.enums.RoleEnum;
 import com.youricsoft.houmain.mapper.OwnerMapper;
 import com.youricsoft.houmain.mapper.TenantMapper;
 import com.youricsoft.houmain.model.ContactEntity;

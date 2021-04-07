@@ -135,6 +135,19 @@ ADD CONSTRAINT `OWNER_PROPERTY_MAPPING_OWNER_ID`
   REFERENCES `app_owner` (`id`)
   ON DELETE NO ACTION
   ON UPDATE NO ACTION;
+  
+ALTER TABLE `property` 
+ADD COLUMN `property_code` VARCHAR(100) NOT NULL AFTER `updatedOn`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`property_id`, `property_code`);
+ALTER TABLE `property` 
+CHANGE COLUMN `id_property` `property_id` INT(11) NOT NULL ;
+
+
+ALTER TABLE `property` 
+CHANGE COLUMN `long` `lng` DECIMAL(6,4) NULL DEFAULT NULL ;
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.youricsoft.houmain.dto;
+package com.youricsoft.houmain.model;
 
 public interface PropertyInterface {
 
