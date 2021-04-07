@@ -108,10 +108,10 @@
                                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                                     <mat-form-field class="example-full-width" appearance="outline">
                                         <mat-label>Mobile Number</mat-label>
-                                        <input matInput formControlName="mobile" >
+                                        <input matInput formControlName="mobileNumber" >
                                         <mat-icon matSuffix>call</mat-icon>
-                                        <mat-error *ngFor="let error of errormessage.mobile">
-                                            <ng-container *ngIf="ownerDetails.get('mobile').hasError(error.type)">
+                                        <mat-error *ngFor="let error of errormessage.mobileNumber">
+                                            <ng-container *ngIf="ownerDetails.get('mobileNumber').hasError(error.type)">
                                                 {{error.message}}
                                             </ng-container>
                                         </mat-error>

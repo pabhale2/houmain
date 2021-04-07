@@ -19,13 +19,12 @@ export class RentalOwnersComponent implements OnInit,AfterViewInit {
   dataOwner: any;
   length: number;
   pageIndex=1;
-  pageSize: number=1;
+  pageSize: number=5;
   pageSizeOptions = [1, 5, 10, 50];
 
   displayedColumns = [
     'firstName',
     'lastName',
-    'endDate',
     'address',
     'mobile',
     'primaryEmail'
