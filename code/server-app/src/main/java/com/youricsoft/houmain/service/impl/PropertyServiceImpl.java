@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -43,10 +45,10 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 	@Override
-	public List<Property> findAll() {
+	public List<Property> findAll(int startIndex, int pageSize) {
 		List<Property> properties = new ArrayList();
-		propertyRepository.findAll()
-		.forEach(properties::add);
+		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
+		propertyRepository.findAll(page).forEach(properties::add);
 		return properties;
 	}
 	
@@ -82,8 +84,9 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 	@Override
-	public List<PropertyDTO> findUnSoldPropertes() {
-		List<PropertyDTO> propertyList = propertyRepository.findUnSoldProperties();
+	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize) {
+		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
+		List<PropertyDTO> propertyList = propertyRepository.findUnSoldProperties(page);
 		return propertyList;
 	}
 	

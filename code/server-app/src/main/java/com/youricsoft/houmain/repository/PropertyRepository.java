@@ -2,6 +2,7 @@ package com.youricsoft.houmain.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
@@ -9,6 +10,8 @@ import com.youricsoft.houmain.dto.PropertyDTO;
 import com.youricsoft.houmain.model.Property;
 
 public interface PropertyRepository extends CrudRepository<Property, Long> {
+	
+	Iterable<Property> findAll(Pageable pageable);
 	
 	@Query(value =  
 			" select new com.youricsoft.houmain.dto.PropertyDTO(" + 
@@ -35,5 +38,5 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
 			+ " where " + 
 			"    occu.id=NULL"
 			)
-	public List<PropertyDTO> findUnSoldProperties();
+	public List<PropertyDTO> findUnSoldProperties(Pageable pageable);
 }

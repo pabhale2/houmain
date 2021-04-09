@@ -63,6 +63,7 @@ public class PropertyDTO implements PropertyInterface {
 		
 	}
 	
+	
 	public PropertyDTO() {
 		super();
 	}

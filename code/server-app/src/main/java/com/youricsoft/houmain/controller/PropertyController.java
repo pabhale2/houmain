@@ -68,16 +68,16 @@ public class PropertyController {
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET)
-	public ServerResponse<List<Property>> getProperties(){
+	public ServerResponse<List<Property>> getProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize){
 		ServerResponse<List<Property>> serverResponse = new ServerResponse<>();
-		List<Property> propertyList = propertyService.findAll();
+		List<Property> propertyList = propertyService.findAll(startIndex, pageSize);
 		if(propertyList.isEmpty()) {
 			serverResponse.setStatus(HttpStatus.NOT_FOUND);
 			serverResponse.setResponseCode(HttpStatus.NOT_FOUND.value());
 		} else {
-		serverResponse.setStatus(HttpStatus.OK);
-		serverResponse.setResponseCode(HttpStatus.OK.value());
-		serverResponse.setData(propertyList);
+			serverResponse.setStatus(HttpStatus.OK);
+			serverResponse.setResponseCode(HttpStatus.OK.value());
+			serverResponse.setData(propertyList);
 		}
 		return serverResponse;
 	}
@@ -113,9 +113,9 @@ public class PropertyController {
 	}
 	
 	@RequestMapping(value="/getUnsoldProperty", method=RequestMethod.GET)
-	public ServerResponse<List<PropertyDTO>> getUnsoldProperties() {
+	public ServerResponse<List<PropertyDTO>> getUnsoldProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize) {
 		ServerResponse<List<PropertyDTO>> serverResponse = new ServerResponse<List<PropertyDTO>>();
-		List<PropertyDTO> propertiesList = propertyService.findUnSoldPropertes();
+		List<PropertyDTO> propertiesList = propertyService.findUnSoldPropertes(startIndex, pageSize);
 		if(propertiesList!=null &&  !propertiesList.isEmpty()) {
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setStatus(HttpStatus.OK);
