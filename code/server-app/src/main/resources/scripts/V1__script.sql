@@ -223,3 +223,25 @@ ALTER TABLE `property_photos`
 CHANGE COLUMN `photoLink` `photo_link` VARCHAR(1000) NULL DEFAULT NULL ,
 ADD COLUMN `photo_type` VARCHAR(45) NULL AFTER `photo`;
 
+ALTER TABLE `property_photos` 
+CHANGE COLUMN `photo` `photo` LONGBLOB NULL DEFAULT NULL ;
+
+CREATE TABLE `property_rate` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `property_id` INT NOT NULL,
+  `amount` DOUBLE NULL,
+  `updatedBy` INT NULL,
+  `updatedOn` DATETIME NULL,
+  PRIMARY KEY (`id`, `property_id`));
+  
+ CREATE TABLE `property_occupancy` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `property_id` INT NOT NULL,
+  `owner_id` INT NOT NULL,
+  `tenant_id` INT NOT NULL,
+  `start_date` DATETIME NULL,
+  `end_date` DATETIME NULL,
+  PRIMARY KEY (`id`, `property_id`, `owner_id`, `tenant_id`));
+ 
+
+

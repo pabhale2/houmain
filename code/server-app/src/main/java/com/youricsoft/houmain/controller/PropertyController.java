@@ -6,7 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -83,11 +82,11 @@ public class PropertyController {
 		return serverResponse;
 	}
 	
-	@RequestMapping(value="/uploadImage", method=RequestMethod.GET)
-	public ServerResponse<PropertyPhotos> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("propetyId") long propertyId, @RequestParam("unitId") long unitId){
+	@RequestMapping(value="/uploadImage", method=RequestMethod.POST)
+	public ServerResponse<PropertyPhotos> uploadImage(@RequestParam("file") MultipartFile file, @RequestParam("propertyId") long propertyId, @RequestParam("unitId") long unitId, @RequestParam("photoCategory") String photoCategory){
 		ServerResponse<PropertyPhotos> serverResponse = new ServerResponse<PropertyPhotos>();
 		try {
-			PropertyPhotos propertyPhotos = propertyService.savePropertyPhotos(file, propertyId, unitId);
+			PropertyPhotos propertyPhotos = propertyService.savePropertyPhotos(file, propertyId, unitId, photoCategory);
 			serverResponse.setStatus(HttpStatus.OK);
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setData(propertyPhotos);	
@@ -97,4 +96,37 @@ public class PropertyController {
 		}
 		return serverResponse;
 	}
+	
+	@RequestMapping(value="/uploadImages", method=RequestMethod.POST)
+	public ServerResponse<List<PropertyPhotos>> uploadImages(@RequestParam("files") MultipartFile[] files, @RequestParam("propertyId") long propertyId, @RequestParam("unitId") long unitId, @RequestParam("photoCategory") String photoCategory){
+		ServerResponse<List<PropertyPhotos>> serverResponse = new ServerResponse<List<PropertyPhotos>>();
+		try {
+			List<PropertyPhotos> list = propertyService.saveMultiplePropertyPhotos(files, propertyId, unitId, photoCategory);
+			serverResponse.setStatus(HttpStatus.OK);
+			serverResponse.setResponseCode(HttpStatus.OK.value());
+			serverResponse.setData(list);	
+		}catch(IOException e) {
+			serverResponse.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			serverResponse.setResponseCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+		}
+		return serverResponse;
+	}
+	
+	@RequestMapping(value="/getUnsoldProperty", method=RequestMethod.GET)
+	public ServerResponse<List<PropertyDTO>> getUnsoldProperties() {
+		ServerResponse<List<PropertyDTO>> serverResponse = new ServerResponse<List<PropertyDTO>>();
+		List<PropertyDTO> propertiesList = propertyService.findUnSoldPropertes();
+		if(propertiesList!=null &&  !propertiesList.isEmpty()) {
+			serverResponse.setResponseCode(HttpStatus.OK.value());
+			serverResponse.setStatus(HttpStatus.OK);
+			serverResponse.setData(propertiesList);
+		} else {
+			serverResponse.setResponseCode(HttpStatus.NO_CONTENT.value());
+			serverResponse.setStatus(HttpStatus.NO_CONTENT);
+			serverResponse.setData(propertiesList);
+		}
+		
+		return serverResponse;
+	}
+	
 }

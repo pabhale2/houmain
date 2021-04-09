@@ -1,5 +1,6 @@
 package com.youricsoft.houmain.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,7 +18,9 @@ import javax.persistence.Table;
 
 import com.youricsoft.houmain.enums.PropertyStatusEnum;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
@@ -67,6 +70,9 @@ public class Property implements PropertyInterface {
 	
 	@Column(name="updatedBy")
 	private long updatedBy;
+	
+	@Column(name="updatedOn")
+	private Date updatedOn;
 	
 	@Column(name="property_code")
 	private String propertyCode;

@@ -26,4 +26,6 @@ public class PropertyType {
 	
 	@Column(name="description")
 	private String description;
+	
+	
 }

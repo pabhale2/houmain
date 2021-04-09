@@ -7,10 +7,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.youricsoft.houmain.dto.PropertyDTO;
 import com.youricsoft.houmain.model.Property;
 import com.youricsoft.houmain.model.PropertyPhotos;
 import com.youricsoft.houmain.model.PropertyUnit;
@@ -49,7 +51,7 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 	
 	@Override
-	public PropertyPhotos savePropertyPhotos(MultipartFile file, long propertyId, long unitId) throws IOException{
+	public PropertyPhotos savePropertyPhotos(MultipartFile file, long propertyId, long unitId, String photoCategory) throws IOException{
 		Optional<Property> property = propertyRepository.findById(propertyId);
 		if(property.isPresent()) {
 			List<PropertyUnit> propertyUnit = property.get().getPropertyUnit().stream().filter(obj -> obj.getUnit()==unitId).collect(Collectors.toList());
@@ -59,13 +61,30 @@ public class PropertyServiceImpl implements PropertyService{
 			propertyPhotos.setPropertyId(property.get().getPropertyId());
 			propertyPhotos.setPropertyUnitId(propertyUnit.get(0).getUnit());
 			propertyPhotos.setPhotoType(file.getContentType());
+			propertyPhotos.setPhotoCategory(photoCategory);
 			propertyPhotosRepository.save(propertyPhotos);
 		
 			return propertyPhotos;
 		} else {
 			return null;
 		}
-				
+	}
+	
+	@Override
+	@Transactional
+	public List<PropertyPhotos> saveMultiplePropertyPhotos(MultipartFile[] files, long propertyId, long unitId, String photoCategory) throws IOException {
+		List<PropertyPhotos> photoList = new ArrayList<PropertyPhotos>();
+		for(MultipartFile file : files) {
+			PropertyPhotos photos = savePropertyPhotos(file, propertyId, unitId, photoCategory);
+			photoList.add(photos);
+		}
+		return photoList;
+	}
+
+	@Override
+	public List<PropertyDTO> findUnSoldPropertes() {
+		List<PropertyDTO> propertyList = propertyRepository.findUnSoldProperties();
+		return propertyList;
 	}
 	
 }
