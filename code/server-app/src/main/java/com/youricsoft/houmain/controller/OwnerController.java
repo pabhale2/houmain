@@ -88,13 +88,13 @@ public class OwnerController {
 	private void populateUserDetails(OwnerDTO ownerDTO, User user) {
 		ownerDTO.setFirstName(user.getFirstName());
 		ownerDTO.setLastName(user.getLastName());
-		ownerDTO.setStatus(user.isUserStatus()?1:0);
+		ownerDTO.setStatus(user.getUserStatus()?1:0);
 	}
 	
 	@RequestMapping(value="/getAll", method=RequestMethod.GET)
 	public ServerResponse<List<Owner>> getAllOwners(){
 		ServerResponse<List<Owner>> serverResponse = new ServerResponse<>();
-		List<Owner> ownerList = genericService.findAllOwners();
+		List<Owner> ownerList = ownerService.findAll();
 		if(ownerList.isEmpty()) {
 			serverResponse.setStatus(HttpStatus.NO_CONTENT);
 			serverResponse.setResponseCode(HttpStatus.NO_CONTENT.value());

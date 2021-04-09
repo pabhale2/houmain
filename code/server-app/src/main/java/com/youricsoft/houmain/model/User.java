@@ -18,7 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.youricsoft.houmain.dto.UserInterface;
 import com.youricsoft.houmain.util.BCryptPasswordUtility;
 
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
+@Getter
+@Setter
 @Table(name = "app_user")
 public class User implements UserInterface {
     @Id
@@ -60,76 +65,10 @@ public class User implements UserInterface {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = (password==null || password=="") ? password :  BCryptPasswordUtility.encryptPassword(password);
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
-    }
-
-	public boolean isUserStatus() {
-		return userStatus;
-	}
-
-	public void setUserStatus(boolean userStatus) {
-		this.userStatus = userStatus;
-	}
-	
-	public String getUserProfilePath() {
-		return userProfilePath;
-	}
-
-	public void setUserProfilePath(String userProfilePath) {
-		this.userProfilePath = userProfilePath;
-	}
-
-	public byte[] getUserProfile() {
-		return userProfile;
-	}
-
-	public void setUserProfile(byte[] data) {
-		this.userProfile = data;
-	}
+   
 }
 

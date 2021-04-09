@@ -1,10 +1,13 @@
 package com.youricsoft.houmain.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -14,14 +17,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="tenant")
-public class Tenant{
+public class Tenant implements TenantInterface{
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="tenant_id")
-	private int tenantId;
+	private long tenantId;
 	
-	@Column(name="user_id")
-	private long userId;
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="user_Id", referencedColumnName = "id")
+	private User user;
 	
 	@Column(name="tax_payer_id")
 	private String taxPayerId;
@@ -33,7 +37,7 @@ public class Tenant{
 	private String relationship;
 	
 	@Column(name="email_id")
-	private String emailId;
+	private String alternateEmailId;
 	
 	@Column(name="mobile_number")
 	private String mobileNumber;
