@@ -1,0 +1,136 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Add Tenant</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/applicant">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a routerLink="/rentals/rentalowners">Tenants</a>
+                        </li>
+                        <li class="breadcrumb-item active">Add Tenant</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="header">
+                <h2>Add Tenant Form </h2>
+            </div>
+            <div class="body">
+                <form class="register-form m-4" [formGroup]="tenantDetails" (ngSubmit)="onSubmit()">
+                    <!--firstname,lastname-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>First name</mat-label>
+                                <input matInput formControlName="firstName" required>
+                                <mat-icon matSuffix>face</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.firstName">
+                                    <ng-container *ngIf="tenantDetails.get('firstName').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Last name</mat-label>
+                                <input matInput formControlName="lastName" required>
+                                <mat-icon matSuffix>account_circle</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.lastName">
+                                    <ng-container *ngIf="tenantDetails.get('lastName').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--primaryEmail-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Primary Email</mat-label>
+                                <input matInput formControlName="primaryEmail" required>
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.primaryEmail">
+                                    <ng-container *ngIf="tenantDetails.get('primaryEmail').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--alternate email-->
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Alternate Email</mat-label>
+                                <input matInput formControlName="alternateEmailId">
+                                <mat-icon matSuffix>email</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.alternateEmailId">
+                                    <ng-container *ngIf="tenantDetails.get('alternateEmailId').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <!--mobileNumber,homenumber-->
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Mobile Number</mat-label>
+                                <input matInput formControlName="mobileNumber" >
+                                <mat-icon matSuffix>call</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.mobileNumber">
+                                    <ng-container *ngIf="tenantDetails.get('mobileNumber').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Taxpayer ID</mat-label>
+                                <input matInput formControlName="taxPayerId" >
+                                <mat-icon matSuffix>credit_card</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.taxPayerId">
+                                    <ng-container *ngIf="tenantDetails.get('taxPayerId').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            <mat-form-field class="example-full-width" appearance="outline">
+                                <mat-label>Tax Indentity Type</mat-label>
+                                <input matInput formControlName="taxIndentityType">
+                                <mat-icon matSuffix>credit_card</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.taxIndentityType">
+                                    <ng-container *ngIf="tenantDetails.get('taxIndentityType').hasError(error.type)">
+                                        {{error.message}}
+                                    </ng-container>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                            <button class="mr-6" [disabled]="!tenantDetails.valid" mat-raised-button
+                                color="primary">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

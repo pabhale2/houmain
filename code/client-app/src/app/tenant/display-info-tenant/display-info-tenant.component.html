@@ -1,0 +1,146 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Tenant information</h4>
+                        </li>
+                    <!--    <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/main">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">Doctor</a>
+                        </li>
+                        <li class="breadcrumb-item active">Profile</li>-->
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- Your content goes here  -->
+        <div class="row clearfix">
+            <div class="col-lg-4 col-md-12" >
+
+                <ng-container *ngIf="dataInfo">
+                <div class="card" >
+                    <div class="m-b-20">
+                        <div class="contact-grid" >
+                            <div class="profile-header bg-dark">
+
+                                <div class="user-name">{{dataInfo.user.firstName +" "+ dataInfo.user.lastName}}</div>
+                                <div class="name-center">Tenant</div>
+
+                            </div>
+                            <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+                            <div>
+                                <span class="phone">
+                                    <i class="material-icons">phone</i>{{dataInfo.mobileNumber}}</span>
+                            </div>
+                            <div>
+                                <button mat-icon-button color="accent" class="btn-tbl-edit">
+                                   <mat-icon aria-label="Edit" class="col-white" [routerLink]="['../../editTenant',dataInfo.user.id]">edit</mat-icon>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 </ng-container>
+            </div>
+            <div class="col-lg-8 col-md-12">
+                <div class="card">
+                    <div class="profile-tab-box">
+                        <div class="p-l-20">
+                            <ul class="nav ">
+                                <li class="nav-item tab-all">
+                                    <a class="nav-link active show" href="#summary" data-toggle="tab">Summary</a>
+                                </li>
+                                <li class="nav-item tab-all p-l-20">
+                                    <a class="nav-link" href="#financials" data-toggle="tab">Financials</a>
+                                </li>
+                                <li class="nav-item tab-all p-l-20">
+                                    <a class="nav-link" href="#property" data-toggle="tab">Property</a>
+                                </li>
+                                <li class="nav-item tab-all p-l-20">
+                                    <a class="nav-link" href="#communications" data-toggle="tab">Communications</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <ng-container *ngIf="dataInfo">
+                    <div role="tabpanel" class="tab-pane active" id="summary" aria-expanded="true">
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="card project_widget">
+                                    <div class="header">
+                                        <h2>Summary</h2>
+                                    </div>
+                                    <div class="body">
+                                        <div class="row">
+                                            <div class="col-md-4 col-6 b-r">
+                                                <strong>Full Name</strong>
+                                                <br>
+                                                <p class="text-muted">{{dataInfo.user.firstName +" "+ dataInfo.user.lastName}}</p>
+                                            </div>
+                                            <div class="col-md-4 col-6 b-r">
+                                                <strong>Mobile</strong>
+                                                <br>
+                                                <p class="text-muted">{{dataInfo.mobileNumber}}</p>
+                                            </div>
+                                            <div class="col-md-4 col-6 b-r">
+                                                <strong>Email</strong>
+                                                <br>
+                                                <p class="text-muted">{{dataInfo.alternateEmailId}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
+                        <div class="card">
+                            <div class="header">
+                                <h2> Financials</h2>
+                            </div>
+                            <div class="body">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="property" aria-expanded="false">
+                        <div class="card">
+                            <div class="header">
+                                <h2> Property</h2>
+                            </div>
+                            <div class="body">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div role="tabpanel" class="tab-pane" id="communications" aria-expanded="false">
+                        <div class="card">
+                            <div class="header">
+                                <h2> Communications</h2>
+                            </div>
+                            <div class="body">
+
+                            </div>
+                        </div>
+
+                    </div>
+                </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

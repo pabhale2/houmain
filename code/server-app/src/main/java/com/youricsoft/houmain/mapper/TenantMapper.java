@@ -21,6 +21,9 @@ public interface TenantMapper {
     
     Tenant tenantDTOtoTenant(TenantDTO tenantDTO);
     
+    @Mappings({
+    	@Mapping(target = "username", source = "primaryEmail")
+    })
     User tenantDTOToUser(TenantDTO tenantDTO);
     
     public default void merge(Tenant target, Tenant source) {

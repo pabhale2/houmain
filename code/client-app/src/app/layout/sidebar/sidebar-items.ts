@@ -55,12 +55,21 @@ export const ROUTES: RouteInfo[] = [
     groupTitle: false,
     submenu: [
       {
-        path: '',
+        path: '../tenants/addTenant',
         title: 'Add Tenant',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
         accessControl: ['ADMIN_USER','SYSTEM_USER','TENANT'],
+        submenu: []
+      },
+      {
+        path: '../tenants/showTenants',
+        title: 'All Tenants',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
         submenu: []
       },
       {
