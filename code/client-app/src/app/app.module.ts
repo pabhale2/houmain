@@ -20,6 +20,7 @@ import { RoomService } from '../app/room/allroom/room.service';
 import { PaymentService } from '../app/payment/allpayment/payment.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { OwnersService } from './rentals/owners.service';
+import { TenantsService} from './tenant/tenants.service';
 import {  PropertyService } from './property/property.service';
 import {
   PerfectScrollbarModule,
@@ -122,6 +123,7 @@ export function tokenGetter() {
     RoomService,
     PaymentService,
     OwnersService,
+    TenantsService,
     PropertyService,
     ServiceProviderService,
     AuthGuard,

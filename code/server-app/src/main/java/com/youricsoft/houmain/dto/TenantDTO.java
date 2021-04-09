@@ -16,4 +16,5 @@ public class TenantDTO {
 	private String relationship;
 	private String alternateEmailId;
 	private String mobileNumber;
+	private String primaryEmail;
 }
