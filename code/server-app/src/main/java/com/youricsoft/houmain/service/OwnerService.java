@@ -1,5 +1,6 @@
 package com.youricsoft.houmain.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.youricsoft.houmain.dto.OwnerDTO;
@@ -10,4 +11,5 @@ public interface OwnerService {
 	public Owner save(Owner owner);
 	public Optional<Owner> findByPrimaryEmail(String primaryEmail);
 	public Owner registerOwner(OwnerDTO ownerDTO);
+	public List<Owner> findAll();
 }

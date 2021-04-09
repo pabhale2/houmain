@@ -27,7 +27,7 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
         }
         
-        if(user.isUserStatus() == false) {
+        if(user.getUserStatus() == false) {
         	throw new UsernameNotFoundException(String.format("The username %s doesn't exist", s));
         }
 

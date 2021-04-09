@@ -89,7 +89,7 @@ public class UserManagement {
 						user.setUserProfile(null);
 					
 				});
-		serverResponse.setData(userList.stream().filter(user->user.isUserStatus()==activeUser).collect(Collectors.toList()));
+		serverResponse.setData(userList.stream().filter(user->user.getUserStatus()==activeUser).collect(Collectors.toList()));
 		return serverResponse;
 	}
 	
@@ -122,7 +122,7 @@ public class UserManagement {
 			existingUser.setLastName(lname);
 			existingUser.setUsername(existingUser.getUsername());
 			existingUser.setPassword(existingUser.getPassword());
-			existingUser.setUserStatus(existingUser.isUserStatus());
+			existingUser.setUserStatus(existingUser.getUserStatus());
 			existingUser.setUserProfile(file.getBytes());
 			//store profile image 
 			

@@ -40,8 +40,7 @@ public class GenericServiceImpl implements GenericService {
 	@Resource private UserRoleRepository userRoleRepository;
 	@Resource private ContactRepository contactRepository;
 	@Resource private OwnerRepository ownerRepository;
-	@Resource private PropertyRepository propertyRepository;
-    
+	
 	@Resource private OwnerService ownerService;
 	@Resource private TenantService tenantService;
 	
@@ -94,41 +93,10 @@ public class GenericServiceImpl implements GenericService {
     }
 
 	@Override
-	public List<Owner> findAllOwners() {
-		List<Owner> owners = new ArrayList();
-		ownerRepository.findAll().forEach(owners::add);
-		return owners;
-    }
-
-	@Override
 	public Owner disableOwner(Owner owner) {
 		owner.setStatus(0);
 		ownerRepository.save(owner);
 		return owner;
-	}
-
-	@Override
-	public Property saveProperty(Property property) {
-		// TODO Auto-generated method stub
-		for(PropertyUnit unit : property.getPropertyUnit()) {
-			unit.setTypeId(property.getPropertyType().getTypeId());
-		}
-		propertyRepository.save(property);
-		return property;
-	}
-
-	@Override
-	public Property findbyIdProperty(long id) {
-		Optional<Property> returnedProperty = propertyRepository.findById(id);
-		return returnedProperty.isPresent() ? returnedProperty.get() : null;
-	}
-
-	@Override
-	public List<Property> findAllProperties() {
-		List<Property> properties = new ArrayList();
-		propertyRepository.findAll()
-		.forEach(properties::add);
-		return properties;
 	}
 
 	@Override
@@ -155,7 +123,7 @@ public class GenericServiceImpl implements GenericService {
 				ownerService.save(owner);
 			} else if(RoleEnum.TENANT.equals(registrationDTO.getType())) {
 				Tenant tenant = TenantMapper.INSTANCE.registrationDTOToTenant(registrationDTO);
-				tenant.setUserId(user.getId());
+				tenant.setUser(savedUser);
 				tenantService.save(tenant);
 			}
 		}

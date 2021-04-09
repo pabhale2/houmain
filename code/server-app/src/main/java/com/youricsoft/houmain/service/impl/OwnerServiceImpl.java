@@ -1,5 +1,7 @@
 package com.youricsoft.houmain.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import javax.annotation.Resource;
@@ -12,6 +14,7 @@ import com.youricsoft.houmain.dto.OwnerDTO;
 import com.youricsoft.houmain.enums.RoleEnum;
 import com.youricsoft.houmain.mapper.OwnerMapper;
 import com.youricsoft.houmain.model.Owner;
+import com.youricsoft.houmain.model.Role;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.model.UserRole;
 import com.youricsoft.houmain.repository.OwnerRepository;
@@ -46,12 +49,13 @@ public class OwnerServiceImpl implements OwnerService {
 		user.setUserStatus(true);
 		//ToDo :: share the login details with user and change to random password
 		user.setPassword("123456");
-		User savedUser = genericService.saveUser(user);
+		user.setRoles(new ArrayList<Role>());
 		
-		UserRole userRole = new UserRole();
-		userRole.setRoleId(RoleEnum.OWNER.getId());
-		userRole.setUserId(savedUser.getId());
-		UserRole savedUserRole = genericService.saveUserRole(userRole);
+		Role role = new Role();
+		role.setId(RoleEnum.OWNER.getId());
+		role.setRoleName(RoleEnum.OWNER.getValue());
+		user.getRoles().add(role);
+		User savedUser = genericService.saveUser(user);
 		
 		if(savedUser!=null && savedUser.getId()>0) {
 			owner.setStatus(1);
@@ -62,6 +66,13 @@ public class OwnerServiceImpl implements OwnerService {
 		return owner;
 		
 	}
+	
+	@Override
+	public List<Owner> findAll() {
+		List<Owner> owners = new ArrayList();
+		ownerRepository.findAll().forEach(owners::add);
+		return owners;
+    }
 	
 	
 }

@@ -207,3 +207,19 @@ CREATE TABLE `user_role` (
 LOCK TABLES `user_role` WRITE;
 INSERT INTO `user_role` VALUES (1,36,6),(2,37,7);
 UNLOCK TABLES;
+
+
+ALTER TABLE `property_photos` 
+DROP COLUMN `parking_area`,
+DROP COLUMN `parking`,
+CHANGE COLUMN `property_photo_id` `property_photo_id` INT(11) NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `property_id` `property_id` INT(11) NOT NULL ,
+CHANGE COLUMN `property_unit_id` `property_unit_id` INT(11) NOT NULL ,
+CHANGE COLUMN `altText` `photo_category` VARCHAR(255) NULL DEFAULT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`property_photo_id`, `property_id`, `property_unit_id`);
+
+ALTER TABLE `property_photos` 
+CHANGE COLUMN `photoLink` `photo_link` VARCHAR(1000) NULL DEFAULT NULL ,
+ADD COLUMN `photo_type` VARCHAR(45) NULL AFTER `photo`;
+

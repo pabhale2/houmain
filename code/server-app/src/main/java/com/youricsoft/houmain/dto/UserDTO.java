@@ -14,4 +14,5 @@ public class UserDTO implements UserInterface{
 	private String firstName;
 	private String lastName;
 	private boolean userStatus;
+	
 }
