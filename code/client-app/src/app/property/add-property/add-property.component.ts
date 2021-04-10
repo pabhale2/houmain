@@ -1,12 +1,13 @@
 import { AddPhotosComponent } from './../add-photos/add-photos.component';
 import { PropertyServiceService } from './../property-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { FormArray, FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
+import { PropertyService } from '../property.service';
 
 interface PropertyType{
   viewValue: string;
@@ -18,9 +19,13 @@ interface PropertyType{
   styleUrls: ['./add-property.component.sass']
 })
 export class AddPropertyComponent implements OnInit {
+  iconText: string;
+  popupText: string;
+  propertyUnit: FormArray;
  
 
-  constructor( private fb: FormBuilder, private http: HttpClient,
+  constructor( public proService: PropertyService,
+    private fb: FormBuilder, private http: HttpClient,
     private propertyService: PropertyServiceService,public dialog: MatDialog) {
       this.propertyTypeData=this.propertyService.getPropertyType();
      }
@@ -150,10 +155,10 @@ export class AddPropertyComponent implements OnInit {
       propertyName: ['Mukund Nivas',[ Validators.required,Validators.maxLength(200)]],
       propertyType: ['', [Validators.required]],
       propertySubType: ['', [Validators.required]],
-      streetAddress: ['Bhanwaj road', [Validators.maxLength(100),Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
+      streetAddress: ['Bhanwaj road', [Validators.maxLength(100)]],
       city: ['Khopoli', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
       state: ['Maharastra', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
-      zip: ['410203', [Validators.required, Validators.pattern("^\d{5}(?:[-\s]\d{4})?$")]],
+      zip: ['410203', [Validators.required]],
       country: ['India', [Validators.required, Validators.pattern]],
       unitCount:['2', [ Validators.pattern("[0-9]{1,2}")]],
       HallNum:  ['2', [ Validators.pattern("[0-9]{1,2}")]],
@@ -164,6 +169,7 @@ export class AddPropertyComponent implements OnInit {
       ToiletNum:['2', [ Validators.pattern("[0-9]{1,2}")]],
       EntryGateNum: ['2', [Validators.pattern("[0-9]{1,2}")]],
       OtherInfo: ['2', [ Validators.pattern("[0-9]{1,2}")]],
+      propertyUnit: this.fb.array([ this.createPropertyUnit() ])
     })
 
     this.addPropertyGallary = this.fb.group({
@@ -171,8 +177,52 @@ export class AddPropertyComponent implements OnInit {
       photoUrls:['',Validators.required]
     })
   }
+
+  createPropertyUnit(): FormGroup {
+    return this.fb.group({
+      unit:'',
+      typeId:'',
+      address:'',
+      bed:'',
+      gallary:'',
+      bath:'',
+      squareFeet:'',
+      carpetArea:''
+    });
+  }
+
+  addPropertyUnit(): void {
+    this.propertyUnit = this.addPropertyForm.get('propertyUnit') as FormArray;
+    this.propertyUnit.push(this.createPropertyUnit());
+  }
+
   onSubmit(){
     console.log(this.addPropertyForm.value);
+     this.proService.addProperty(this.addPropertyForm.value).subscribe(
+      data => {
+        this.iconText="success";
+        this.popupText=" User added successfully";
+        this.openDialog(this.popupText,this.iconText);
+        this.addPropertyForm.reset();
+      },
+      err => {
+        this.iconText="error";
+        if(err.status === 401 ){
+          this.popupText=" Unauthorized - Username or Password is Incorrect";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 404){
+          this.popupText="Not Found - The Authentication URL is not valid";
+          this.openDialog(this.popupText,this.iconText);
+        }else if(err.status === 500){
+          this.popupText="Internal Server Error at Server Side.";
+          this.openDialog(this.popupText,this.iconText);
+        }
+        else{
+          this.popupText="Application Problem Please contact to Application Administrator ";
+          this.openDialog(this.popupText,this.iconText);
+        }
+      }
+    );
   }
   onPhotoUpload(){
     

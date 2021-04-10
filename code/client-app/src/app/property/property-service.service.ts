@@ -9,8 +9,8 @@ export class PropertyServiceService {
   constructor() { }
   getPropertyType(){
     return [
-       { "propertyType": "Residential" },
-       { "propertyType": "Commercial" }
+       { "typeId":1,"propertyType": "Residential" },
+       { "typeId":2,"propertyType": "Commercial" }
       ]
   }
   getPropertySubType(newValue){
