@@ -1,5 +1,7 @@
 package com.youricsoft.houmain.mapper;
 
+import java.util.List;
+
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
@@ -14,6 +16,8 @@ public interface PropertyMapper {
 	PropertyMapper INSTANCE = Mappers.getMapper(PropertyMapper.class);
 	
 	PropertyDTO propertyToPropertyDTO(Property property);
+	
+	List<PropertyDTO> propertyListToPropertyDTOList(List<Property> propertyList);
 	
 	@Mappings(
 		@Mapping(target="propertyType.typeId", source="typeId")

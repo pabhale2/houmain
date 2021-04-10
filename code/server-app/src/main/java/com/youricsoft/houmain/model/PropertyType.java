@@ -26,6 +26,16 @@ public class PropertyType {
 	
 	@Column(name="description")
 	private String description;
+
+	public PropertyType(long typeId) {
+		super();
+		this.typeId = typeId;
+	}
+
+	public PropertyType() {
+		super();
+	}
+	
 	
 	
 }

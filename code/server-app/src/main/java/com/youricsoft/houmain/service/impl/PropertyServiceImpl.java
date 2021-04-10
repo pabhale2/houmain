@@ -2,19 +2,26 @@ package com.youricsoft.houmain.service.impl;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youricsoft.houmain.dto.PropertyDTO;
+import com.youricsoft.houmain.mapper.PropertyMapper;
 import com.youricsoft.houmain.model.Property;
 import com.youricsoft.houmain.model.PropertyPhotos;
+import com.youricsoft.houmain.model.PropertyType;
 import com.youricsoft.houmain.model.PropertyUnit;
 import com.youricsoft.houmain.repository.PropertyPhotosRepository;
 import com.youricsoft.houmain.repository.PropertyRepository;
@@ -43,10 +50,10 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 	@Override
-	public List<Property> findAll() {
+	public List<Property> findAll(int startIndex, int pageSize) {
 		List<Property> properties = new ArrayList();
-		propertyRepository.findAll()
-		.forEach(properties::add);
+		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
+		propertyRepository.findAll(page).forEach(properties::add);
 		return properties;
 	}
 	
@@ -82,9 +89,65 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 
 	@Override
-	public List<PropertyDTO> findUnSoldPropertes() {
-		List<PropertyDTO> propertyList = propertyRepository.findUnSoldProperties();
-		return propertyList;
+	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize, boolean detailsFlag) {
+		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
+		List<Object[]> propertyObjectList =null;
+		if(detailsFlag) {
+			propertyObjectList = propertyRepository.findUnSoldPropertiesWithDetails(page);
+		} else {
+			propertyObjectList = propertyRepository.findUnSoldPropertieNames(page);
+		}
+		List<Property> propertyList = preparePropertyObject(propertyObjectList);
+		List<PropertyDTO> propertyDTOList = PropertyMapper.INSTANCE.propertyListToPropertyDTOList(propertyList);
+		return propertyDTOList;
+	}
+	
+	@Override
+	public List<Property> findUnMappedProperties(int startIndex, int pageSize, boolean detailsFlag) {
+		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
+		List<Object[]> propertyList = detailsFlag ? propertyRepository.findUnMappedPropertieNames() :propertyRepository.findUnMappedPropertiesWithDetails();
+		return preparePropertyObject(propertyList);
+	}
+	
+	public List<Property> preparePropertyObject(List<Object[]> propertyList){
+		Map<Long, Property> propertyMap = new HashMap<Long, Property>();
+		for(Object[] obj : propertyList) {
+			Property prop = (Property)obj[0];
+			if(propertyMap.containsKey(prop.getPropertyId())) {
+				prop = propertyMap.get(prop.getPropertyId());
+				PropertyUnit unit = (PropertyUnit)obj[2];
+				if(prop.getPropertyUnit().contains(unit.getPropertyUnitId())){
+					if(propertyList.size()>3) {
+						PropertyPhotos photos = (PropertyPhotos)obj[3];
+						unit.getPropertyPhotos().add(photos);
+					}
+				} else {
+					if(propertyList.size()>3) {
+						PropertyPhotos photos = (PropertyPhotos)obj[3];
+						unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
+						unit.getPropertyPhotos().add(photos);
+					}
+				}
+				prop.getPropertyUnit().add(unit);
+				
+			} else {
+				PropertyType propertyType = (PropertyType) obj[1];
+				prop.setPropertyType(propertyType);
+				
+				PropertyUnit unit = (PropertyUnit)obj[2];
+				if(propertyList.size()>3) {
+					PropertyPhotos photos = (PropertyPhotos)obj[3];
+					unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
+					unit.getPropertyPhotos().add(photos);
+				}
+				prop.setPropertyUnit(new ArrayList<PropertyUnit>());
+				prop.getPropertyUnit().add(unit);
+				
+				propertyMap.put(prop.getPropertyId(), prop);
+			}
+		}
+		
+		return new ArrayList<Property>(propertyMap.values());
 	}
 	
 }

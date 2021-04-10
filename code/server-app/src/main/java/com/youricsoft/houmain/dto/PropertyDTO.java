@@ -1,5 +1,6 @@
 package com.youricsoft.houmain.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +34,9 @@ public class PropertyDTO implements PropertyInterface {
 	private boolean active;
 	private String propertyCode;
 	
+	public void setTypeId(long typeId) {
+		this.propertyType = new PropertyType(typeId);
+	}
 	public void setPropertyCode(String propertyCode) {
 		this.propertyCode = String.join("-", String.valueOf(this.typeId), this.city, this.state, this.country);
 	}
