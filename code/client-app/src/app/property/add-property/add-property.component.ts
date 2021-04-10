@@ -1,7 +1,7 @@
 import { AddPhotosComponent } from './../add-photos/add-photos.component';
 import { PropertyServiceService } from './../property-service.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder,FormGroup,Validators } from '@angular/forms';
+import { FormArray, FormBuilder,FormGroup,Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -21,6 +21,7 @@ interface PropertyType{
 export class AddPropertyComponent implements OnInit {
   iconText: string;
   popupText: string;
+  propertyUnit: FormArray;
  
 
   constructor( public proService: PropertyService,
@@ -168,6 +169,7 @@ export class AddPropertyComponent implements OnInit {
       ToiletNum:['2', [ Validators.pattern("[0-9]{1,2}")]],
       EntryGateNum: ['2', [Validators.pattern("[0-9]{1,2}")]],
       OtherInfo: ['2', [ Validators.pattern("[0-9]{1,2}")]],
+      propertyUnit: this.fb.array([ this.createPropertyUnit() ])
     })
 
     this.addPropertyGallary = this.fb.group({
@@ -175,6 +177,25 @@ export class AddPropertyComponent implements OnInit {
       photoUrls:['',Validators.required]
     })
   }
+
+  createPropertyUnit(): FormGroup {
+    return this.fb.group({
+      unit:'',
+      typeId:'',
+      address:'',
+      bed:'',
+      gallary:'',
+      bath:'',
+      squareFeet:'',
+      carpetArea:''
+    });
+  }
+
+  addPropertyUnit(): void {
+    this.propertyUnit = this.addPropertyForm.get('propertyUnit') as FormArray;
+    this.propertyUnit.push(this.createPropertyUnit());
+  }
+
   onSubmit(){
     console.log(this.addPropertyForm.value);
      this.proService.addProperty(this.addPropertyForm.value).subscribe(

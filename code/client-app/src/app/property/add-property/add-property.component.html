@@ -68,7 +68,7 @@
                 <mat-label>Property Type</mat-label>
                 <mat-select #type formControlName="propertyType">
                   <mat-option *ngFor="let x of propertyTypeData" (onSelectionChange)="loadData(x.propertyType)"
-                    [value]="x.propertyType">
+                    [value]="x.typeId">
                     {{x.propertyType}}
                   </mat-option>
                 </mat-select>
@@ -286,8 +286,81 @@
           </div> -->
           <!--table-->
 
-         
+         <div class="row">
+          <div
+          formArrayName="propertyUnit"
+          *ngFor="let unit of addPropertyForm.get('propertyUnit')['controls']; let i = index;"
+        >
+          <div [formGroupName]="i">
+
           <div class="row">
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Unit</mat-label>
+                <input matInput formControlName="unit" required>
+              </mat-form-field>
+            </div>
+           
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Type Id</mat-label>
+                <input matInput formControlName="typeId" required>
+              </mat-form-field>
+            </div>
+           
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput formControlName="address" required>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Bed</mat-label>
+                <input matInput formControlName="bed" required>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Gallary</mat-label>
+                <input matInput formControlName="gallary" required>
+              </mat-form-field>
+            </div>
+           
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Bath</mat-label>
+                <input matInput formControlName="bath" required>
+              </mat-form-field>
+            </div>
+           
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Square Feet</mat-label>
+                <input matInput formControlName="squareFeet" required>
+              </mat-form-field>
+            </div>
+
+            <div class="col">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Carpet Area</mat-label>
+                <input matInput formControlName="carpetArea" required>
+              </mat-form-field>
+            </div>
+          </div>
+         </div>
+        </div>   
+      </div>
+
+          <div class="row">
+            <button class="mr-6" mat-raised-button
+            color="primary" type="button" (click)="addPropertyUnit()">Add Property Unit</button>
+           </div>
+           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
               <button class="mr-6" mat-raised-button
                 color="primary">Upload</button>
