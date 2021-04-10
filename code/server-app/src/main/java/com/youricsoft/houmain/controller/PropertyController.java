@@ -1,7 +1,10 @@
 package com.youricsoft.houmain.controller;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.Resource;
 
@@ -15,10 +18,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.youricsoft.houmain.bo.ServerResponse;
 import com.youricsoft.houmain.dto.PropertyDTO;
+import com.youricsoft.houmain.enums.PropertyStatusEnum;
 import com.youricsoft.houmain.mapper.PropertyMapper;
 import com.youricsoft.houmain.model.Property;
 import com.youricsoft.houmain.model.PropertyInterface;
+import com.youricsoft.houmain.model.PropertyOwnerMapping;
 import com.youricsoft.houmain.model.PropertyPhotos;
+import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
 import com.youricsoft.houmain.service.PropertyService;
 
@@ -30,12 +36,14 @@ public class PropertyController {
 	@Resource private PropertyService propertyService;
 		
 	@RequestMapping(value="/save", method=RequestMethod.POST)
-	public ServerResponse<PropertyInterface> saveProperty(@RequestBody PropertyDTO propertyDTO) {
+	public ServerResponse<PropertyInterface> saveProperty(@RequestBody PropertyDTO propertyDTO, Principal principal) {
 		ServerResponse<PropertyInterface> serverResponse = new ServerResponse<>();
 		Property property = PropertyMapper.INSTANCE.propertyDTOTOproperty(propertyDTO);
 		Property existingProperty = propertyService.findById(property.getPropertyId());
 		if ( existingProperty == null){
-			propertyService.save(property);
+			property = propertyService.save(property);
+			User user = genericService.findByUsername(principal.getName());
+			propertyService.savePropertyOwnerMapping(property, user);
 			serverResponse.setStatus(HttpStatus.OK);
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setData(property);
@@ -129,10 +137,11 @@ public class PropertyController {
 		return serverResponse;
 	}
 	
-	@RequestMapping(value="/getUnMappedProperties", method=RequestMethod.GET)
-	public ServerResponse<List<Property>> getUnMappedProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize, @RequestParam(name="details", defaultValue = "false") boolean detailsFlag) {
+	
+	@RequestMapping(value="/inspectionProperties", method=RequestMethod.GET)
+	public ServerResponse<List<Property>> inspectionProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize, @RequestParam(name="details", defaultValue = "false") boolean detailsFlag) {
 		ServerResponse<List<Property>> serverResponse = new ServerResponse<List<Property>>();
-		List<Property> propertiesList = propertyService.findUnMappedProperties(startIndex, pageSize, detailsFlag);
+		List<Property> propertiesList = propertyService.findPropertiesForInspection(startIndex, pageSize, detailsFlag);
 		if(propertiesList!=null &&  !propertiesList.isEmpty()) {
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setStatus(HttpStatus.OK);
@@ -145,5 +154,4 @@ public class PropertyController {
 		
 		return serverResponse;
 	}
-	
 }

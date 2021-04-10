@@ -35,6 +35,7 @@ public class PropertyDTO implements PropertyInterface {
 	private String propertyCode;
 	
 	public void setTypeId(long typeId) {
+		this.typeId = typeId;
 		this.propertyType = new PropertyType(typeId);
 	}
 	public void setPropertyCode(String propertyCode) {

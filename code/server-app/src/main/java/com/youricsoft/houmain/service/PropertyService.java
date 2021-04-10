@@ -7,7 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.youricsoft.houmain.dto.PropertyDTO;
 import com.youricsoft.houmain.model.Property;
+import com.youricsoft.houmain.model.PropertyOwnerMapping;
 import com.youricsoft.houmain.model.PropertyPhotos;
+import com.youricsoft.houmain.model.User;
 
 public interface PropertyService {
 	public Property findById(long id);
@@ -16,5 +18,6 @@ public interface PropertyService {
 	public PropertyPhotos savePropertyPhotos(MultipartFile file, long propertyId, long unitId, String photoCategory)  throws IOException;
 	public List<PropertyPhotos> saveMultiplePropertyPhotos(MultipartFile[] files, long propertyId, long unitId, String photoCategory)  throws IOException;
 	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize, boolean detailsFlag);
-	public List<Property> findUnMappedProperties(int startIndex, int pageSize, boolean detailsFlag);
+	public List<Property> findPropertiesForInspection(int startIndex, int pageSize, boolean detailsFlag);
+	public PropertyOwnerMapping savePropertyOwnerMapping(Property property, User user);
 }

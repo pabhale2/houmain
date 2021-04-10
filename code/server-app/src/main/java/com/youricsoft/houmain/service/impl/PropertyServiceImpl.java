@@ -3,6 +3,7 @@ package com.youricsoft.houmain.service.impl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.youricsoft.houmain.dto.PropertyDTO;
+import com.youricsoft.houmain.enums.PropertyStatusEnum;
 import com.youricsoft.houmain.mapper.PropertyMapper;
 import com.youricsoft.houmain.model.Property;
+import com.youricsoft.houmain.model.PropertyOwnerMapping;
 import com.youricsoft.houmain.model.PropertyPhotos;
 import com.youricsoft.houmain.model.PropertyType;
 import com.youricsoft.houmain.model.PropertyUnit;
+import com.youricsoft.houmain.model.User;
+import com.youricsoft.houmain.repository.PropertyOwnerMappingRepository;
 import com.youricsoft.houmain.repository.PropertyPhotosRepository;
 import com.youricsoft.houmain.repository.PropertyRepository;
 import com.youricsoft.houmain.service.PropertyService;
@@ -32,14 +37,14 @@ public class PropertyServiceImpl implements PropertyService{
 
 	@Resource PropertyPhotosRepository propertyPhotosRepository;
 	@Resource PropertyRepository propertyRepository;
+	@Resource PropertyOwnerMappingRepository propertyOwnerMappingRepository;
 	
 	@Override
 	public Property save(Property property) {
-		// TODO Auto-generated method stub
 		for(PropertyUnit unit : property.getPropertyUnit()) {
 			unit.setTypeId(property.getPropertyType().getTypeId());
 		}
-		propertyRepository.save(property);
+		property = propertyRepository.save(property);
 		return property;
 	}
 
@@ -103,10 +108,10 @@ public class PropertyServiceImpl implements PropertyService{
 	}
 	
 	@Override
-	public List<Property> findUnMappedProperties(int startIndex, int pageSize, boolean detailsFlag) {
+	public List<Property> findPropertiesForInspection(int startIndex, int pageSize, boolean detailsFlag) {
 		Pageable page = PageRequest.of(startIndex, startIndex + pageSize);
-		List<Object[]> propertyList = detailsFlag ? propertyRepository.findUnMappedPropertieNames() :propertyRepository.findUnMappedPropertiesWithDetails();
-		return preparePropertyObject(propertyList);
+		List<Property> propertyList = propertyRepository.findAllByStatus(PropertyStatusEnum.INSPECTION.getValue());
+		return propertyList;
 	}
 	
 	public List<Property> preparePropertyObject(List<Object[]> propertyList){
@@ -148,6 +153,15 @@ public class PropertyServiceImpl implements PropertyService{
 		}
 		
 		return new ArrayList<Property>(propertyMap.values());
+	}
+
+	@Override
+	public PropertyOwnerMapping savePropertyOwnerMapping(Property property, User user) {
+		PropertyOwnerMapping propertyOwnerMapping = new PropertyOwnerMapping();
+		propertyOwnerMapping.setPropertyId(property.getPropertyId());
+		propertyOwnerMapping.setOwnerId(user.getId());
+		propertyOwnerMapping.setRegisterDate(new Date());
+		return propertyOwnerMappingRepository.save(propertyOwnerMapping);
 	}
 	
 }
