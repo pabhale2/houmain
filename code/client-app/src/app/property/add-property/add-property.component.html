@@ -280,76 +280,20 @@
               </div>
             </div>
 
-            <!-- Map -->
-            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
-              <agm-map [latitude]="latitude" [longitude]="longitude" style="height: 250px;"
-                (mapClick)="onMapClick($event)">
-                <agm-marker [latitude]="latitude" [longitude]="longitude">
-                </agm-marker>
-              </agm-map>
-            </div>
-
           </div>
           <!-- <div *ngIf="propertyType == 'Condo/Town Home'">
             <mat-label> Enter Units </mat-label>
           </div> -->
           <!--table-->
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="card">
-                <div class="body">
-                  <div class="table-responsive">
-                    <div class="materialTableHeader">
-                      <div class="row">
-                        <div class="col-8">
-                          <ul class="header-buttons-left ml-0">
-                            <li class="dropdown">
-                              <h2>
-                                <strong>Photos</strong>
-                              </h2>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="col-4">
-                          <ul class="header-buttons">
-                            <li>
-                              <div class="icon-button-demo">
-                                <button mat-mini-fab color="primary" (click)="addPhoto()">
-                                  <mat-icon class="col-white">add</mat-icon>
-                                </button>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <mat-table [dataSource]="container" matSort class="mat-cell">
-                      <ng-container matColumnDef="Photo Type">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photo Type</mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row.firstName}}</mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="Photos">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photos</mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
-                      </ng-container>
-                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns;">
-                      </mat-row>
-                    </mat-table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
          
           <div class="row">
             <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-              <button class="mr-6" [disabled]="container.data.length<2 || container.data.length>10" mat-raised-button
+              <button class="mr-6" mat-raised-button
                 color="primary">Upload</button>
             </div>
           </div>
         </form>
-
       </div>
     </div>
   </div>
