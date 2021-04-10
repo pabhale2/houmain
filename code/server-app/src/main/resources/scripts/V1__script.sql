@@ -243,5 +243,21 @@ CREATE TABLE `property_rate` (
   `end_date` DATETIME NULL,
   PRIMARY KEY (`id`, `property_id`, `owner_id`, `tenant_id`));
  
+ ALTER TABLE `property` 
+CHANGE COLUMN `status` `status` ENUM('ACTIVE', 'INACTIVE', 'PENDING', 'UNDERCONSTRUCTION', 'INSPECTION', 'REJECTED') NULL DEFAULT NULL ;
+
+ALTER TABLE `propertyownermapping` 
+CHANGE COLUMN `mappingId` `mappingId` INT(11) NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `ownerId` `ownerId` INT(11) NOT NULL ,
+CHANGE COLUMN `propertyId` `propertyId` INT(11) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`mappingId`, `ownerId`, `propertyId`);
+
+ALTER TABLE `propertyownermapping` 
+CHANGE COLUMN `registerDate` `registerDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ;
+
+
+ 
+ 
 
 

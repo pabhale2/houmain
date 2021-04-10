@@ -77,11 +77,11 @@ public class Property implements PropertyInterface {
 	@Column(name="property_code")
 	private String propertyCode;
 	
-//	@OneToOne(fetch = FetchType.EAGER)
+//	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinTable(
 //    	name = "propertyownermapping", 
 //    	joinColumns = @JoinColumn(name = "propertyId", referencedColumnName = "property_id"),
-//        inverseJoinColumns = @JoinColumn(name = "ownerId", referencedColumnName = "id"))
+//        inverseJoinColumns = @JoinColumn(name = "ownerId", referencedColumnName = "ownerId"))
 //    private PropertyOwnerMapping propertyOwnerMapping;
     
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)

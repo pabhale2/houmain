@@ -13,6 +13,8 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
 	
 	Iterable<Property> findAll(Pageable pageable);
 	
+	List<Property> findAllByStatus(String status);
+	
 	@Query(value =  
 			" select " +
 			"	 prop,  " + 
