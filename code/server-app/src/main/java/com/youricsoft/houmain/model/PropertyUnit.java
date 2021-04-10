@@ -1,5 +1,6 @@
 package com.youricsoft.houmain.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -10,6 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -20,8 +23,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name="property_unit")
-public class PropertyUnit {
+public class PropertyUnit implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1469650768990053988L;
+
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	@Column(name="property_unit_id")
@@ -62,4 +70,11 @@ public class PropertyUnit {
 	
 	@Column(name="updatedOn")
 	private Date updatedOn;
+	
+	@OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumns({
+        @JoinColumn(name="property_id", referencedColumnName="property_id"),
+        @JoinColumn(name="property_unit_id", referencedColumnName="property_unit_id")
+    })
+	private List<PropertyPhotos> propertyPhotos;
 }
