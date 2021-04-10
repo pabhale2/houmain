@@ -17,4 +17,5 @@ public class PropertyPhotosDTO {
 	private String photoType;
 	private String photoCategory;
 	private boolean active;
+	private byte[] photo;
 }

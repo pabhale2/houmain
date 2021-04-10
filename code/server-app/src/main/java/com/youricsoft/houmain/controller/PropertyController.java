@@ -112,10 +112,27 @@ public class PropertyController {
 		return serverResponse;
 	}
 	
-	@RequestMapping(value="/getUnsoldProperty", method=RequestMethod.GET)
-	public ServerResponse<List<PropertyDTO>> getUnsoldProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize) {
+	@RequestMapping(value="/getUnsoldProperties", method=RequestMethod.GET)
+	public ServerResponse<List<PropertyDTO>> getUnsoldProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize, @RequestParam(name="details", defaultValue = "false") boolean detailsFlag) {
 		ServerResponse<List<PropertyDTO>> serverResponse = new ServerResponse<List<PropertyDTO>>();
-		List<PropertyDTO> propertiesList = propertyService.findUnSoldPropertes(startIndex, pageSize);
+		List<PropertyDTO> propertiesList = propertyService.findUnSoldPropertes(startIndex, pageSize, detailsFlag);
+		if(propertiesList!=null &&  !propertiesList.isEmpty()) {
+			serverResponse.setResponseCode(HttpStatus.OK.value());
+			serverResponse.setStatus(HttpStatus.OK);
+			serverResponse.setData(propertiesList);
+		} else {
+			serverResponse.setResponseCode(HttpStatus.NO_CONTENT.value());
+			serverResponse.setStatus(HttpStatus.NO_CONTENT);
+			serverResponse.setData(propertiesList);
+		}
+		
+		return serverResponse;
+	}
+	
+	@RequestMapping(value="/getUnMappedProperties", method=RequestMethod.GET)
+	public ServerResponse<List<Property>> getUnMappedProperties(@RequestParam(name = "startIndex", defaultValue = "0") int startIndex, @RequestParam(name="pageSize", defaultValue = "10") int pageSize, @RequestParam(name="details", defaultValue = "false") boolean detailsFlag) {
+		ServerResponse<List<Property>> serverResponse = new ServerResponse<List<Property>>();
+		List<Property> propertiesList = propertyService.findUnMappedProperties(startIndex, pageSize, detailsFlag);
 		if(propertiesList!=null &&  !propertiesList.isEmpty()) {
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setStatus(HttpStatus.OK);

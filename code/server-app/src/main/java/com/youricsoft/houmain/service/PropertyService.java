@@ -15,5 +15,6 @@ public interface PropertyService {
 	public Property save(Property property);
 	public PropertyPhotos savePropertyPhotos(MultipartFile file, long propertyId, long unitId, String photoCategory)  throws IOException;
 	public List<PropertyPhotos> saveMultiplePropertyPhotos(MultipartFile[] files, long propertyId, long unitId, String photoCategory)  throws IOException;
-	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize);
+	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize, boolean detailsFlag);
+	public List<Property> findUnMappedProperties(int startIndex, int pageSize, boolean detailsFlag);
 }
