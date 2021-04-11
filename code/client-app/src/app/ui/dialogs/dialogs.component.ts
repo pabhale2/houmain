@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./dialogs.component.scss']
 })
 export class DialogsComponent {
-  constructor() {}
+  constructor() { }
   showBasicMessage() {
     Swal.fire('Here is a message!');
   }
@@ -144,8 +144,8 @@ export class DialogsComponent {
         'Question 3'
       ])
       .then(result => {
-        if (result.value) {
-          const answers = JSON.stringify(result.value);
+        if (result && result["value"]) {
+          const answers = JSON.stringify(result['value']);
           Swal.fire({
             title: 'All done!',
             html: `
