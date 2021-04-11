@@ -54,12 +54,6 @@ public class PropertyController {
 		return serverResponse;
 	}
 	
-	@RequestMapping(value="/update", method=RequestMethod.PUT)
-	public ServerResponse<List<String>> updateProperty(){
-		ServerResponse<List<String>> serverResponse = new ServerResponse<>();
-		return serverResponse;
-	}
-	
 	@RequestMapping(value="/get", method=RequestMethod.GET)
 	public ServerResponse<Property> getProperty(@RequestParam("propertyId") long id){
 		ServerResponse<Property> serverResponse = new ServerResponse<>();

@@ -130,4 +130,9 @@ public class GenericServiceImpl implements GenericService {
 		return savedUser;
 	}
 
+	@Override
+	public List<User> findAllByRole(RoleEnum role) {
+		return userRepository.findAllByRole(role.getValue());
+	}
+
 }

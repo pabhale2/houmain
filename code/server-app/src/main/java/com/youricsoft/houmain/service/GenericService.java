@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.youricsoft.houmain.dto.RegistrationDTO;
+import com.youricsoft.houmain.enums.RoleEnum;
 import com.youricsoft.houmain.model.ContactEntity;
 import com.youricsoft.houmain.model.Owner;
 import com.youricsoft.houmain.model.Property;
@@ -21,4 +22,5 @@ public interface GenericService {
     ContactEntity saveContact(ContactEntity contact);
     Owner disableOwner(Owner owner);
 	User registerUser(RegistrationDTO registrationDTO);
+	List<User> findAllByRole(RoleEnum role);
 }
