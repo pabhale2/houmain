@@ -10,6 +10,7 @@ import { PropertyService } from "../property.service";
 import { Property } from "../property.model";
 import { ActivatedRoute } from "@angular/router";
 import Swal from "sweetalert2";
+import { AddPhotosComponent } from "../add-photos/add-photos.component";
 
 @Component({
   selector: "app-view-property",
@@ -20,6 +21,7 @@ export class ViewPropertyComponent implements OnInit {
   container = new MatTableDataSource();
   displayedColumns = ["unit", "address", "tenant", "recentEvent"];
   public property = [];
+  dialog: any;
   constructor(
     private propertyService: PropertyService,
     public http: HttpClient,
@@ -86,5 +88,15 @@ export class ViewPropertyComponent implements OnInit {
         };
       }
     }
+  }
+
+  addPhoto() {
+    const dialogRef = this.dialog.open(AddPhotosComponent, {
+          height: '400px',
+        width: '600px',
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

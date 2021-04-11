@@ -49,4 +49,13 @@ export class AuthenticationService {
     };
     return this.http.get(serverURL + "service/user/get?username="+username, requestOptions);
   }
+
+  getUsersByRole(role: String){
+    const requestOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded'
+      })
+    };
+    return this.http.get(serverURL + "service/user/byRole?role="+role, requestOptions);
+  }
 }

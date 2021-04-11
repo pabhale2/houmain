@@ -60,13 +60,13 @@
                             </div>
                             <mat-table [dataSource]="container" matSort class="mat-cell">
                                 <ng-container matColumnDef="propertyName">
+                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Property Image</mat-header-cell>
+                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]"> <img src="assets/images/usrbig.jpg" width="130"/></mat-cell> 
+                                </ng-container>
+                                 <ng-container matColumnDef="ownerName">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Property Name</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]">{{row.propertyName}}</mat-cell> 
-                                </ng-container>
-                                <ng-container matColumnDef="ownerName">
-                                    <mat-header-cell *matHeaderCellDef mat-sort-header>Property Type</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]"> {{row.propertyType.type}}</mat-cell>
-                                </ng-container>
+                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]"> {{row.propertyName}}</mat-cell>
+                                </ng-container> 
                                 
                                 <ng-container matColumnDef="mobile">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>city</mat-header-cell>
@@ -76,7 +76,39 @@
                                 <ng-container matColumnDef="propertyAddress">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Property Address</mat-header-cell>
                                     <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]"> {{row.address}}</mat-cell>
-                                </ng-container>                                
+                                </ng-container> 
+                                   <!-- actions -->
+                                   <ng-container matColumnDef="actions" *ngIf="userRole=='INSPECTOR'">
+                                    <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                                        <button mat-icon-button color="accent" class="btn-tbl-delete"
+                                            (click)="$event.stopPropagation()" (click)="editCall(row)">
+                                            <mat-icon aria-label="Edit" class="col-white">done</mat-icon>
+                                        </button>
+                                        <button mat-icon-button color="accent" class="btn-tbl-edit"
+                                            (click)="$event.stopPropagation()" (click)="deleteItem(i, row)">
+                                            <mat-icon aria-label="Delete" class="col-white">clear</mat-icon>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="actions" *ngIf="userRole=='ADMIN_USER'">
+                                    <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                                        <select>
+                                            <option>Assign Inspector</option>
+                                            <option *ngFor="let inspectors of allInspectors.data" value="inspectors.id">{{ inspectors.firstName+" "+inspectors.lastName }}</option>
+                                        </select>
+                                    </mat-cell>
+                                </ng-container> 
+                                <ng-container matColumnDef="actions" *ngIf="userRole=='USER'">
+                                    <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
+                                    <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
+                                        <button mat-icon-button color="accent" class="btn-tbl-delete"
+                                        [routerLink]="['../displayPropertyInfo', row.propertyId]">
+                                        <mat-icon aria-label="Edit" class="col-white">pageview</mat-icon>
+                                    </button>
+                                    </mat-cell>
+                                </ng-container>                                 
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: displayedColumns;">
                                 </mat-row>

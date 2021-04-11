@@ -7,7 +7,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { AfterViewInit } from '@angular/core';
-
+import {TokenStorageService} from '../../shared/services/token-storage.service';
+import {AuthenticationService} from '../../shared/services/authentication.service';
 @Component({
   selector: 'app-view-property-list',
   templateUrl: './view-property-list.component.html',
@@ -28,20 +29,39 @@ export class ViewPropertyListComponent implements OnInit {
     'propertyName',
     'ownerName',
     'propertyAddress',
-    'mobile'
+    'mobile',
+    'actions'
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   manualPage: number;
+  user: any;
+  userRole: string;
+  popupText: string;
+  openDialog: any;
+  iconText: any;
+  allInspectors: any;
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public propertyService: PropertyService,
     private router: Router,
+    private tokenStorageService: TokenStorageService,
+    private authenticationService: AuthenticationService
   ) {}
   ngOnInit(){
     this.loadData();
-
+    this.user = this.tokenStorageService.getUser();
+    if(this.user.roles.some(e => e.roleName === "ADMIN_USER")){
+      this.userRole="ADMIN_USER";
+    }
+    else if(this.user.roles.some(e => e.roleName === "INSPECTOR")){
+      this.userRole="INSPECTOR";
+    }
+    else{
+      this.userRole="USER";
+    }
+    this.getAllInspectors();
   }
   ngAfterViewInit() {
     this.container.sort = this.sort;
@@ -66,5 +86,9 @@ export class ViewPropertyListComponent implements OnInit {
   }
   addProperty() {
     this.router.navigate(['rentals/addOwner']);
+  }
+  
+  getAllInspectors(){
+    this.authenticationService.getUsersByRole('INSPECTOR').subscribe(response=>this.allInspectors=response);
   }
 }
