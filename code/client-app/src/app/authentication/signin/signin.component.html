@@ -14,7 +14,7 @@
               <mat-icon matSuffix>face</mat-icon>
               <mat-error *ngFor="let error of errorMessages.username">
                 <ng-container *ngIf="loginForm.get('username').hasError(error.type)">{{error.message}}</ng-container>
-            </mat-error>
+              </mat-error>
             </mat-form-field>
           </div>
         </div>
@@ -44,9 +44,7 @@
           </div>
         </div>
         <div class="container-login100-form-btn">
-          <button
-
-           mat-flat-button color="primary" class="login100-form-btn" type="submit">
+          <button mat-flat-button color="primary" class="login100-form-btn" type="submit">
             Login
           </button>
         </div>
@@ -57,18 +55,21 @@
             </a> using
           </span>
         </div>
-        <div class="login100-form-social flex-c-m">
+        <!--  <div class="login100-form-social flex-c-m">
           <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
             <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
             <i class="fab fa-twitter"></i>
           </a>
-        </div>
+        </div> -->
       </form>
 
 
-      <div class="login100-more" style="background-image: url('assets/images/pages/bg-01.png');">
+      <div class="login100-more p-4">
+        <h1 mt-4>House Maintainance Services</h1>
+        <h6>One Stup solution for Owner and Tenant</h6>
+        <img src="assets/images/login-bk-2.png" class="img-fluid" />
       </div>
     </div>
   </div>

@@ -49,23 +49,23 @@
             Company Name is required
           </mat-error>
         </mat-form-field>
-      
-          
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Type</mat-label>
-            <mat-select #type formControlName="type">
-              <mat-option *ngFor="let x of ownerTypeData"  [value]="x.ownerType">
-                {{x.ownerType}}
-              </mat-option>
-            </mat-select>
-            <mat-error *ngIf="loginForm.get('type').hasError('required')">
-              Type is required
-            </mat-error>
-            <mat-icon matSuffix>flag</mat-icon>
-          </mat-form-field>
-        
 
-          
+
+        <mat-form-field class="example-full-width" appearance="outline">
+          <mat-label>Type</mat-label>
+          <mat-select #type formControlName="type">
+            <mat-option *ngFor="let x of ownerTypeData" [value]="x.ownerType">
+              {{x.ownerType}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="loginForm.get('type').hasError('required')">
+            Type is required
+          </mat-error>
+          <mat-icon matSuffix>flag</mat-icon>
+        </mat-form-field>
+
+
+
         <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Password</mat-label>
           <input matInput formControlName="password" [type]="hide ? 'password' : 'text'" required>
@@ -75,7 +75,7 @@
             Password is required
           </mat-error>
         </mat-form-field>
-        <mat-form-field class="example-full-width" appearance="outline">
+        <!-- <mat-form-field class="example-full-width" appearance="outline">
           <mat-label>Confirm Password</mat-label>
           <input matInput formControlName="cpassword" [type]="chide ? 'password' : 'text'" required>
           <mat-icon matSuffix (click)="chide = !chide">
@@ -83,37 +83,45 @@
           <mat-error *ngIf="loginForm.get('cpassword').hasError('required')">
             Confirm Password is required
           </mat-error>
-        </mat-form-field>
+        </mat-form-field> -->
 
-        
-      
-        <div class="flex-sb-m w-full p-t-15 p-b-20">
+
+
+        <!-- <div class="flex-sb-m w-full p-t-15 p-b-20">
           <div>
             <span>Already Registered? <a routerLink="/authentication/signin">
                 Login
               </a></span>
           </div>
-        </div>
-        <div class="container-login100-form-btn">
+        </div> -->
+        <div class="container-login100-form-btn p-b-20">
           <button mat-flat-button color="primary" class="login100-form-btn" type="submit">
             Register
           </button>
         </div>
-        <div class="text-center p-t-30 p-b-20">
+        <!--<div class="text-center p-t-30 p-b-20">
           <span class="txt2">
             or sign up using
           </span>
         </div>
-        <div class="login100-form-social flex-c-m">
+         <div class="login100-form-social flex-c-m">
           <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
             <i class="fab fa-facebook-f"></i>
           </a>
           <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
             <i class="fab fa-twitter"></i>
           </a>
-        </div>
+        </div> -->
       </form>
-      <div class="login100-more" style="background-image: url('assets/images/pages/bg-02.png');">
+      <div class="login100-more p-5">
+        <h1 mt-4>House Maintainance Services</h1>
+        <h6>One Stup solution for Owner and Tenant</h6>
+        <img src="assets/images/registration-bg.png" class="img-fluid p-b-20" />
+        <div class="row">
+          <div class="col-12 text-center">
+            Already Register User? Click <a routerLink="/authentication/signin">here </a> To Login
+          </div>
+        </div>
       </div>
     </div>
   </div>

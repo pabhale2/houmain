@@ -15,8 +15,8 @@ export class SignupComponent implements OnInit {
   returnUrl: string;
   hide = true;
   chide = true;
-  ownerTypeData :any;
-  subTypeData :any;
+  ownerTypeData: any;
+  subTypeData: any;
   popupText: string;
   iconText: string;
 
@@ -24,22 +24,21 @@ export class SignupComponent implements OnInit {
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private authService:AuthenticationService,
+    private authService: AuthenticationService,
     private dialog: MatDialog
   ) {
-    this.ownerTypeData=this.authService.getPropertyType();
+    this.ownerTypeData = this.authService.getPropertyType();
   }
   minDate: any = (new Date()).getDate();
   maxDate: any = (new Date()).getDate();
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      firstName: ['Damini', [Validators.required,Validators.pattern('[a-zA-Z]{3,50}')]],
-      lastName: ['Mhaske', [Validators.required,Validators.pattern('[a-zA-Z]{3,50}')]],
-      userName: ['mhaskedamini311@gmail.com',[Validators.required,Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
-      mobileNumber:['8975560067',[Validators.minLength(10), Validators.maxLength(15),Validators.pattern('[0-9]*')]],
-      companyName: ['ABC',[Validators.pattern('[a-zA-Z]{0,200}')]],
+      firstName: ['Damini', [Validators.required, Validators.pattern('[a-zA-Z]{3,50}')]],
+      lastName: ['Mhaske', [Validators.required, Validators.pattern('[a-zA-Z]{3,50}')]],
+      userName: ['mhaskedamini311@gmail.com', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
+      mobileNumber: ['8975560067', [Validators.minLength(10), Validators.maxLength(15), Validators.pattern('[0-9]*')]],
+      companyName: ['ABC', [Validators.pattern('[a-zA-Z]{0,200}')]],
       password: ['123456', Validators.required],
-      cpassword: ['123456', Validators.required],
       type: ['OWNER', [Validators.required]]
     });
     // get return url from route parameters or default to '/'
@@ -57,21 +56,21 @@ export class SignupComponent implements OnInit {
       return;
     } else {
       this.authService.registration(this.loginForm.value).subscribe(
-        result=> {
+        result => {
           this.router.navigate(['/authentication/signin']);
-          this.popupText="Registration Succesfully";
-          this.iconText="sccess";
-          this.openDialog(this.popupText,this.iconText);
+          this.popupText = "Registration Succesfully";
+          this.iconText = "sccess";
+          this.openDialog(this.popupText, this.iconText);
         },
-        error=> {
-          
+        error => {
+
         }
       );
-      
+
     }
   }
 
-   openDialog(popupText,iconText){
+  openDialog(popupText, iconText) {
     Swal.fire({
       icon: iconText,
       title: popupText,

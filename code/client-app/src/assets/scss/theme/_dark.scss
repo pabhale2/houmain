@@ -571,7 +571,10 @@
         border: 1px solid #404755;
       }
     }
-    &.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    &.fixed-header
+      .datatable-header
+      .datatable-header-inner
+      .datatable-header-cell {
       color: #bbb;
     }
   }
@@ -651,7 +654,10 @@
         }
       }
     }
-    &.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    &.fixed-header
+      .datatable-header
+      .datatable-header-inner
+      .datatable-header-cell {
       color: #bbb;
     }
   }
@@ -893,7 +899,7 @@
     }
   }
   .container-login100 {
-    background: #3c4452;
+    background: linear-gradient(to left, skyblue, transparent);
   }
   .login100-form {
     background-color: #353c48;
