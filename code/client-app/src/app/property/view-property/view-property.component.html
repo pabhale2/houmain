@@ -6,7 +6,6 @@
                     <ul class="breadcrumb breadcrumb-style ">
                         <li class="breadcrumb-item">
                             <h4 class="page-title">Property Area</h4>
-                            <br>
                         </li>
                         
                        <!-- <li class="breadcrumb-item bcrumb-2">
@@ -17,7 +16,13 @@
                 </div>
             </div>
         </div>
-        
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12">
+                <div class="card">
+                    <img src="assets/images/property1.jpg" height="500">
+                </div>
+            </div>
+        </div>
         <div class="row clearfix">
             <div class="col-lg-12 col-md-12">
                 <div class="card">
@@ -526,37 +531,53 @@
                             <div class="body">
                                 <div class="table-responsive">
                                     <div class="materialTableHeader">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <ul class="header-buttons-left ml-0">
-                                                    <li >
-                                                            <mat-form-field >
-                                                                <select matNativeControl required>
-                                                                  <option value="all">All categories</option>
-                                                                  <option value="2">2</option>
-                                                                  <option value="3">3</option>
-                                                                  <option value="4">4</option>
-                                                                </select>
-                                                              </mat-form-field>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <div class="col-6">
-                                                <ul class="header-buttons">
-                                                    <li>                                                                            
-                                                            <a href="#"><button mat-button >
-                                                                Upload File
-                                                            </button></a>                                                                                
-                                                    </li>
-                                                    <li>
-                                                        <a href="#"><button mat-button >
-                                                            Manage Categories
-                                                        </button></a>
-                                                    </li>
-                                                    
-                                                </ul>
-                                            </div>
-                                        </div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <div class="card">
+                <div class="body">
+                  <div class="table-responsive">
+                    <div class="materialTableHeader">
+                      <div class="row">
+                        <div class="col-8">
+                          <ul class="header-buttons-left ml-0">
+                            <li class="dropdown">
+                              <h2>
+                                <strong>Photos</strong>
+                              </h2>
+                            </li>
+                          </ul>
+                        </div>
+                        <div class="col-4">
+                          <ul class="header-buttons">
+                            <li>
+                              <div class="icon-button-demo">
+                                <button mat-mini-fab color="primary" (click)="addPhoto()">
+                                  <mat-icon class="col-white">add</mat-icon>
+                                </button>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-table [dataSource]="container" matSort class="mat-cell">
+                      <ng-container matColumnDef="Photo Type">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photo Type</mat-header-cell>
+                        <mat-cell *matCellDef="let row">{{row.firstName}}</mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="Photos">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photos</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
+                      </ng-container>
+                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: displayedColumns;">
+                      </mat-row>
+                    </mat-table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
                                     </div>                                    
                                 </div>
                             </div>
