@@ -24,6 +24,7 @@ import com.youricsoft.houmain.bo.ServerResponse;
 import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.dto.UserDTO;
 import com.youricsoft.houmain.dto.UserInterface;
+import com.youricsoft.houmain.enums.RoleEnum;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
 import com.youricsoft.houmain.service.OwnerService;
@@ -210,6 +211,22 @@ public class UserManagement {
 		}
 		return response;
 	    
+	}
+	
+	@RequestMapping(value = "/byRole", method = RequestMethod.GET, consumes = {"application/json"})
+	public ServerResponse<List<User>> getByRole(@RequestParam("role") RoleEnum role){
+		ServerResponse<List<User>> serverResponse = new ServerResponse<List<User>>();
+		List<User> list = userService.findAllByRole(role);
+		if(list!=null && list.size()>0) {
+			serverResponse.setData(list);
+			serverResponse.setResponseCode(HttpStatus.OK.value());
+			serverResponse.setStatus(HttpStatus.OK);
+		} else {
+			serverResponse.setData(null);
+			serverResponse.setResponseCode(HttpStatus.NO_CONTENT.value());
+			serverResponse.setStatus(HttpStatus.NO_CONTENT);
+		}
+		return serverResponse;
 	}
 	
 }
