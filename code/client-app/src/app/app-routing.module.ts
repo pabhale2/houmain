@@ -4,7 +4,7 @@ import { AuthGuard } from './authentication/auth.guard';
 const routes: Routes = [
   {
     path: 'dashboard',
-    canActivate: [ AuthGuard ],
+    canActivate: [AuthGuard],
     loadChildren: () =>
       import('./dashboard/dashboard.module').then(m => m.DashboardModule),
   },
@@ -100,7 +100,7 @@ const routes: Routes = [
     path: 'rentals',
     loadChildren: () => import('./rentals/rentals.module').then(m => m.RentalsModule)
   },
-   {
+  {
     path: 'tenants',
     loadChildren: () => import('./tenant/tenants.module').then(m => m.TenantsModule)
   },
@@ -109,8 +109,12 @@ const routes: Routes = [
     loadChildren: () => import('./property/property.module').then(m => m.PropertyModule)
   },
   {
+    path: 'user',
+    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+  },
+  {
     path: 'serviceProvider',
-    loadChildren: () =>import('./service-provider/service-provider.module').then(m => m.ServiceProviderModule)
+    loadChildren: () => import('./service-provider/service-provider.module').then(m => m.ServiceProviderModule)
   },
   {
     path: '',
@@ -123,4 +127,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

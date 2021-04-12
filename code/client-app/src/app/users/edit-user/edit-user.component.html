@@ -1,0 +1,118 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                    <ul class="breadcrumb breadcrumb-style ">
+                        <li class="breadcrumb-item">
+                            <h4 class="page-title">Edit user</h4>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-1">
+                            <a routerLink="/dashboard/main">
+                                <i class="fas fa-home"></i> Home</a>
+                        </li>
+                        <li class="breadcrumb-item bcrumb-2">
+                            <a href="#" onClick="return false;">users</a>
+                        </li>
+                        <li class="breadcrumb-item active">Edit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2><strong> user Information</strong></h2>
+                        <!-- <ul class="header-dropdown m-r--5">
+                            <li class="dropdown">
+                                <a href="#" onClick="return false;" data-toggle="dropdown" role="button"
+                                    aria-haspopup="true" aria-expanded="false">
+                                    <i class="material-icons">more_vert</i>
+                                </a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li>
+                                        <a href="#" onClick="return false;">Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onClick="return false;">Another action</a>
+                                    </li>
+                                    <li>
+                                        <a href="#" onClick="return false;">Something else here</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul> -->
+                    </div>
+                    <div class="body">
+                        <form class="register-form m-4" [formGroup]="userDetails" (ngSubmit)="onSubmit()">
+                            <!--firstname,lastname-->
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>First name</mat-label>
+                                        <input matInput formControlName="firstName" required>
+                                        <mat-icon matSuffix>face</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.firstName">
+                                            <ng-container *ngIf="userDetails.get('firstName').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Last name</mat-label>
+                                        <input matInput formControlName="lastName" required>
+                                        <mat-icon matSuffix>account_circle</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.lastName">
+                                            <ng-container *ngIf="userDetails.get('lastName').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!--primaryEmail-->
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Username</mat-label>
+                                        <input matInput formControlName="username" required>
+                                        <mat-icon matSuffix>username</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.username">
+                                            <ng-container *ngIf="userDetails.get('username').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <!--alternate email-->
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Type</mat-label>
+                                        <input matInput formControlName="type">
+                                        <mat-icon matSuffix>type</mat-icon>
+                                        <mat-error *ngFor="let error of errormessage.type">
+                                            <ng-container *ngIf="userDetails.get('type').hasError(error.type)">
+                                                {{error.message}}
+                                            </ng-container>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                                    <button class="mr-6" [disabled]="!userDetails.valid" mat-raised-button
+                                        color="primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -20,8 +20,9 @@ import { RoomService } from '../app/room/allroom/room.service';
 import { PaymentService } from '../app/payment/allpayment/payment.service';
 import { RightSidebarService } from './shared/services/rightsidebar.service';
 import { OwnersService } from './rentals/owners.service';
-import { TenantsService} from './tenant/tenants.service';
-import {  PropertyService } from './property/property.service';
+import { TenantsService } from './tenant/tenants.service';
+import { PropertyService } from './property/property.service';
+import { UserService } from './users/users.service';
 import {
   PerfectScrollbarModule,
   PERFECT_SCROLLBAR_CONFIG,
@@ -122,6 +123,7 @@ export function tokenGetter() {
     PatientService,
     RoomService,
     PaymentService,
+    UserService,
     OwnersService,
     TenantsService,
     PropertyService,
@@ -140,4 +142,4 @@ export function tokenGetter() {
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
