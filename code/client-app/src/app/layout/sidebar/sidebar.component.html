@@ -13,8 +13,8 @@
                         </div>
                     </div>
                     <div class="profile-usertitle">
-                        <div class="sidebar-userpic-name font-weight-bold">Mr. ABC XYz </div>
-                        <div class="profile-usertitle-job ">Tenant </div>
+                        <div class="sidebar-userpic-name font-weight-bold" *ngIf="user">{{user.firstName}} {{user.lastName}}</div>
+                        <div class="profile-usertitle-job " *ngIf="user && user.roles && user.roles[0]">{{user.roles[0].roleName}}</div>
                     </div>
                 </li>
                 <!-- First level menu -->

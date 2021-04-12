@@ -7,6 +7,7 @@ import {
   Renderer2,
   HostListener
 } from '@angular/core';
+import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { ROUTES } from './sidebar-items';
 declare const Waves: any;
 @Component({
@@ -23,11 +24,19 @@ export class SidebarComponent implements OnInit {
   listMaxHeight: string;
   listMaxWidth: string;
   headerHeight = 60;
+  user;
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private renderer: Renderer2,
-    public elementRef: ElementRef
-  ) {}
+    public elementRef: ElementRef,
+    private tokenStorageService: TokenStorageService
+  ) {
+    this.user = {
+      firstName: '',
+      lastName:'',
+      roles:[]
+    };
+  }
   @HostListener('window:resize', ['$event'])
   windowResizecall(event) {
     this.setMenuHeight();
@@ -60,6 +69,7 @@ export class SidebarComponent implements OnInit {
     }
   }
   ngOnInit() {
+    this.user = this.tokenStorageService.getUser();
     this.sidebarItems = ROUTES.filter(sidebarItem => sidebarItem);
     this.initLeftSidebar();
     this.bodyTag = this.document.body;

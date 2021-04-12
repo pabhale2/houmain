@@ -25,24 +25,6 @@ export const ROUTES: RouteInfo[] = [
         groupTitle: false,
         accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
-      },
-      {
-        path: '',
-        title: 'Map Property',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
-        submenu: []
-      },
-      {
-        path: '',
-        title: 'Documentation ',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        accessControl: [],
-        submenu: []
       }
     ]
   },
@@ -71,15 +53,6 @@ export const ROUTES: RouteInfo[] = [
         groupTitle: false,
         accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
-      },
-      {
-        path: '',
-        title: 'Documentation ',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        accessControl: [],
-        submenu: []
       }
     ]
   },
@@ -101,15 +74,6 @@ export const ROUTES: RouteInfo[] = [
         submenu: []
       },
       {
-        path: '',
-        title: 'Map Property',
-        icon: '',
-        class: 'ml-menu',
-        groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
-        submenu: []
-      },
-      {
         path: '../property/viewPropertyList',
         title: 'Property List',
         icon: '',
@@ -117,7 +81,16 @@ export const ROUTES: RouteInfo[] = [
         groupTitle: false,
         accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER', 'TENANT'],
         submenu: []
-      }
+      },
+      {
+        path: '../property/showcase-property',
+        title: 'Properties',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['TENANT'],
+        submenu: []
+      },
     ]
   },
   {

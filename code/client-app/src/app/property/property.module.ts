@@ -26,11 +26,18 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { RentPricePredictionComponent } from './rent-price-prediction/rent-price-prediction.component';
+import { ShowcasePropertyComponent } from './showcase-property/showcase-property.component';
 
 
 @NgModule({
   declarations: [
-    ViewPropertyComponent ,EditPropertyComponent,ViewPropertyListComponent,AddPropertyComponent,AddPhotosComponent, RentPricePredictionComponent
+    ViewPropertyComponent ,
+    EditPropertyComponent,
+    ViewPropertyListComponent,
+    AddPropertyComponent,
+    AddPhotosComponent, 
+    RentPricePredictionComponent,
+    ShowcasePropertyComponent
    ],
 
   imports: [

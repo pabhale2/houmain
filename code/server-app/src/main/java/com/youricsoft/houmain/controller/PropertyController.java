@@ -149,4 +149,9 @@ public class PropertyController {
 		return serverResponse;
 	}
 	
+//	@RequestMapping(value="/assignInspection", method=RequestMethod.POST)
+//	public ServerResponse<Property> assignInspection(@RequestBody PropertyDTO propertyDTO) {
+//		
+//	}
+	
 }

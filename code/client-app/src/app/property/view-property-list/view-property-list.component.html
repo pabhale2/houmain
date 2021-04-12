@@ -94,7 +94,7 @@
                                 <ng-container matColumnDef="actions" *ngIf="userRole=='ADMIN_USER'">
                                     <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
                                     <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
-                                        <select>
+                                        <select (change)="assignPropertyForInspection($event)">
                                             <option>Assign Inspector</option>
                                             <option *ngFor="let inspectors of allInspectors.data" value="inspectors.id">{{ inspectors.firstName+" "+inspectors.lastName }}</option>
                                         </select>

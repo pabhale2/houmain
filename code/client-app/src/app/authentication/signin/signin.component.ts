@@ -62,12 +62,6 @@ export class SigninComponent implements OnInit {
       const decodedToken = helper.decodeToken(data['access_token']);
        console.log(decodedToken);
         this.StoreLoggedUserDetails(data,decodedToken);
-        this.isLoginFailed = false;
-        this.isLoggedIn = true;
-        this.popupText="Login Succesfull";
-        this.iconText="success";
-        this.openDialog(this.popupText,this.iconText);
-        this.router.navigate(['/dashboard/applicant']);
       },
       err => {
         this.iconText="error";
@@ -99,7 +93,26 @@ export class SigninComponent implements OnInit {
     this.tokenStorage.saveToken(data['access_token']);
     this.authService.getUserDetailsByUsername(decodedToken.user_name).subscribe(
       data => {
+        var roleRedirect = {
+          'ADMIN_USER' : '/dashboard/applicant',
+          'INSPECTOR': '/dashboard/applicant',
+          'OWNER': '/dashboard/applicant',
+          'TENANT': '/property/showcase-property'
+        }
         this.tokenStorage.saveUser(data['data']);
+        this.isLoginFailed = false;
+        this.isLoggedIn = true;
+        this.popupText="Login Succesfull";
+        this.iconText="success";
+        this.openDialog(this.popupText,this.iconText);
+        if(data && data['data']['roles']){
+          var roles = data['data']['roles'];
+          for(let role of roles ){
+            this.router.navigate([roleRedirect[role.roleName]]);
+            break;
+          }
+        }
+        
       },
       err => {
         this.iconText="error";

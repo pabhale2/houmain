@@ -5,6 +5,7 @@ import { AddPropertyComponent } from './add-property/add-property.component';
 import { EditPropertyComponent } from './edit-property/edit-property.component';
 import { ViewPropertyComponent } from './view-property/view-property.component';
 import { ViewPropertyListComponent } from './view-property-list/view-property-list.component';
+import { ShowcasePropertyComponent } from './showcase-property/showcase-property.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: 'rentPrediction',
     component: RentPricePredictionComponent
+  },
+  {
+    path: 'showcase-property',
+    component: ShowcasePropertyComponent
   }
 ];
 @NgModule({
