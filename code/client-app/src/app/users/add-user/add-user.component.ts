@@ -11,6 +11,12 @@ import { TokenStorageService } from '../../shared/services/token-storage.service
   styleUrls: ['./add-user.component.sass']
 })
 export class AddUserComponent implements OnInit {
+  roleList = [
+    { value: 'ADMIN_USER', role_name: 'ADMIN_USER' },
+    { value: 'INSPECTOR', role_name: 'INSPECTOR' },
+    { value: 'LOCAL_GUIDE', role_name: 'LOCAL_GUIDE' },
+    { value: 'STANDARD_USER', role_name: 'STANDARD_USER' },
+  ];
   dataInfo: any;
   constructor(private fb: FormBuilder, private httpClient: HttpClient, private userService: UserService, private dialog: MatDialog, private tokenStorageService: TokenStorageService) {
     this.initForm();
@@ -34,14 +40,14 @@ export class AddUserComponent implements OnInit {
       { type: 'required', message: 'Last Name required' },
       { type: 'pattern', message: 'Last Name is not valid' },
     ],
-    username: [
+    userName: [
       { type: 'required', message: 'Primary Email required' },
       { type: 'pattern', message: 'Primary Email is not valid' },
     ],
     password: [
       { type: 'pattern', message: 'password is not valid' },
     ],
-    type: [
+    roleName: [
       { type: 'pattern', message: 'Type is not valid' },
     ],
   };
@@ -54,9 +60,8 @@ export class AddUserComponent implements OnInit {
     this.userDetails = this.fb.group({
       firstName: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,50}')]],
       lastName: ['', [Validators.required, Validators.pattern('[a-zA-Z]{3,50}')]],
-      username: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
-      password: ['', [Validators.required]],
-      type: ['', [Validators.minLength(10), Validators.maxLength(15), Validators.pattern('[0-9]*')]],
+      userName: ['', [Validators.required, Validators.pattern('^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$')]],
+      roleName: ['', [Validators.required]],
     });
   }
   ngOnInit(): void {

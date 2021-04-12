@@ -1,6 +1,7 @@
 package com.youricsoft.houmain.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,6 +26,7 @@ import com.youricsoft.houmain.dto.RegistrationDTO;
 import com.youricsoft.houmain.dto.UserDTO;
 import com.youricsoft.houmain.dto.UserInterface;
 import com.youricsoft.houmain.enums.RoleEnum;
+import com.youricsoft.houmain.model.Role;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
 import com.youricsoft.houmain.service.OwnerService;
@@ -45,19 +47,41 @@ public class UserManagement {
 	private EmailFactory emailFactory;
 	
 	//TODO : User role update pending
-	@RequestMapping(value ="/save", method=RequestMethod.PUT, consumes = {"application/json"})
+	@RequestMapping(value ="/save", method=RequestMethod.POST, consumes = {"application/json"})
     public ServerResponse<UserInterface> updateUser(@RequestBody UserDTO user){
 		ServerResponse<UserInterface> response = new ServerResponse<>();
 		
 		User existingUser = userService.findByUsername(user.getUserName());
 		if(existingUser==null) {
-			response.setStatus(HttpStatus.NOT_FOUND);
-			response.setResponseCode(HttpStatus.NOT_FOUND.value());
+			User newUser = new User();
+			newUser.setFirstName(user.getFirstName());
+			newUser.setLastName(user.getLastName());
+			newUser.setUsername(user.getUserName());
+			newUser.setPassword((user.getPassword()== null) ? "123456" : user.getPassword());
+			newUser.setUserStatus(true);
+			newUser.setRoles(new ArrayList<Role>());
+			Role role = new Role();
+			role.setId(user.getRoleName().getId());
+			role.setRoleName(user.getRoleName().getValue());
+			newUser.getRoles().add(role);
+			
+			
+			User savedUser = userService.saveUser(newUser);
+			
+			if(savedUser!=null) {
+				response.setStatus(HttpStatus.CREATED);
+				response.setResponseCode(HttpStatus.CREATED.value());
+				savedUser.setPassword("");
+				response.setData(savedUser);
+			}else {
+				response.setStatus(HttpStatus.BAD_REQUEST);
+				response.setResponseCode(HttpStatus.BAD_REQUEST.value());
+			}
 		}else {
 			existingUser.setFirstName(user.getFirstName());
 			existingUser.setLastName(user.getLastName());
 			existingUser.setUsername(existingUser.getUsername());
-			existingUser.setPassword(existingUser.getPassword());
+			existingUser.setPassword((existingUser.getPassword()== null) ? "123456" : existingUser.getPassword());
 			existingUser.setUserStatus(user.isUserStatus());
 			User savedUser = userService.saveUser(existingUser);
 			if(savedUser!=null) {
