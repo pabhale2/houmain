@@ -1,5 +1,7 @@
 package com.youricsoft.houmain.dto;
 
+import com.youricsoft.houmain.enums.RoleEnum;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,5 +16,6 @@ public class UserDTO implements UserInterface{
 	private String firstName;
 	private String lastName;
 	private boolean userStatus;
+	private RoleEnum roleName;
 	
 }

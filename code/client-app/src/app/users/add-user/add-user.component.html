@@ -57,10 +57,10 @@
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                             <mat-form-field class="example-full-width" appearance="outline">
                                 <mat-label>Username</mat-label>
-                                <input matInput formControlName="username" required>
-                                <mat-icon matSuffix>username</mat-icon>
-                                <mat-error *ngFor="let error of errormessage.username">
-                                    <ng-container *ngIf="userDetails.get('username').hasError(error.type)">
+                                <input matInput formControlName="userName" required>
+                                <mat-icon matSuffix>userName</mat-icon>
+                                <mat-error *ngFor="let error of errormessage.userName">
+                                    <ng-container *ngIf="userDetails.get('userName').hasError(error.type)">
                                         {{error.message}}
                                     </ng-container>
                                 </mat-error>
@@ -71,11 +71,15 @@
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>Type</mat-label>
-                                <input matInput formControlName="type">
-                                <mat-icon matSuffix>type</mat-icon>
-                                <mat-error *ngFor="let error of errormessage.type">
-                                    <ng-container *ngIf="userDetails.get('type').hasError(error.type)">
+                                <mat-label>Role Name</mat-label>
+                                <mat-label>Favorite food</mat-label>
+                                <mat-select formControlName="roleName">
+                                    <mat-option *ngFor="let role of roleList" [value]="role.value">
+                                        {{role.value}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngFor="let error of errormessage.roleName">
+                                    <ng-container *ngIf="userDetails.get('roleName').hasError(error.roleName)">
                                         {{error.message}}
                                     </ng-container>
                                 </mat-error>
