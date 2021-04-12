@@ -163,5 +163,11 @@ public class PropertyServiceImpl implements PropertyService{
 		propertyOwnerMapping.setRegisterDate(new Date());
 		return propertyOwnerMappingRepository.save(propertyOwnerMapping);
 	}
+
+	@Override
+	public List<PropertyDTO> findOwnerProperties(long ownerId) {
+		List<Property> list = propertyRepository.findOwnerProperties(ownerId);
+		return PropertyMapper.INSTANCE.propertyListToPropertyDTOList(list);
+	}
 	
 }

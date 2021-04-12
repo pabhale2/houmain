@@ -33,7 +33,7 @@
                                 <div class="name-center">Rental Owner </div>
 
                             </div>
-                            <img src="assets/images/user/usrbig3.jpg" class="user-img" alt="">
+                            <img src="assets/images/user-big.jpg" class="user-img" alt="">
                             <p>
                                 {{dataInfo.streetAddress}}
                                 <br>{{dataInfo.city}} , {{dataInfo.state}} <br> {{dataInfo.zip}}
@@ -128,7 +128,39 @@
                                 <h2> Property</h2>
                             </div>
                             <div class="body">
+                                <div class="row pl-4 pr-4" *ngFor="let property of dataInfo.properties"> 
+                                    <div class="card col-md-12">
+                                        <div class="header box">
+                                            <div class="row">
+                                                <div class="col-md-10 mb-0 pt-2">
+                                                    <h3>{{property.propertyName}}</h3>
+                                                </div>
+                                                <div class="col-md-2 text-right mb-0">
+                                                    <a class="btn btn-success m-2" [routerLink]="['/property/displayPropertyInfo',property.propertyId]"><i class="fas fa-pencil-alt"></i></a>
+                                                    <a class="btn btn-danger m-2" [routerLink]=""><i class="fas fa-trash-alt"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="body" >
+                                            <div class="row">
+                                                <div class="col-md-2 text-center">
+                                                    <img [src]="property.propertyUnit[0] && property.propertyUnit[0].propertyPhotos[0] ? property.propertyUnit[0].propertyPhotos[0].photo : '/assets/images/property/property-small.jpg'" class="img-fluid" />
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <div class="row">
+                                                        <div class="col-md-8">
+                                                            <h6>Type : {{property.propertyType.type}}</h6>
+                                                            <span> <b> Area</b> : {{property.propertyUnit[0].squareFeet}}</span>
+                                                            <span> <b> Carpet Area</b> : {{property.propertyUnit[0].carpetArea}}</span> <br />
+                                                            <span><b>Address</b> {{property.propertyUnit[0].address}}, {{property.propertyUnit[0].city}},  {{property.propertyUnit[0].state}}  {{property.propertyUnit[0].zipCode}}</span>
 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

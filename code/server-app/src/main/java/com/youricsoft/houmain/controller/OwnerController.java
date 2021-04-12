@@ -20,6 +20,7 @@ import com.youricsoft.houmain.model.Owner;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
 import com.youricsoft.houmain.service.OwnerService;
+import com.youricsoft.houmain.service.PropertyService;
 
 
 @RestController
@@ -28,6 +29,7 @@ public class OwnerController {
 	
 	@Resource private GenericService genericService;
 	@Resource private OwnerService ownerService;
+	@Resource private PropertyService propertyService;
 	
 	@RequestMapping(value="/save", method=RequestMethod.POST)
 	public ServerResponse<OwnerInterface> saveOwner(@RequestBody OwnerDTO ownerDTO){
@@ -75,6 +77,7 @@ public class OwnerController {
 		Optional<Owner> existingOwner = ownerService.findById(id);
 		if(existingOwner.isPresent()) {
 			OwnerDTO dto = OwnerMapper.INSTANCE.ownerTOOwnerDTO(existingOwner.get());
+			dto.setProperties(propertyService.findOwnerProperties(id));
 			response.setStatus(HttpStatus.OK);
 			response.setResponseCode(HttpStatus.OK.value());
 			response.setData(dto);
