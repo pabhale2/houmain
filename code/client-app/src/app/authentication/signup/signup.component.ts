@@ -57,13 +57,26 @@ export class SignupComponent implements OnInit {
     } else {
       this.authService.registration(this.loginForm.value).subscribe(
         result => {
-          this.router.navigate(['/authentication/signin']);
-          this.popupText = "Registration Succesfully";
-          this.iconText = "sccess";
-          this.openDialog(this.popupText, this.iconText);
+          if(result) {
+            if( result['responseCode']==200) {
+              this.router.navigate(['/authentication/signin']);
+              this.popupText = "Registration Succesfully";
+              this.iconText = "sccess";
+            } else if(result['responseCode'] == 409) {
+              this.popupText = "Duplicate user with given username";
+              this.iconText = "warning";
+            }
+            this.openDialog(this.popupText, this.iconText);
+          } else{
+              this.popupText = "Problem while registration, please try again...";
+              this.iconText = "error";
+              this.openDialog(this.popupText, this.iconText);
+          }
         },
         error => {
-
+          this.popupText = "Problem while registration, please try again...";
+          this.iconText = "error";
+          this.openDialog(this.popupText, this.iconText);
         }
       );
 

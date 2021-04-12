@@ -197,8 +197,8 @@ export class AddPropertyComponent implements OnInit {
   }
 
   onSubmit(){
-    this.addPropertyForm.value['typeId'] = this.addPropertyForm.value['propertyType'];
-     this.proService.addProperty(this.addPropertyForm.value).subscribe(
+      this.addPropertyForm.value['typeId'] = this.addPropertyForm.value['propertyType'];
+      this.proService.addProperty(this.addPropertyForm.value).subscribe(
       data => {
         this.iconText="success";
         this.popupText=" User added successfully";

@@ -259,6 +259,16 @@ CHANGE COLUMN `registerDate` `registerDate` DATETIME NULL DEFAULT CURRENT_TIMEST
 ALTER TABLE `app_owner` 
 CHANGE COLUMN `street_address` `street_address` VARCHAR(500) NULL DEFAULT NULL ;
 
+CREATE TABLE `property_status` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `property_id` INT NULL,
+  `user_id` INT NULL,
+  `status` VARCHAR(45) NULL,
+  `remark` VARCHAR(500) NULL,
+  `updated_date` DATETIME NULL,
+  PRIMARY KEY (`id`));
+
+
 
 
  

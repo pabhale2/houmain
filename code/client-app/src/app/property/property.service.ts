@@ -22,6 +22,11 @@ export class PropertyService {
   getAllProperty(): Observable<Property[]> {
     return this.httpClient.get<Property[]>(serverURL + 'service/property/getAll');
   }
+
+  getUnSoldProperties(): Observable<Property[]> {
+    return this.httpClient.get<Property[]>(serverURL + 'service/property/getUnsoldProperties');
+  }
+  
   addProperty(Property) {
     const body = Property;
     return this.httpClient.post(serverURL + 'service/property/save', body);

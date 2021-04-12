@@ -91,4 +91,8 @@ export class ViewPropertyListComponent implements OnInit {
   getAllInspectors(){
     this.authenticationService.getUsersByRole('INSPECTOR').subscribe(response=>this.allInspectors=response);
   }
+
+  assignPropertyForInspection(event){
+    console.log(event);
+  }
 }
