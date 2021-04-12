@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -32,7 +32,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -60,7 +60,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','TENANT'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'TENANT'],
         submenu: []
       },
       {
@@ -69,7 +69,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -97,7 +97,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -106,7 +106,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -115,9 +115,37 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER','SYSTEM_USER','OWNER','TENANT'],
+        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER', 'TENANT'],
         submenu: []
       }
     ]
   },
-  ];
+  {
+    path: '',
+    title: 'User',
+    icon: 'fas fa-user-md',
+    class: 'menu-toggle',
+    groupTitle: false,
+    accessControl: [],
+    submenu: [
+      {
+        path: '../user/addUser',
+        title: 'Add User',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER'],
+        submenu: []
+      },
+      {
+        path: '../user/showUsers',
+        title: 'Users List',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER'],
+        submenu: []
+      }
+    ]
+  },
+];
