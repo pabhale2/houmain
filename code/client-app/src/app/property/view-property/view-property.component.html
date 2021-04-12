@@ -7,7 +7,7 @@
                         <li class="breadcrumb-item">
                             <h4 class="page-title">Property Area</h4>
                         </li>
-                        
+
                        <!-- <li class="breadcrumb-item bcrumb-2">
                             <a href="#" onClick="return false;">Doctor</a>
                         </li>
@@ -31,6 +31,9 @@
                             <ul class="nav ">
                                 <li class="nav-item tab-all">
                                     <a class="nav-link active show" href="#summary" data-toggle="tab">Summary</a>
+                                </li>
+                                <li class="nav-item tab-all p-l-20">
+                                  <a class="nav-link" href="#tenantDetails" data-toggle="tab">Tenant/Owner Details</a>
                                 </li>
                                 <li class="nav-item tab-all p-l-20">
                                     <a class="nav-link" href="#financials" data-toggle="tab">Financials</a>
@@ -61,12 +64,12 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card project_widget">
                                     <div class="header">
-                                        <h2 ><strong>Property Details   </strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
+                                        <h2 ><strong>Property Details</strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
                                             Edit
-                                        </button></a> 
+                                        </button></a>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <ng-container *ngIf="dataInfo">
                                             <div class="row" >
@@ -74,22 +77,22 @@
                                                     <strong>Property Name</strong>
                                                     <br>
                                                     <p class="text-muted">{{dataInfo.propertyName}}</p>
-                                                </div>  
+                                                </div>
                                                 <div class="col-md-4 col-6 b-r">
                                                     <strong>Property Type</strong>
                                                     <br>
                                                     <p class="text-muted">{{dataInfo.propertyType.type}}</p>
-                                                </div>  
-                                                
-                                            </div> 
+                                                </div>
+
+                                            </div>
                                             <div class="row" >
-                                                 
+
                                                 <div class="col-md-12 col-6 b-r">
                                                     <strong>Property Description</strong>
                                                     <br>
                                                     <p class="text-muted">{{dataInfo.propertyDescription}}</p>
-                                                </div> 
-                                            </div> 
+                                                </div>
+                                            </div>
                                             <div class="row" >
                                                 <div class="col-md-6 col-6">
                                                     <strong>ADDRESS</strong><br><a href="#">Map it</a>
@@ -101,10 +104,10 @@
                                                     <br>
                                                     <p class="text-muted">{{dataInfo.city}}</p>
                                                 </div>
-                                            </div> 
+                                            </div>
 
                                         <div class="row" >
-                                            
+
                                             <div class="col-md-3 col-6 b-r">
                                                 <strong>State</strong>
                                                 <br>
@@ -127,7 +130,7 @@
                                                 <p class="text-muted">Longitude : </p>
                                             </div>
                                         </div>
-                                        </ng-container>   
+                                        </ng-container>
                                     </div>
                                 </div>
                             </div>
@@ -137,7 +140,7 @@
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card project_widget">
                                     <div class="header">
-                                        
+
                                         <h2 ><strong>Rental Owners   </strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
                                             Edit
                                         </button></a>
@@ -160,20 +163,20 @@
                                                 <br>
                                                 <p class="text-muted">{{dataInfo.rentalPrimaryEmail}}</p>
                                             </div>
-                                            
+
                                         </div>
 
                                         <ng-template #elseRental>
                                             <div class="col-md-3 col-6">
                                                 <p class="text-muted">No Rental Owner yet</p>
                                             </div>
-                                        </ng-template> 
+                                        </ng-template>
                                     </div>
                                 </div>
                             </div>
                         </div> -->
 
-                        
+
 
                         <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -184,7 +187,7 @@
                                         </button></a>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <div class="row">
                                             <div class="col-md-4 col-6 b-r">
@@ -196,7 +199,7 @@
                                                 <strong>REQUESTS</strong>
                                                 <br>
                                                 <p class="text-muted">Tenants can submit and view requests online<br> Show entry questions and allow tenants to add notes</p>
-                                            </div>                                         
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -212,7 +215,7 @@
                                         </button></a>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <div class="row" *ngIf="dataInfo;else elseApp">
                                             <div class="col-md-6 col-6 b-r">
@@ -220,9 +223,9 @@
                                                 <br>
                                                 <p class="text-muted">1.</p>
                                             </div>
-                                                                                    
+
                                         </div>
-                                        <ng-template #elseApp> 
+                                        <ng-template #elseApp>
                                             <div class="col-md-12 col-6 b-r">
                                                 <p class="text-muted">You don't have any appliances for this property right now  <a href="#">Add your first Property</a></p>
                                             </div>
@@ -240,16 +243,16 @@
                                         <h2 ><strong>Property Gallery</strong></h2>  <button mat-button class="btn-tbl-edit" (click)="fileUpload.click()"> Add </button>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <div class="row" *ngIf="dataInfo;else elseApp">
-                                            <div class="col-md-6 col-6 b-r">      
+                                            <div class="col-md-6 col-6 b-r">
                                                 <br>
                                                 <img *ngFor='let imgUrl of imageUrls' [src]="imgUrl" height="100" width="100" style="border: 5px;">
                                             </div>
-                                                                                    
+
                                         </div>
-                                        <ng-template #elseApp> 
+                                        <ng-template #elseApp>
                                             <div class="col-md-12 col-6 b-r">
                                                 <p class="text-muted">No Images to display  <a href="#">Add your first Property</a></p>
                                             </div>
@@ -268,21 +271,21 @@
                                         </button></a>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <div class="row" *ngIf="dataInfo;else elseNotes">
                                             <div class="col-md-6 col-6 b-r">
                                                 <p class="text-muted">{{dataInfo.notes}}</p>
-                                            </div>                              
+                                            </div>
                                         </div>
-                                        <ng-template #elseNotes> 
+                                        <ng-template #elseNotes>
                                             <div class="col-md-12 col-6 b-r">
                                                 <p class="text-muted"><a href="#">Add your first note</a></p>
                                             </div>
                                         </ng-template>
                                     </div>
                                 </div>
-                                    
+
                             </div>
                         </div> -->
 
@@ -295,7 +298,7 @@
                                         </button></a>
                                         <hr>
                                     </div>
-                                    
+
                                     <div class="body">
                                         <div class="row" *ngIf="dataInfo;else elseRecent">
                                             <div class="col-md-6 col-6 b-r">
@@ -303,9 +306,9 @@
                                                 <br>
                                                 <p class="text-muted">1.</p>
                                             </div>
-                                                                                    
+
                                         </div>
-                                        <ng-template #elseRecent> 
+                                        <ng-template #elseRecent>
                                             <div class="col-md-12 col-6 b-r">
                                                 <p class="text-muted">You don't have any files for this rental right now  <a href="#">Upload your first file</a></p>
                                             </div>
@@ -317,6 +320,75 @@
 
                     </div>
 
+                    <div role="tabpanel" class="tab-pane" id="tenantDetails" aria-expanded="false">
+                      <div class="card">
+                          <div class="header">
+                              <h2>Tenant/Owner Details</h2>
+                          </div>
+                          <div class="body">
+
+                              <div class="profile-tab-box">
+                                  <div class="p-l-20">
+                                      <ul class="nav ">
+                                          <li class="nav-item tab-all">
+                                              <a class="nav-link active show" href="#tenant" data-toggle="tab">Tenant Details</a>
+                                          </li>
+                                          <li class="nav-item tab-all p-l-20">
+                                              <a class="nav-link" href="#owner" data-toggle="tab">Owner Details</a>
+                                          </li>
+                                          <!-- <li class="nav-item tab-all p-l-20">
+                                              <a class="nav-link" href="#management" data-toggle="tab">Management fee setting</a>
+                                          </li> -->
+
+                                      </ul>
+                                      <hr>
+                                  </div>
+                              </div>
+
+                              <div class="tab-content">
+                                  <ng-container >
+                                      <div role="tabpanel" class="tab-pane active" id="tenant" aria-expanded="true">
+
+                                          <div class="card">
+                                              <div class="header">
+                                                  <h2> Tenant Name : xyz</h2>
+                                                  <h2> Start Date : </h2>
+                                              </div>
+                                              <div class="body">
+
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                      <div role="tabpanel" class="tab-pane" id="owner" aria-expanded="false">
+                                          <div class="card">
+                                              <div class="header">
+                                                  <h2> Owner Name : xyz</h2>
+                                              </div>
+                                              <div class="body">
+
+                                              </div>
+                                          </div>
+
+                                      </div>
+                                      <!-- <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
+                                          <div class="card">
+                                              <div class="header">
+                                                  <h2> Management fee setting</h2>
+                                              </div>
+                                              <div class="body">
+
+                                              </div>
+                                          </div>
+
+                                      </div> -->
+                                  </ng-container>
+                              </div>
+
+                          </div>
+                      </div>
+
+                  </div>
                     <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
                         <div class="card">
                             <div class="header">
@@ -336,7 +408,7 @@
                                             <li class="nav-item tab-all p-l-20">
                                                 <a class="nav-link" href="#management" data-toggle="tab">Management fee setting</a>
                                             </li>
-                                            
+
                                         </ul>
                                         <hr>
                                     </div>
@@ -345,16 +417,16 @@
                                 <div class="tab-content">
                                     <ng-container >
                                         <div role="tabpanel" class="tab-pane active" id="income" aria-expanded="true">
-                                        
+
                                             <div class="card">
                                                 <div class="header">
                                                     <h2> Income Statement</h2>
                                                 </div>
                                                 <div class="body">
-                    
+
                                                 </div>
                                             </div>
-                    
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="lease" aria-expanded="false">
                                             <div class="card">
@@ -362,10 +434,10 @@
                                                     <h2> Lease Payment</h2>
                                                 </div>
                                                 <div class="body">
-                    
+
                                                 </div>
                                             </div>
-                    
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
                                             <div class="card">
@@ -373,14 +445,14 @@
                                                     <h2> Management fee setting</h2>
                                                 </div>
                                                 <div class="body">
-                    
+
                                                 </div>
                                             </div>
-                    
+
                                         </div>
                                     </ng-container>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -403,7 +475,7 @@
                                             <li class="nav-item tab-all p-l-20">
                                                 <a class="nav-link" href="#common" data-toggle="tab">Commom expense allocations</a>
                                             </li>
-                                            
+
                                         </ul>
                                         <hr>
                                     </div>
@@ -426,10 +498,10 @@
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <ul class="header-buttons">
-                                                                        <li>                                                                            
+                                                                        <li>
                                                                                 <a href="#"><button mat-button >
                                                                                     Add Unit
-                                                                                </button></a>                                                                                
+                                                                                </button></a>
                                                                         </li>
                                                                         <li>
                                                                             <a href="#"><button mat-button >
@@ -446,7 +518,7 @@
                                                             </div>
                                                         </div>
                                                         <!-- <mat-table [dataSource]="container" matSort class="mat-cell">
-                                                            <ng-container matColumnDef="unit"> 
+                                                            <ng-container matColumnDef="unit">
                                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Units</mat-header-cell>
                                                                 <mat-cell *matCellDef="let row">{{row.unit}}</mat-cell>
                                                             </ng-container>
@@ -462,7 +534,7 @@
                                                                 <mat-header-cell *matHeaderCellDef mat-sort-header>Most Recent Event</mat-header-cell>
                                                                 <mat-cell *matCellDef="let row"> {{row.recentEvent}}</mat-cell>
                                                             </ng-container>
-                                                            
+
                                                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                                             <mat-row *matRowDef="let row; columns: displayedColumns;">
                                                             </mat-row>
@@ -475,8 +547,8 @@
                                                         </mat-paginator> -->
                                                     </div>
                                                 </div>
-                                            
-                    
+
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="meter" aria-expanded="false">
                                             <div class="card">
@@ -484,10 +556,10 @@
                                                     <h2> Meter Reading</h2>
                                                 </div>
                                                 <div class="body">
-                    
+
                                                 </div>
                                             </div>
-                    
+
                                         </div>
                                         <div role="tabpanel" class="tab-pane" id="common" aria-expanded="false">
                                             <div class="card">
@@ -497,7 +569,7 @@
                                                 <div class="body">
                                                 </div>
                                             </div>
-                    
+
                                         </div>
                                     </ng-container>
                                 </div>
@@ -578,10 +650,10 @@
               </div>
             </div>
           </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                             </div>
-                        
+
 
                     </div>
                     <div role="tabpanel" class="tab-pane" id="vendors" aria-expanded="false">
@@ -597,7 +669,7 @@
                     </div>
 
 
-                    
+
 
                 </ng-container>
                 </div>
