@@ -181,7 +181,7 @@ export class AddPropertyComponent implements OnInit {
   createPropertyUnit(): FormGroup {
     return this.fb.group({
       unit:'',
-      typeId:'',
+      typeId: '',
       address:'',
       bed:'',
       gallary:'',
@@ -197,7 +197,7 @@ export class AddPropertyComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.addPropertyForm.value);
+    this.addPropertyForm.value['typeId'] = this.addPropertyForm.value['propertyType'];
      this.proService.addProperty(this.addPropertyForm.value).subscribe(
       data => {
         this.iconText="success";

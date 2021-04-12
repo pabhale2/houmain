@@ -20,4 +20,5 @@ public interface PropertyService {
 	public List<PropertyDTO> findUnSoldPropertes(int startIndex, int pageSize, boolean detailsFlag);
 	public List<Property> findPropertiesForInspection(int startIndex, int pageSize, boolean detailsFlag);
 	public PropertyOwnerMapping savePropertyOwnerMapping(Property property, User user);
+	public List<PropertyDTO> findOwnerProperties(long ownerId);
 }

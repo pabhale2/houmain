@@ -256,6 +256,10 @@ ADD PRIMARY KEY (`mappingId`, `ownerId`, `propertyId`);
 ALTER TABLE `propertyownermapping` 
 CHANGE COLUMN `registerDate` `registerDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ;
 
+ALTER TABLE `app_owner` 
+CHANGE COLUMN `street_address` `street_address` VARCHAR(500) NULL DEFAULT NULL ;
+
+
 
  
  

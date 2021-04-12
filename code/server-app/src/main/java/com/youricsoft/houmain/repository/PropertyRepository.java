@@ -78,5 +78,13 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
 			)
 	public List<Object[]> findUnMappedPropertiesWithDetails();
 	
+	@Query(value = "select prop " + 
+			" from Property prop  " + 
+			" left join PropertyUnit unit on prop.propertyId = unit.propertyId " + 
+			" left join PropertyType type on type.typeId = unit.typeId " + 
+			" left join PropertyPhotos photos on photos.propertyId = prop.propertyId and unit.propertyUnitId = photos.propertyUnitId " + 
+			" left join PropertyOwnerMapping map on prop.propertyId = map.propertyId " + 
+			" where map.ownerId =?1")
+	public List<Property> findOwnerProperties(long ownerId);
 	
 }

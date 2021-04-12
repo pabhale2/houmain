@@ -1,6 +1,7 @@
 package com.youricsoft.houmain.dto;
 
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 import lombok.Getter;
@@ -30,5 +31,5 @@ public class OwnerDTO implements OwnerInterface {
 	private String taxpayerId;
 	private String taxIdentityType;
 	private int status;
-	
+	private List<PropertyDTO> properties;
 }
