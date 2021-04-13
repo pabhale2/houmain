@@ -8,7 +8,7 @@ import { PropertyServiceService } from '../property-service.service';
 @Component({
   selector: 'app-edit-property',
   templateUrl: './edit-property.component.html',
-  styleUrls: ['./edit-property.component.sass']
+  styleUrls: ['./edit-property.component.scss']
 })
 export class EditPropertyComponent implements OnInit {
   propertyDetails : FormGroup;

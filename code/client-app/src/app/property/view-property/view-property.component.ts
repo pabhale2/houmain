@@ -15,7 +15,7 @@ import { AddPhotosComponent } from "../add-photos/add-photos.component";
 @Component({
   selector: "app-view-property",
   templateUrl: "./view-property.component.html",
-  styleUrls: ["./view-property.component.sass"],
+  styleUrls: ["./view-property.component.scss"],
 })
 export class ViewPropertyComponent implements OnInit {
   container = new MatTableDataSource();

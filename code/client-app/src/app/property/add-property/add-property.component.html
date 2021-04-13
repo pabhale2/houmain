@@ -50,9 +50,9 @@
               </mat-label>
               <mat-form-field class="example-full-width" appearance="outline">
                 <mat-label>Description</mat-label>
-                <textarea matInput formControlName="propertDescription"></textarea>
-                <mat-error *ngFor="let error of errormessage.propertDescription">
-                  <ng-container *ngIf="addPropertyForm.get('propertDescription').hasError(error.type)">
+                <textarea matInput formControlName="propertyDescription"></textarea>
+                <mat-error *ngFor="let error of errormessage.propertyDescription">
+                  <ng-container *ngIf="addPropertyForm.get('propertyDescription').hasError(error.type)">
                     {{error.message}}
                   </ng-container>
                 </mat-error>
@@ -95,6 +95,22 @@
                 <mat-icon matSuffix>flag</mat-icon>
                 <mat-error *ngFor="let error of errormessage.propertySubType">
                   <ng-container *ngIf="addPropertyForm.get('propertySubType').hasError(error.type)">
+                    {{error.message}}
+                  </ng-container>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-label>
+                <h5>Property Rate Per Month</h5>
+              </mat-label>
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Rate</mat-label>
+                <input matInput formControlName="rate" required>
+                <mat-error *ngFor="let error of errormessage.rate">
+                  <ng-container *ngIf="addPropertyForm.get('rate').hasError(error.type)">
                     {{error.message}}
                   </ng-container>
                 </mat-error>
@@ -214,10 +230,10 @@
                     <h5>What is the property address?</h5>
                   </mat-label>
                   <mat-form-field class="example-full-width" appearance="outline">
-                    <mat-label>Street address</mat-label>
-                    <input matInput formControlName="streetAddress">
-                    <mat-error *ngFor="let error of errormessage.streetAddress">
-                      <ng-container *ngIf="addPropertyForm.get('streetAddress').hasError(error.type)">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address">
+                    <mat-error *ngFor="let error of errormessage.address">
+                      <ng-container *ngIf="addPropertyForm.get('address').hasError(error.type)">
                         {{error.message}}
                       </ng-container>
                     </mat-error>

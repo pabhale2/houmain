@@ -12,7 +12,7 @@ import {AuthenticationService} from '../../shared/services/authentication.servic
 @Component({
   selector: 'app-view-property-list',
   templateUrl: './view-property-list.component.html',
-  styleUrls: ['./view-property-list.component.sass']
+  styleUrls: ['./view-property-list.component.scss']
 })
 export class ViewPropertyListComponent implements OnInit {
 
@@ -20,8 +20,8 @@ export class ViewPropertyListComponent implements OnInit {
   dataOwner: any;
   length: number;
   pageIndex=1;
-  pageSize: number=1;
-  pageSizeOptions = [1, 5, 10, 50];
+  pageSize: number=10;
+  pageSizeOptions = [10, 25, 50];
   
   propertyList : any[];
 
@@ -73,14 +73,13 @@ export class ViewPropertyListComponent implements OnInit {
   }
   private refreshTable(response) {
     this.container.data=response.data;
-    console.log(this.container);
     this.length=this.container.data.length;
   }
   applyFilter(filterValue: string) {
     this.container.filter = filterValue.trim().toLowerCase();
   }
   public loadData() {
-    this.propertyService.getAllProperty().subscribe(response=>this.refreshTable(response));
+    this.propertyService.getAllProperty(((this.pageIndex*this.pageSize) - this.pageSize), this.pageSize).subscribe(response=>this.refreshTable(response));
     this.container.sort = this.sort;
     this.applyFilter('');
   }

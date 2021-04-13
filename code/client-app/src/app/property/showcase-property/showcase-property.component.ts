@@ -12,12 +12,12 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 @Component({
   selector: 'showcase-property-list',
   templateUrl: './showcase-property.component.html',
-  styleUrls: ['./showcase-property.component.sass']
+  styleUrls: ['./showcase-property.component.scss']
 })
 export class ShowcasePropertyComponent implements OnInit {
 
   propertyList;
-  
+  user;
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
@@ -26,6 +26,7 @@ export class ShowcasePropertyComponent implements OnInit {
     private tokenStorageService: TokenStorageService,
     private authenticationService: AuthenticationService
   ) {
+    this.user = {};
     this.propertyList = [];
   }
   ngOnInit(){
@@ -53,7 +54,7 @@ export class ShowcasePropertyComponent implements OnInit {
     this.router.navigate(['rentals/addOwner']);
   }
   
-  assignPropertyForInspection(event){
-    console.log(event);
+  bookProperty(property){
+    console.log(property);
   }
 }

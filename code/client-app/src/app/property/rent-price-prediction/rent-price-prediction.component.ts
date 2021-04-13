@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-rent-price-prediction',
   templateUrl: './rent-price-prediction.component.html',
-  styleUrls: ['./rent-price-prediction.component.sass']
+  styleUrls: ['./rent-price-prediction.component.scss']
 })
 export class RentPricePredictionComponent implements OnInit {
   iconText: string;
