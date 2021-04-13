@@ -24,6 +24,7 @@ import com.youricsoft.houmain.model.Property;
 import com.youricsoft.houmain.model.PropertyInterface;
 import com.youricsoft.houmain.model.PropertyOwnerMapping;
 import com.youricsoft.houmain.model.PropertyPhotos;
+import com.youricsoft.houmain.model.PropertyRate;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.service.GenericService;
 import com.youricsoft.houmain.service.PropertyService;
@@ -41,9 +42,8 @@ public class PropertyController {
 		Property property = PropertyMapper.INSTANCE.propertyDTOTOproperty(propertyDTO);
 		Property existingProperty = propertyService.findById(property.getPropertyId());
 		if ( existingProperty == null){
-			property = propertyService.save(property);
 			User user = genericService.findByUsername(principal.getName());
-			propertyService.savePropertyOwnerMapping(property, user);
+			property = propertyService.save(property, user, propertyDTO.getRate());
 			serverResponse.setStatus(HttpStatus.OK);
 			serverResponse.setResponseCode(HttpStatus.OK.value());
 			serverResponse.setData(property);
@@ -148,10 +148,5 @@ public class PropertyController {
 		
 		return serverResponse;
 	}
-	
-//	@RequestMapping(value="/assignInspection", method=RequestMethod.POST)
-//	public ServerResponse<Property> assignInspection(@RequestBody PropertyDTO propertyDTO) {
-//		
-//	}
 	
 }

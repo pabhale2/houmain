@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.youricsoft.houmain.enums.PropertyStatusEnum;
 import com.youricsoft.houmain.model.PropertyInterface;
+import com.youricsoft.houmain.model.PropertyRate;
 import com.youricsoft.houmain.model.PropertyType;
 
 import lombok.Data;
@@ -23,6 +24,7 @@ public class PropertyDTO implements PropertyInterface {
 	private PropertyType propertyType;
 	private double lat;
 	private double lng;
+	private double rate;
 	private PropertyStatusEnum status;
 	private String propertyDescription;
 	private String address;
@@ -33,6 +35,7 @@ public class PropertyDTO implements PropertyInterface {
 	List<PropertyUnitDTO> propertyUnit;
 	private boolean active;
 	private String propertyCode;
+	private PropertyRate propertyRate;
 	
 	public void setTypeId(long typeId) {
 		this.typeId = typeId;

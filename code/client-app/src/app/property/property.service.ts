@@ -19,12 +19,12 @@ export class PropertyService {
   getDialogData() {
     return this.dialogData;
   }
-  getAllProperty(): Observable<Property[]> {
-    return this.httpClient.get<Property[]>(serverURL + 'service/property/getAll');
+  getAllProperty(startIndex, pageSize): Observable<Property[]> {
+    return this.httpClient.get<Property[]>(serverURL + 'service/property/getAll?startIndex='+startIndex+'&pageSize=100');
   }
 
   getUnSoldProperties(): Observable<Property[]> {
-    return this.httpClient.get<Property[]>(serverURL + 'service/property/getUnsoldProperties');
+    return this.httpClient.get<Property[]>(serverURL + 'service/property/getUnsoldProperties?startIndex=0&pageSize=100');
   }
   
   addProperty(Property) {

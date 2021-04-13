@@ -8,7 +8,7 @@ import { PropertyServiceService } from './../property-service.service';
 @Component({
   selector: 'app-add-photos',
   templateUrl: './add-photos.component.html',
-  styleUrls: ['./add-photos.component.sass']
+  styleUrls: ['./add-photos.component.scss']
 })
 export class AddPhotosComponent implements OnInit {
   PropertyPhotoCategory:any;

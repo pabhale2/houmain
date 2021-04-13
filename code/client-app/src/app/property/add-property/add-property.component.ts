@@ -16,7 +16,7 @@ interface PropertyType{
 @Component({
   selector: 'app-add-property',
   templateUrl: './add-property.component.html',
-  styleUrls: ['./add-property.component.sass']
+  styleUrls: ['./add-property.component.scss']
 })
 export class AddPropertyComponent implements OnInit {
   iconText: string;
@@ -53,7 +53,7 @@ export class AddPropertyComponent implements OnInit {
       {type : 'required' , message: 'Property Subtype required'},
       {type : 'pattern' , message: 'Property subtype is not valid'},
     ],
-    propertDescription: [
+    propertyDescription: [
       {type : 'maxLength' , message: 'Property Description must be less than 1000 words'},
       {type : 'required' , message: 'Property Description required'},
     ],
@@ -61,7 +61,7 @@ export class AddPropertyComponent implements OnInit {
       {type : 'maxLength' , message: 'Property Name must be less than 200 words'},
       {type : 'required' , message: 'Property Name required'},
     ],
-    streetAddress: [
+    address: [
       {type : 'maxLength' , message: 'street address must be less than 500 words'},
     ],
     city: [
@@ -138,6 +138,10 @@ export class AddPropertyComponent implements OnInit {
     OtherInfo: [
       {type : 'pattern' , message: 'other info is not valid'},
     ],
+    rate:[
+      {type : 'required' , message: 'Property rate required'},
+      {type : 'pattern' , message: 'rate is not valid'},
+    ]
   };
 
  
@@ -151,24 +155,25 @@ export class AddPropertyComponent implements OnInit {
 }
   initForm(){
     this.addPropertyForm = this.fb.group({
-      propertDescription: ['New & furnished',[Validators.maxLength(1000),Validators.required] ],
-      propertyName: ['Mukund Nivas',[ Validators.required,Validators.maxLength(200)]],
+      propertyDescription: ['',[Validators.maxLength(1000),Validators.required] ],
+      propertyName: ['',[ Validators.required,Validators.maxLength(200)]],
       propertyType: ['', [Validators.required]],
       propertySubType: ['', [Validators.required]],
-      streetAddress: ['Bhanwaj road', [Validators.maxLength(100)]],
-      city: ['Khopoli', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
-      state: ['Maharastra', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
-      zip: ['410203', [Validators.required]],
-      country: ['India', [Validators.required, Validators.pattern]],
-      unitCount:['2', [ Validators.pattern("[0-9]{1,2}")]],
-      HallNum:  ['2', [ Validators.pattern("[0-9]{1,2}")]],
-      BedNum: ['2', [ Validators.pattern("[0-9]{1,2}")]],
-      GalleriesNum: ['2', [ Validators.pattern("[0-9]{1,2}")]],
-      KitchenNum:['2', [ Validators.pattern("[0-9]{1,2}")]],
-      BathroomNum:['2', [Validators.pattern("[0-9]{1,2}")]],
-      ToiletNum:['2', [ Validators.pattern("[0-9]{1,2}")]],
-      EntryGateNum: ['2', [Validators.pattern("[0-9]{1,2}")]],
-      OtherInfo: ['2', [ Validators.pattern("[0-9]{1,2}")]],
+      address: ['', [Validators.maxLength(100)]],
+      city: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
+      state: ['', [Validators.required, Validators.pattern("^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$")]],
+      zip: ['', [Validators.required]],
+      country: ['', [Validators.required, Validators.pattern]],
+      rate:['', [Validators.required, Validators.minLength(1), Validators.maxLength(10)]],
+      unitCount:['', [ Validators.pattern("[0-9]{1,2}")]],
+      HallNum:  ['', [ Validators.pattern("[0-9]{1,2}")]],
+      BedNum: ['', [ Validators.pattern("[0-9]{1,2}")]],
+      GalleriesNum: ['', [ Validators.pattern("[0-9]{1,2}")]],
+      KitchenNum:['', [ Validators.pattern("[0-9]{1,2}")]],
+      BathroomNum:['', [Validators.pattern("[0-9]{1,2}")]],
+      ToiletNum:['', [ Validators.pattern("[0-9]{1,2}")]],
+      EntryGateNum: ['', [Validators.pattern("[0-9]{1,2}")]],
+      OtherInfo: ['', [ Validators.pattern("[0-9]{1,2}")]],
       propertyUnit: this.fb.array([ this.createPropertyUnit() ])
     })
 

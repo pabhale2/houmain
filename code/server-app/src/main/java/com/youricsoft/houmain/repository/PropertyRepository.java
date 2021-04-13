@@ -19,10 +19,12 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
 			" select " +
 			"	 prop,  " + 
 			"    type,  " + 
-			"    unit  " + 
+			"    unit,  " + 
+			"	 rate	" +
 			//"    ,photos " + 
 			" from Property prop join PropertyType type on   " + 
 			" prop.propertyType.typeId=type.typeId   " + 
+			" left join PropertyRate rate on prop.propertyId = rate.propertyId " +
 			" left join PropertyOccupancy occu on prop.propertyId = occu.propertyId  " + 
 			" left join PropertyUnit unit on prop.propertyId = unit.propertyId  " + 
 			" left join PropertyPhotos photos on prop.propertyId = photos.propertyId and unit.propertyUnitId = photos.propertyUnitId  " + 
@@ -36,9 +38,11 @@ public interface PropertyRepository extends CrudRepository<Property, Long> {
 			"	 prop,  " + 
 			"    type,  " + 
 			"    unit,  " + 
+			"	 rate, " +
 			"    photos " + 
 			" from Property prop join PropertyType type on   " + 
 			" prop.propertyType.typeId=type.typeId   " + 
+			" left join PropertyRate rate on prop.propertyId = rate.propertyId " +
 			" left join PropertyOccupancy occu on prop.propertyId = occu.propertyId  " + 
 			" left join PropertyUnit unit on prop.propertyId = unit.propertyId  " + 
 			" left join PropertyPhotos photos on prop.propertyId = photos.propertyId and unit.propertyUnitId = photos.propertyUnitId  " + 
