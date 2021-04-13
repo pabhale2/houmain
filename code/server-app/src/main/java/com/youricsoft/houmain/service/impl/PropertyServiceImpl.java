@@ -24,11 +24,13 @@ import com.youricsoft.houmain.mapper.PropertyMapper;
 import com.youricsoft.houmain.model.Property;
 import com.youricsoft.houmain.model.PropertyOwnerMapping;
 import com.youricsoft.houmain.model.PropertyPhotos;
+import com.youricsoft.houmain.model.PropertyRate;
 import com.youricsoft.houmain.model.PropertyType;
 import com.youricsoft.houmain.model.PropertyUnit;
 import com.youricsoft.houmain.model.User;
 import com.youricsoft.houmain.repository.PropertyOwnerMappingRepository;
 import com.youricsoft.houmain.repository.PropertyPhotosRepository;
+import com.youricsoft.houmain.repository.PropertyRateRepository;
 import com.youricsoft.houmain.repository.PropertyRepository;
 import com.youricsoft.houmain.service.PropertyService;
 
@@ -38,13 +40,16 @@ public class PropertyServiceImpl implements PropertyService{
 	@Resource PropertyPhotosRepository propertyPhotosRepository;
 	@Resource PropertyRepository propertyRepository;
 	@Resource PropertyOwnerMappingRepository propertyOwnerMappingRepository;
+	@Resource PropertyRateRepository propertyRateRepository;
 	
 	@Override
-	public Property save(Property property) {
+	public Property save(Property property, User user, double rate) {
 		for(PropertyUnit unit : property.getPropertyUnit()) {
 			unit.setTypeId(property.getPropertyType().getTypeId());
 		}
 		property = propertyRepository.save(property);
+		savePropertyOwnerMapping(property, user);
+		savePropertyRate(property, rate);
 		return property;
 	}
 
@@ -120,15 +125,16 @@ public class PropertyServiceImpl implements PropertyService{
 			Property prop = (Property)obj[0];
 			if(propertyMap.containsKey(prop.getPropertyId())) {
 				prop = propertyMap.get(prop.getPropertyId());
+				prop.setPropertyRate((PropertyRate)obj[3]);
 				PropertyUnit unit = (PropertyUnit)obj[2];
 				if(prop.getPropertyUnit().contains(unit.getPropertyUnitId())){
-					if(propertyList.size()>3) {
-						PropertyPhotos photos = (PropertyPhotos)obj[3];
+					if(propertyList.size()==4) {
+						PropertyPhotos photos = (PropertyPhotos)obj[4];
 						unit.getPropertyPhotos().add(photos);
 					}
 				} else {
-					if(propertyList.size()>3) {
-						PropertyPhotos photos = (PropertyPhotos)obj[3];
+					if(propertyList.size()==4) {
+						PropertyPhotos photos = (PropertyPhotos)obj[4];
 						unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
 						unit.getPropertyPhotos().add(photos);
 					}
@@ -138,10 +144,10 @@ public class PropertyServiceImpl implements PropertyService{
 			} else {
 				PropertyType propertyType = (PropertyType) obj[1];
 				prop.setPropertyType(propertyType);
-				
 				PropertyUnit unit = (PropertyUnit)obj[2];
-				if(propertyList.size()>3) {
-					PropertyPhotos photos = (PropertyPhotos)obj[3];
+				prop.setPropertyRate((PropertyRate)obj[3]);
+				if(propertyList.size()==4) {
+					PropertyPhotos photos = (PropertyPhotos)obj[4];
 					unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
 					unit.getPropertyPhotos().add(photos);
 				}
@@ -169,5 +175,15 @@ public class PropertyServiceImpl implements PropertyService{
 		List<Property> list = propertyRepository.findOwnerProperties(ownerId);
 		return PropertyMapper.INSTANCE.propertyListToPropertyDTOList(list);
 	}
+
+	@Override
+	public PropertyRate savePropertyRate(Property property, double rate) {
+		PropertyRate propertyRate = new PropertyRate();
+		propertyRate.setPropertyId(property.getPropertyId());
+		propertyRate.setRate(rate);
+		return propertyRateRepository.save(propertyRate);
+	}
+	
+	
 	
 }
