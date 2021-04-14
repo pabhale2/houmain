@@ -29,12 +29,14 @@
                                         <ul class="header-buttons-left ml-0">
                                             <li class="dropdown">
                                                 <h2>
-                                                    <strong>Tenants</strong></h2>
+                                                    <strong>Tenants</strong>
+                                                </h2>
                                             </li>
                                             <li class="dropdown m-l-20">
-                                             <mat-form-field>
-                                                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-                                              </mat-form-field>
+                                                <mat-form-field>
+                                                    <input matInput (keyup)="applyFilter($event.target.value)"
+                                                        placeholder="Filter">
+                                                </mat-form-field>
                                             </li>
                                         </ul>
                                     </div>
@@ -42,7 +44,7 @@
                                         <ul class="header-buttons">
                                             <li>
                                                 <div class="icon-button-demo">
-                                                    <button mat-mini-fab color="primary" (click)="addOwner()" >
+                                                    <button mat-mini-fab color="primary" (click)="addOwner()">
                                                         <mat-icon class="col-white">add</mat-icon>
                                                     </button>
                                                 </div>
@@ -61,29 +63,34 @@
                             <mat-table [dataSource]="container" matSort class="mat-cell">
                                 <ng-container matColumnDef="firstName">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>First Name</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayTenantInfo', row.user.id]">{{row.user.firstName}}</mat-cell>
+                                    <mat-cell *matCellDef="let row"
+                                        [routerLink]="['../displayTenantInfo', row.user.id]">{{row.user.firstName}}
+                                    </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="lastName">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Last Name</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.user.lastName}}</mat-cell>
+                                    <mat-cell *matCellDef="let row"
+                                        [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.user.lastName}}
+                                    </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="mobile">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>mobile</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.mobileNumber}}</mat-cell>
+                                    <mat-cell *matCellDef="let row"
+                                        [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.mobileNumber}}
+                                    </mat-cell>
                                 </ng-container>
                                 <ng-container matColumnDef="primaryEmail">
                                     <mat-header-cell *matHeaderCellDef mat-sort-header>Email</mat-header-cell>
-                                    <mat-cell *matCellDef="let row" [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.alternateEmailId}}</mat-cell>
+                                    <mat-cell *matCellDef="let row"
+                                        [routerLink]="['../displayTenantInfo', row.user.id]"> {{row.primaryEmail}}
+                                    </mat-cell>
                                 </ng-container>
                                 <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                 <mat-row *matRowDef="let row; columns: displayedColumns;">
                                 </mat-row>
                             </mat-table>
-                            <mat-paginator  #paginator
-                                            [length]="length"
-                                            [pageIndex]="0"
-                                            [pageSize]="pageSize"
-                                            [pageSizeOptions]="pageSizeOptions">
+                            <mat-paginator #paginator [length]="length" [pageIndex]="0" [pageSize]="pageSize"
+                                [pageSizeOptions]="pageSizeOptions">
                             </mat-paginator>
                         </div>
                     </div>

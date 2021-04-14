@@ -5,7 +5,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'Rental',
     icon: 'fas fa-clipboard-list',
     class: 'menu-toggle',
-    accessControl: [],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
     groupTitle: false,
     submenu: [
       {
@@ -14,7 +14,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
         submenu: []
       }
     ]
@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'Tenant',
     icon: 'fas fa-clipboard-list',
     class: 'menu-toggle',
-    accessControl: [],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
     groupTitle: false,
     submenu: [
       {
@@ -42,7 +42,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'TENANT'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
         submenu: []
       },
       {
@@ -51,7 +51,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
         submenu: []
       }
     ]
@@ -62,7 +62,7 @@ export const ROUTES: RouteInfo[] = [
     icon: 'fas fa-user-md',
     class: 'menu-toggle',
     groupTitle: false,
-    accessControl: [],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER', 'TENANT', 'INSPECTOR'],
     submenu: [
       {
         path: '../property/addProperty',
@@ -70,7 +70,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -79,7 +79,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'SYSTEM_USER', 'OWNER', 'TENANT'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER', 'INSPECTOR'],
         submenu: []
       },
       {
@@ -99,7 +99,7 @@ export const ROUTES: RouteInfo[] = [
     icon: 'fas fa-user-md',
     class: 'menu-toggle',
     groupTitle: false,
-    accessControl: [],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER'],
     submenu: [
       {
         path: '../user/addUser',
@@ -107,7 +107,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
         submenu: []
       },
       {
@@ -116,7 +116,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
         submenu: []
       }
     ]

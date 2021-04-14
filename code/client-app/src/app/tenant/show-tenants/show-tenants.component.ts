@@ -14,12 +14,12 @@ import { AfterViewInit } from '@angular/core';
   templateUrl: './show-tenants.component.html',
   styleUrls: ['./show-tenants.component.sass']
 })
-export class tenantsComponent implements OnInit,AfterViewInit {
-  container=new MatTableDataSource();
+export class tenantsComponent implements OnInit, AfterViewInit {
+  container = new MatTableDataSource();
   dataOwner: any;
   length: number;
-  pageIndex=1;
-  pageSize: number=5;
+  pageIndex = 1;
+  pageSize: number = 5;
   pageSizeOptions = [1, 5, 10, 50];
 
   displayedColumns = [
@@ -29,34 +29,37 @@ export class tenantsComponent implements OnInit,AfterViewInit {
     'primaryEmail'
   ];
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
   manualPage: number;
   constructor(
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public tenantsService: TenantsService,
     private router: Router,
-  ) {}
-  ngOnInit(){
+  ) { }
+  ngOnInit() {
     this.loadData();
   }
   ngAfterViewInit() {
-  this.container.sort = this.sort;
-  this.container.paginator = this.paginator;
-  setTimeout(()=>this.paginator.length = this.length);
+    this.container.sort = this.sort;
+    this.container.paginator = this.paginator;
+    setTimeout(() => this.paginator.length = this.length);
   }
   refresh() {
     this.loadData();
   }
   private refreshTable(response) {
-    this.container.data=response.data;
-    this.length=this.container.data.length;
+    for (let obj of response.data) {
+      obj.primaryEmail = obj.user.username;
+    }
+    this.container.data = response.data;
+    this.length = this.container.data.length;
   }
   applyFilter(filterValue: string) {
     this.container.filter = filterValue.trim().toLowerCase();
   }
   public loadData() {
-    this.tenantsService.getAllTenants().subscribe(response=>this.refreshTable(response));
+    this.tenantsService.getAllTenants().subscribe(response => this.refreshTable(response));
     this.container.sort = this.sort;
     this.applyFilter('');
     console.log(this.container);
