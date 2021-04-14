@@ -7,7 +7,7 @@
                         <li class="breadcrumb-item">
                             <h4 class="page-title">Owner information</h4>
                         </li>
-                    <!--    <li class="breadcrumb-item bcrumb-1">
+                        <!--    <li class="breadcrumb-item bcrumb-1">
                             <a routerLink="/dashboard/main">
                                 <i class="fas fa-home"></i> Home</a>
                         </li>
@@ -21,36 +21,37 @@
         </div>
         <!-- Your content goes here  -->
         <div class="row clearfix">
-            <div class="col-lg-4 col-md-12" >
+            <div class="col-lg-4 col-md-12">
 
                 <ng-container *ngIf="dataInfo">
-                <div class="card" >
-                    <div class="m-b-20">
-                        <div class="contact-grid" >
-                            <div class="profile-header bg-dark">
+                    <div class="card">
+                        <div class="m-b-20">
+                            <div class="contact-grid">
+                                <div class="profile-header bg-dark">
 
-                                <div class="user-name">{{dataInfo.firstName}}</div>
-                                <div class="name-center">Rental Owner </div>
+                                    <div class="user-name">{{dataInfo.firstName}}</div>
+                                    <div class="name-center">Rental Owner </div>
 
-                            </div>
-                            <img src="assets/images/user-big.jpg" class="user-img" alt="">
-                            <p>
-                                {{dataInfo.streetAddress}}
-                                <br>{{dataInfo.city}} , {{dataInfo.state}} <br> {{dataInfo.zip}}
-                            </p>
-                            <div>
-                                <span class="phone">
-                                    <i class="material-icons">phone</i>{{dataInfo.mobileNumber}}</span>
-                            </div>
-                            <div>
-                                <button mat-icon-button color="accent" class="btn-tbl-edit">
-                                   <mat-icon aria-label="Edit" class="col-white" [routerLink]="['../../editOwner',dataInfo.userId]">edit</mat-icon>
-                                </button>
+                                </div>
+                                <img src="assets/images/user-big.jpg" class="user-img" alt="">
+                                <p>
+                                    {{dataInfo.streetAddress}}
+                                    <br>{{dataInfo.city}} , {{dataInfo.state}} <br> {{dataInfo.zip}}
+                                </p>
+                                <div>
+                                    <span class="phone">
+                                        <i class="material-icons">phone</i>{{dataInfo.mobileNumber}}</span>
+                                </div>
+                                <div>
+                                    <button mat-icon-button color="accent" class="btn-tbl-edit">
+                                        <mat-icon aria-label="Edit" class="col-white"
+                                            [routerLink]="['../../editOwner',dataInfo.userId]">edit</mat-icon>
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                 </ng-container>
+                </ng-container>
             </div>
             <div class="col-lg-8 col-md-12">
                 <div class="card">
@@ -75,85 +76,97 @@
                 </div>
                 <div class="tab-content">
                     <ng-container *ngIf="dataInfo">
-                    <div role="tabpanel" class="tab-pane active" id="summary" aria-expanded="true">
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h2>Summary</h2>
-                                    </div>
-                                    <div class="body">
-                                        <div class="row">
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Full Name</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.firstName}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Mobile</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.mobileNumber}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Email</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.primaryEmail}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6">
-                                                <strong>Address</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.streetAddress}}</p>
+                        <div role="tabpanel" class="tab-pane active" id="summary" aria-expanded="true">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2>Summary</h2>
+                                        </div>
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-3 col-6 b-r">
+                                                    <strong>Full Name</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.firstName}}</p>
+                                                </div>
+                                                <div class="col-md-3 col-6 b-r">
+                                                    <strong>Mobile</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.mobileNumber}}</p>
+                                                </div>
+                                                <div class="col-md-3 col-6 b-r">
+                                                    <strong>Email</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.primaryEmail}}</p>
+                                                </div>
+                                                <div class="col-md-3 col-6">
+                                                    <strong>Address</strong>
+                                                    <br>
+                                                    <p class="text-muted">{{dataInfo.streetAddress}}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Financials</h2>
-                            </div>
-                            <div class="body">
+                        <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Financials</h2>
+                                </div>
+                                <div class="body">
 
+                                </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="property" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Property</h2>
-                            </div>
-                            <div class="body">
-                                <div class="row pl-4 pr-4" *ngFor="let property of dataInfo.properties"> 
-                                    <div class="card col-md-12">
-                                        <div class="header box">
-                                            <div class="row">
-                                                <div class="col-md-10 mb-0 pt-2">
-                                                    <h3>{{property.propertyName}}</h3>
-                                                </div>
-                                                <div class="col-md-2 text-right mb-0">
-                                                    <a class="btn btn-success m-2" [routerLink]="['/property/displayPropertyInfo',property.propertyId]"><i class="fas fa-pencil-alt"></i></a>
-                                                    <a class="btn btn-danger m-2" [routerLink]=""><i class="fas fa-trash-alt"></i></a>
+                        <div role="tabpanel" class="tab-pane" id="property" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Property</h2>
+                                </div>
+                                <div class="body">
+                                    <div class="row pl-4 pr-4" *ngFor="let property of dataInfo.properties">
+                                        <div class="card col-md-12">
+                                            <div class="header box">
+                                                <div class="row">
+                                                    <div class="col-md-9 mb-0 pt-2">
+                                                        <h3>{{property.propertyName}}</h3>
+                                                    </div>
+                                                    <div class="col-md-3 text-right mb-0">
+                                                        <a class="btn btn-success m-2"
+                                                            [routerLink]="['/property/displayPropertyInfo',property.propertyId]"><i
+                                                                class="fas fa-pencil-alt"></i></a>
+                                                        <a class="btn btn-danger m-2" [routerLink]=""><i
+                                                                class="fas fa-trash-alt"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="body" >
-                                            <div class="row">
-                                                <div class="col-md-2 text-center">
-                                                    <img [src]="property.propertyUnit[0] && property.propertyUnit[0].propertyPhotos[0] ? property.propertyUnit[0].propertyPhotos[0].photo : '/assets/images/property/property-small.jpg'" class="img-fluid" />
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <div class="row">
-                                                        <div class="col-md-8">
-                                                            <h6>Type : {{property.propertyType.type}}</h6>
-                                                            <span> <b> Area</b> : {{property.propertyUnit[0].squareFeet}}</span>
-                                                            <span> <b> Carpet Area</b> : {{property.propertyUnit[0].carpetArea}}</span> <br />
-                                                            <span><b>Address</b> {{property.propertyUnit[0].address}}, {{property.propertyUnit[0].city}},  {{property.propertyUnit[0].state}}  {{property.propertyUnit[0].zipCode}}</span>
+                                            <div class="body">
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center">
+                                                        <img [src]="property.propertyUnit[0] && property.propertyUnit[0].propertyPhotos[0] ? property.propertyUnit[0].propertyPhotos[0].photo : '/assets/images/property/property-small.jpg'"
+                                                            class="img-fluid" />
+                                                    </div>
+                                                    <div class="col-md-10">
+                                                        <div class="row">
+                                                            <div class="col-md-8">
+                                                                <h6>Type : {{property.propertyType.type}}</h6>
+                                                                <span> <b> Area</b> :
+                                                                    {{property.propertyUnit[0].squareFeet}}</span>
+                                                                <span> <b> Carpet Area</b> :
+                                                                    {{property.propertyUnit[0].carpetArea}}</span>
+                                                                <br />
+                                                                <span><b>Address</b>
+                                                                    {{property.propertyUnit[0].address}},
+                                                                    {{property.propertyUnit[0].city}},
+                                                                    {{property.propertyUnit[0].state}}
+                                                                    {{property.propertyUnit[0].zipCode}}</span>
 
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -162,26 +175,22 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="communications" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Communications</h2>
+                                </div>
+                                <div class="body">
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="communications" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Communications</h2>
+                                </div>
                             </div>
-                            <div class="body">
 
-                            </div>
                         </div>
-
-                    </div>
-                </ng-container>
+                    </ng-container>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-

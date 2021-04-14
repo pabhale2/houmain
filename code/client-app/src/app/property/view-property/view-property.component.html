@@ -7,7 +7,7 @@
                         <li class="breadcrumb-item">
                             <h4 class="page-title">Property Area</h4>
                         </li>
-                       <!-- <li class="breadcrumb-item bcrumb-2">
+                        <!-- <li class="breadcrumb-item bcrumb-2">
                             <a href="#" onClick="return false;">Doctor</a>
                         </li>
                         <li class="breadcrumb-item active">Profile</li>-->
@@ -32,7 +32,7 @@
                                     <a class="nav-link active show" href="#summary" data-toggle="tab">Summary</a>
                                 </li>
                                 <li class="nav-item tab-all p-l-20">
-                                  <a class="nav-link" href="#tenantDetails" data-toggle="tab">Tenant/Owner Details</a>
+                                    <a class="nav-link" href="#tenantDetails" data-toggle="tab">Tenant/Owner Details</a>
                                 </li>
                                 <li class="nav-item tab-all p-l-20">
                                     <a class="nav-link" href="#financials" data-toggle="tab">Financials</a>
@@ -58,84 +58,85 @@
                 </div>
                 <div class="tab-content">
                     <ng-container>
-                    <div role="tabpanel" class="tab-pane active" id="summary" aria-expanded="true">
-                        <div class="row clearfix" >
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h2 ><strong>Property Details</strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
-                                            Edit
-                                        </button></a>
-                                        <hr>
-                                    </div>
-
-                                    <div class="body">
-                                        <ng-container *ngIf="dataInfo">
-                                            <div class="row" >
-                                                <div class="col-md-4 col-6 b-r">
-                                                    <strong>Property Name</strong>
-                                                    <br>
-                                                    <p class="text-muted">{{dataInfo.propertyName}}</p>
-                                                </div>
-                                                <div class="col-md-4 col-6 b-r">
-                                                    <strong>Property Type</strong>
-                                                    <br>
-                                                    <p class="text-muted">{{dataInfo.propertyType.type}}</p>
-                                                </div>
-
-                                            </div>
-                                            <div class="row" >
-
-                                                <div class="col-md-12 col-6 b-r">
-                                                    <strong>Property Description</strong>
-                                                    <br>
-                                                    <p class="text-muted">{{dataInfo.propertyDescription}}</p>
-                                                </div>
-                                            </div>
-                                            <div class="row" >
-                                                <div class="col-md-6 col-6">
-                                                    <strong>ADDRESS</strong><br><a href="#">Map it</a>
-                                                    <br>
-                                                    <p class="text-muted">{{dataInfo.address}}</p>
-                                                </div>
-                                                <div class="col-md-6 col-6 b-r">
-                                                    <strong>City</strong>
-                                                    <br>
-                                                    <p class="text-muted">{{dataInfo.city}}</p>
-                                                </div>
-                                            </div>
-
-                                        <div class="row" >
-
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>State</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.state}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Country</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.country}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Zip Code</strong>
-                                                <br>
-                                                <p class="text-muted">{{dataInfo.zipCode}}</p>
-                                            </div>
-                                            <div class="col-md-3 col-6 b-r">
-                                                <strong>Co-Ordinates</strong>
-                                                <br>
-                                                <p class="text-muted">Latitude : </p>
-                                                <p class="text-muted">Longitude : </p>
-                                            </div>
+                        <div role="tabpanel" class="tab-pane active" id="summary" aria-expanded="true">
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Property Details</strong></h2> <a href="#"><button mat-button
+                                                    class="btn-tbl-edit">
+                                                    Edit
+                                                </button></a>
+                                            <hr>
                                         </div>
-                                        </ng-container>
+
+                                        <div class="body">
+                                            <ng-container *ngIf="dataInfo">
+                                                <div class="row">
+                                                    <div class="col-md-4 col-6 b-r">
+                                                        <strong>Property Name</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.propertyName}}</p>
+                                                    </div>
+                                                    <div class="col-md-4 col-6 b-r">
+                                                        <strong>Property Type</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.propertyType.type}}</p>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-md-12 col-6 b-r">
+                                                        <strong>Property Description</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.propertyDescription}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6 col-6">
+                                                        <strong>ADDRESS</strong><br><a href="#">Map it</a>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.address}}</p>
+                                                    </div>
+                                                    <div class="col-md-6 col-6 b-r">
+                                                        <strong>City</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.city}}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+
+                                                    <div class="col-md-3 col-6 b-r">
+                                                        <strong>State</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.state}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-6 b-r">
+                                                        <strong>Country</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.country}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-6 b-r">
+                                                        <strong>Zip Code</strong>
+                                                        <br>
+                                                        <p class="text-muted">{{dataInfo.zipCode}}</p>
+                                                    </div>
+                                                    <div class="col-md-3 col-6 b-r">
+                                                        <strong>Co-Ordinates</strong>
+                                                        <br>
+                                                        <p class="text-muted">Latitude : </p>
+                                                        <p class="text-muted">Longitude : </p>
+                                                    </div>
+                                                </div>
+                                            </ng-container>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- <div class="row clearfix">
+                            <!-- <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card project_widget">
                                     <div class="header">
@@ -177,64 +178,69 @@
 
 
 
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h2 ><strong>Tenant website setting   </strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
-                                            Edit
-                                        </button></a>
-                                        <hr>
-                                    </div>
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Tenant website setting </strong></h2> <a href="#"><button
+                                                    mat-button class="btn-tbl-edit">
+                                                    Edit
+                                                </button></a>
+                                            <hr>
+                                        </div>
 
-                                    <div class="body">
-                                        <div class="row">
-                                            <div class="col-md-4 col-6 b-r">
-                                                <strong>PAYMENT HISTORY</strong>
-                                                <br>
-                                                <p class="text-muted">Tenant can view all transactions</p>
-                                            </div>
-                                            <div class="col-md-4 col-6 b-r">
-                                                <strong>REQUESTS</strong>
-                                                <br>
-                                                <p class="text-muted">Tenants can submit and view requests online<br> Show entry questions and allow tenants to add notes</p>
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-md-4 col-6 b-r">
+                                                    <strong>PAYMENT HISTORY</strong>
+                                                    <br>
+                                                    <p class="text-muted">Tenant can view all transactions</p>
+                                                </div>
+                                                <div class="col-md-4 col-6 b-r">
+                                                    <strong>REQUESTS</strong>
+                                                    <br>
+                                                    <p class="text-muted">Tenants can submit and view requests
+                                                        online<br> Show entry questions and allow tenants to add notes
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h2 ><strong>Appliances   </strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
-                                            Add
-                                        </button></a>
-                                        <hr>
-                                    </div>
-
-                                    <div class="body">
-                                        <div class="row" *ngIf="dataInfo;else elseApp">
-                                            <div class="col-md-6 col-6 b-r">
-                                                <strong>Appliances</strong>
-                                                <br>
-                                                <p class="text-muted">1.</p>
-                                            </div>
-
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Appliances </strong></h2> <a href="#"><button mat-button
+                                                    class="btn-tbl-edit">
+                                                    Add
+                                                </button></a>
+                                            <hr>
                                         </div>
-                                        <ng-template #elseApp>
-                                            <div class="col-md-12 col-6 b-r">
-                                                <p class="text-muted">You don't have any appliances for this property right now  <a href="#">Add your first Property</a></p>
+
+                                        <div class="body">
+                                            <div class="row" *ngIf="dataInfo;else elseApp">
+                                                <div class="col-md-6 col-6 b-r">
+                                                    <strong>Appliances</strong>
+                                                    <br>
+                                                    <p class="text-muted">1.</p>
+                                                </div>
+
                                             </div>
-                                        </ng-template>
+                                            <ng-template #elseApp>
+                                                <div class="col-md-12 col-6 b-r">
+                                                    <p class="text-muted">You don't have any appliances for this
+                                                        property right now <a href="#">Add your first Property</a></p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <!-- <div class="row clearfix">
+                            <!-- <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card project_widget">
                                     <div class="header">
@@ -261,7 +267,7 @@
                             </div>
                         </div> -->
 
-                        <!-- <div class="row clearfix">
+                            <!-- <div class="row clearfix">
                             <div class="col-lg-12 col-md-12 col-sm-12">
                                 <div class="card project_widget">
                                     <div class="header">
@@ -288,89 +294,94 @@
                             </div>
                         </div> -->
 
-                        <div class="row clearfix">
-                            <div class="col-lg-12 col-md-12 col-sm-12">
-                                <div class="card project_widget">
-                                    <div class="header">
-                                        <h2 ><strong>Recent files   </strong></h2>  <a href="#"><button mat-button class="btn-tbl-edit">
-                                            Add
-                                        </button></a>
-                                        <hr>
-                                    </div>
-
-                                    <div class="body">
-                                        <div class="row" *ngIf="dataInfo;else elseRecent">
-                                            <div class="col-md-6 col-6 b-r">
-                                                <strong>Recent files</strong>
-                                                <br>
-                                                <p class="text-muted">1.</p>
-                                            </div>
-
+                            <div class="row clearfix">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="card project_widget">
+                                        <div class="header">
+                                            <h2><strong>Recent files </strong></h2> <a href="#"><button mat-button
+                                                    class="btn-tbl-edit">
+                                                    Add
+                                                </button></a>
+                                            <hr>
                                         </div>
-                                        <ng-template #elseRecent>
-                                            <div class="col-md-12 col-6 b-r">
-                                                <p class="text-muted">You don't have any files for this rental right now  <a href="#">Upload your first file</a></p>
+
+                                        <div class="body">
+                                            <div class="row" *ngIf="dataInfo;else elseRecent">
+                                                <div class="col-md-6 col-6 b-r">
+                                                    <strong>Recent files</strong>
+                                                    <br>
+                                                    <p class="text-muted">1.</p>
+                                                </div>
+
                                             </div>
-                                        </ng-template>
+                                            <ng-template #elseRecent>
+                                                <div class="col-md-12 col-6 b-r">
+                                                    <p class="text-muted">You don't have any files for this rental right
+                                                        now <a href="#">Upload your first file</a></p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+
                         </div>
 
-                    </div>
+                        <div role="tabpanel" class="tab-pane" id="tenantDetails" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>Tenant/Owner Details</h2>
+                                </div>
+                                <div class="body">
 
-                    <div role="tabpanel" class="tab-pane" id="tenantDetails" aria-expanded="false">
-                      <div class="card">
-                          <div class="header">
-                              <h2>Tenant/Owner Details</h2>
-                          </div>
-                          <div class="body">
-
-                              <div class="profile-tab-box">
-                                  <div class="p-l-20">
-                                      <ul class="nav ">
-                                          <li class="nav-item tab-all">
-                                              <a class="nav-link active show" href="#tenant" data-toggle="tab">Tenant Details</a>
-                                          </li>
-                                          <li class="nav-item tab-all p-l-20">
-                                              <a class="nav-link" href="#owner" data-toggle="tab">Owner Details</a>
-                                          </li>
-                                          <!-- <li class="nav-item tab-all p-l-20">
+                                    <div class="profile-tab-box">
+                                        <div class="p-l-20">
+                                            <ul class="nav ">
+                                                <li class="nav-item tab-all">
+                                                    <a class="nav-link active show" href="#tenant"
+                                                        data-toggle="tab">Tenant Details</a>
+                                                </li>
+                                                <li class="nav-item tab-all p-l-20">
+                                                    <a class="nav-link" href="#owner" data-toggle="tab">Owner
+                                                        Details</a>
+                                                </li>
+                                                <!-- <li class="nav-item tab-all p-l-20">
                                               <a class="nav-link" href="#management" data-toggle="tab">Management fee setting</a>
                                           </li> -->
 
-                                      </ul>
-                                      <hr>
-                                  </div>
-                              </div>
+                                            </ul>
+                                            <hr>
+                                        </div>
+                                    </div>
 
-                              <div class="tab-content">
-                                  <ng-container >
-                                      <div role="tabpanel" class="tab-pane active" id="tenant" aria-expanded="true">
+                                    <div class="tab-content">
+                                        <ng-container>
+                                            <div role="tabpanel" class="tab-pane active" id="tenant"
+                                                aria-expanded="true">
 
-                                          <div class="card">
-                                              <div class="header">
-                                                  <h2> Tenant Name : xyz</h2>
-                                                  <h2> Start Date : </h2>
-                                              </div>
-                                              <div class="body">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Tenant Name : xyz</h2>
+                                                        <h2> Start Date : </h2>
+                                                    </div>
+                                                    <div class="body">
 
-                                              </div>
-                                          </div>
+                                                    </div>
+                                                </div>
 
-                                      </div>
-                                      <div role="tabpanel" class="tab-pane" id="owner" aria-expanded="false">
-                                          <div class="card">
-                                              <div class="header">
-                                                  <h2> Owner Name : xyz</h2>
-                                              </div>
-                                              <div class="body">
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="owner" aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Owner Name : xyz</h2>
+                                                    </div>
+                                                    <div class="body">
 
-                                              </div>
-                                          </div>
+                                                    </div>
+                                                </div>
 
-                                      </div>
-                                      <!-- <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
+                                            </div>
+                                            <!-- <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
                                           <div class="card">
                                               <div class="header">
                                                   <h2> Management fee setting</h2>
@@ -381,136 +392,145 @@
                                           </div>
 
                                       </div> -->
-                                  </ng-container>
-                              </div>
-
-                          </div>
-                      </div>
-
-                  </div>
-                    <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Financials</h2>
-                            </div>
-                            <div class="body">
-
-                                <div class="profile-tab-box">
-                                    <div class="p-l-20">
-                                        <ul class="nav ">
-                                            <li class="nav-item tab-all">
-                                                <a class="nav-link active show" href="#income" data-toggle="tab">Income statement</a>
-                                            </li>
-                                            <li class="nav-item tab-all p-l-20">
-                                                <a class="nav-link" href="#lease" data-toggle="tab">Lease payment setting</a>
-                                            </li>
-                                            <li class="nav-item tab-all p-l-20">
-                                                <a class="nav-link" href="#management" data-toggle="tab">Management fee setting</a>
-                                            </li>
-
-                                        </ul>
-                                        <hr>
+                                        </ng-container>
                                     </div>
+
                                 </div>
-
-                                <div class="tab-content">
-                                    <ng-container >
-                                        <div role="tabpanel" class="tab-pane active" id="income" aria-expanded="true">
-
-                                            <div class="card">
-                                                <div class="header">
-                                                    <h2> Income Statement</h2>
-                                                </div>
-                                                <div class="body">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="lease" aria-expanded="false">
-                                            <div class="card">
-                                                <div class="header">
-                                                    <h2> Lease Payment</h2>
-                                                </div>
-                                                <div class="body">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
-                                            <div class="card">
-                                                <div class="header">
-                                                    <h2> Management fee setting</h2>
-                                                </div>
-                                                <div class="body">
-
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                    </ng-container>
-                                </div>
-
                             </div>
-                        </div>
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="units" aria-expanded="false">
-                        <div class="card">
-                          <!--  <div class="header">
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="financials" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Financials</h2>
+                                </div>
+                                <div class="body">
+
+                                    <div class="profile-tab-box">
+                                        <div class="p-l-20">
+                                            <ul class="nav ">
+                                                <li class="nav-item tab-all">
+                                                    <a class="nav-link active show" href="#income"
+                                                        data-toggle="tab">Income statement</a>
+                                                </li>
+                                                <li class="nav-item tab-all p-l-20">
+                                                    <a class="nav-link" href="#lease" data-toggle="tab">Lease payment
+                                                        setting</a>
+                                                </li>
+                                                <li class="nav-item tab-all p-l-20">
+                                                    <a class="nav-link" href="#management" data-toggle="tab">Management
+                                                        fee setting</a>
+                                                </li>
+
+                                            </ul>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                    <div class="tab-content">
+                                        <ng-container>
+                                            <div role="tabpanel" class="tab-pane active" id="income"
+                                                aria-expanded="true">
+
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Income Statement</h2>
+                                                    </div>
+                                                    <div class="body">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="lease" aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Lease Payment</h2>
+                                                    </div>
+                                                    <div class="body">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="management" aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Management fee setting</h2>
+                                                    </div>
+                                                    <div class="body">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </ng-container>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="units" aria-expanded="false">
+                            <div class="card">
+                                <!--  <div class="header">
                                 <h2> Units</h2>
                             </div> -->
-                            <div class="body">
-                                <div class="profile-tab-box">
-                                    <div class="p-l-20">
-                                        <ul class="nav ">
-                                            <li class="nav-item tab-all">
-                                                <a class="nav-link active show" href="#unitlist" data-toggle="tab">Unit list</a>
-                                            </li>
-                                            <li class="nav-item tab-all p-l-20">
-                                                <a class="nav-link" href="#meter" data-toggle="tab">Meter readings</a>
-                                            </li>
-                                            <li class="nav-item tab-all p-l-20">
-                                                <a class="nav-link" href="#common" data-toggle="tab">Commom expense allocations</a>
-                                            </li>
+                                <div class="body">
+                                    <div class="profile-tab-box">
+                                        <div class="p-l-20">
+                                            <ul class="nav ">
+                                                <li class="nav-item tab-all">
+                                                    <a class="nav-link active show" href="#unitlist"
+                                                        data-toggle="tab">Unit list</a>
+                                                </li>
+                                                <li class="nav-item tab-all p-l-20">
+                                                    <a class="nav-link" href="#meter" data-toggle="tab">Meter
+                                                        readings</a>
+                                                </li>
+                                                <li class="nav-item tab-all p-l-20">
+                                                    <a class="nav-link" href="#common" data-toggle="tab">Commom expense
+                                                        allocations</a>
+                                                </li>
 
-                                        </ul>
-                                        <hr>
+                                            </ul>
+                                            <hr>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="tab-content">
-                                    <ng-container >
-                                        <div role="tabpanel" class="tab-pane active" id="unitlist" aria-expanded="true">
+                                    <div class="tab-content">
+                                        <ng-container>
+                                            <div role="tabpanel" class="tab-pane active" id="unitlist"
+                                                aria-expanded="true">
                                                 <div class="body">
                                                     <div class="table-responsive">
                                                         <div class="materialTableHeader">
                                                             <div class="row">
                                                                 <div class="col-6">
                                                                     <ul class="header-buttons-left ml-0">
-                                                                        <li >
+                                                                        <li>
                                                                             <h2>
-                                                                                <strong>Unit list</strong></h2>
+                                                                                <strong>Unit list</strong>
+                                                                            </h2>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
                                                                 <div class="col-6">
                                                                     <ul class="header-buttons">
                                                                         <li>
-                                                                                <a href="#"><button mat-button >
+                                                                            <a href="#"><button mat-button>
                                                                                     Add Unit
                                                                                 </button></a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="#"><button mat-button >
-                                                                                Enter bulk charges
-                                                                            </button></a>
+                                                                            <a href="#"><button mat-button>
+                                                                                    Enter bulk charges
+                                                                                </button></a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="#"><button mat-button >
-                                                                                Enter bulk credits
-                                                                            </button></a>
+                                                                            <a href="#"><button mat-button>
+                                                                                    Enter bulk credits
+                                                                                </button></a>
                                                                         </li>
                                                                     </ul>
                                                                 </div>
@@ -548,134 +568,148 @@
                                                 </div>
 
 
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="meter" aria-expanded="false">
-                                            <div class="card">
-                                                <div class="header">
-                                                    <h2> Meter Reading</h2>
-                                                </div>
-                                                <div class="body">
-
-                                                </div>
                                             </div>
+                                            <div role="tabpanel" class="tab-pane" id="meter" aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Meter Reading</h2>
+                                                    </div>
+                                                    <div class="body">
 
-                                        </div>
-                                        <div role="tabpanel" class="tab-pane" id="common" aria-expanded="false">
-                                            <div class="card">
-                                                <div class="header">
-                                                    <h2> Common expense allocation</h2>
+                                                    </div>
                                                 </div>
-                                                <div class="body">
-                                                </div>
+
                                             </div>
+                                            <div role="tabpanel" class="tab-pane" id="common" aria-expanded="false">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2> Common expense allocation</h2>
+                                                    </div>
+                                                    <div class="body">
+                                                    </div>
+                                                </div>
 
-                                        </div>
-                                    </ng-container>
+                                            </div>
+                                        </ng-container>
+                                    </div>
                                 </div>
                             </div>
+
                         </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="task" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Tasks</h2>
+                        <div role="tabpanel" class="tab-pane" id="task" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2>Request for service</h2>
+                                </div>
+                                <div class="body">
+                                    <form class="form-group" [formGroup]="serviceForm" (ngSubmit)="requestForService()">
+                                        <label class="container-checkbox" formArrayName="services"
+                                            *ngFor="let service of servicesFormArray.controls; let i = index">
+                                            <input type="checkbox" [formControlName]="i">
+                                            {{servicesData[i].name}}
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <button class="mr-6" mat-raised-button color="primary">submit</button>
+                                    </form>
+                                </div>
                             </div>
-                            <div class="body">
 
-                            </div>
                         </div>
+                        <div role="tabpanel" class="tab-pane" id="eventhistory" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Events History</h2>
+                                </div>
+                                <div class="body">
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="eventhistory" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Events History</h2>
+                                </div>
                             </div>
-                            <div class="body">
 
-                            </div>
                         </div>
-
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="files" aria-expanded="false">
+                        <div role="tabpanel" class="tab-pane" id="files" aria-expanded="false">
                             <div class="body">
                                 <div class="table-responsive">
                                     <div class="materialTableHeader">
-          <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-              <div class="card">
-                <div class="body">
-                  <div class="table-responsive">
-                    <div class="materialTableHeader">
-                      <div class="row">
-                        <div class="col-8">
-                          <ul class="header-buttons-left ml-0">
-                            <li class="dropdown">
-                              <h2>
-                                <strong>Photos</strong>
-                              </h2>
-                            </li>
-                          </ul>
-                        </div>
-                        <div class="col-4">
-                          <ul class="header-buttons">
-                            <li>
-                              <div class="icon-button-demo">
-                                <button mat-mini-fab color="primary" (click)="addPhoto()">
-                                  <mat-icon class="col-white">add</mat-icon>
-                                </button>
-                              </div>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <mat-table [dataSource]="container" matSort class="mat-cell">
-                      <ng-container matColumnDef="Photo Type">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photo Type</mat-header-cell>
-                        <mat-cell *matCellDef="let row">{{row.firstName}}</mat-cell>
-                      </ng-container>
-                      <ng-container matColumnDef="Photos">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Photos</mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.lastName}}</mat-cell>
-                      </ng-container>
-                      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                      <mat-row *matRowDef="let row; columns: displayedColumns;">
-                      </mat-row>
-                    </mat-table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+                                        <div class="row">
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="card">
+                                                    <div class="body">
+                                                        <div class="table-responsive">
+                                                            <div class="materialTableHeader">
+                                                                <div class="row">
+                                                                    <div class="col-8">
+                                                                        <ul class="header-buttons-left ml-0">
+                                                                            <li class="dropdown">
+                                                                                <h2>
+                                                                                    <strong>Photos</strong>
+                                                                                </h2>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="col-4">
+                                                                        <ul class="header-buttons">
+                                                                            <li>
+                                                                                <div class="icon-button-demo">
+                                                                                    <button mat-mini-fab color="primary"
+                                                                                        (click)="addPhoto()">
+                                                                                        <mat-icon class="col-white">add
+                                                                                        </mat-icon>
+                                                                                    </button>
+                                                                                </div>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <mat-table [dataSource]="container" matSort
+                                                                class="mat-cell">
+                                                                <ng-container matColumnDef="Photo Type">
+                                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                        Photo Type</mat-header-cell>
+                                                                    <mat-cell *matCellDef="let row">{{row.firstName}}
+                                                                    </mat-cell>
+                                                                </ng-container>
+                                                                <ng-container matColumnDef="Photos">
+                                                                    <mat-header-cell *matHeaderCellDef mat-sort-header>
+                                                                        Photos</mat-header-cell>
+                                                                    <mat-cell *matCellDef="let row"> {{row.lastName}}
+                                                                    </mat-cell>
+                                                                </ng-container>
+                                                                <mat-header-row *matHeaderRowDef="displayedColumns">
+                                                                </mat-header-row>
+                                                                <mat-row
+                                                                    *matRowDef="let row; columns: displayedColumns;">
+                                                                </mat-row>
+                                                            </mat-table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                    </div>
-                    <div role="tabpanel" class="tab-pane" id="vendors" aria-expanded="false">
-                        <div class="card">
-                            <div class="header">
-                                <h2> Vendors</h2>
-                            </div>
-                            <div class="body">
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="vendors" aria-expanded="false">
+                            <div class="card">
+                                <div class="header">
+                                    <h2> Vendors</h2>
+                                </div>
+                                <div class="body">
 
+                                </div>
                             </div>
+
                         </div>
 
-                    </div>
 
 
 
-
-                </ng-container>
+                    </ng-container>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-

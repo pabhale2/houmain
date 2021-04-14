@@ -7,8 +7,10 @@ import {
   Renderer2,
   HostListener
 } from '@angular/core';
+import { Routes } from '@angular/router';
 import { TokenStorageService } from 'src/app/shared/services/token-storage.service';
 import { ROUTES } from './sidebar-items';
+import { RouteInfo } from './sidebar.metadata';
 declare const Waves: any;
 @Component({
   selector: 'app-sidebar',
@@ -33,8 +35,8 @@ export class SidebarComponent implements OnInit {
   ) {
     this.user = {
       firstName: '',
-      lastName:'',
-      roles:[]
+      lastName: '',
+      roles: []
     };
   }
   @HostListener('window:resize', ['$event'])
@@ -70,10 +72,47 @@ export class SidebarComponent implements OnInit {
   }
   ngOnInit() {
     this.user = this.tokenStorageService.getUser();
-    this.sidebarItems = ROUTES.filter(sidebarItem => sidebarItem);
+    let highestRole = this.findHighestUserRole(this.user.roles);
+    this.user['ROLE'] = highestRole;
+    this.filterMenuItems();
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
   }
+
+  findHighestUserRole(roles: string[]) {
+    let sortedArray = roles.sort((a, b) => a['id'].localeCompare(b['id']));
+    return sortedArray[0];
+  }
+  filterMenuItems() {
+    this.sidebarItems = [];
+    var localRouter: RouteInfo[] = [];
+    Object.assign(localRouter, ROUTES);
+    for (const menuItem of localRouter) {
+      let count = 0;
+      if (menuItem.accessControl.indexOf(this.user['ROLE'].roleName) >= 0) {
+        if (menuItem.submenu) {
+          let i1 = 0;
+          for (const subMenu1 of menuItem.submenu) {
+            if (subMenu1.accessControl.indexOf(this.user['ROLE'].roleName) >= 0) {
+              let i2 = 0;
+              for (const subMenu2 of subMenu1.submenu) {
+                if (subMenu2.accessControl.indexOf(this.user['ROLE'].roleName) === -1) {
+                  menuItem.submenu.splice(i2, 1);
+                }
+                i2++;
+              }
+            } else {
+              menuItem.submenu.splice(i1, 1);
+            }
+            i1++;
+          }
+        }
+        this.sidebarItems.push(menuItem);
+      }
+      count++;
+    }
+  }
+
   initLeftSidebar() {
     const _this = this;
     // Set menu height
