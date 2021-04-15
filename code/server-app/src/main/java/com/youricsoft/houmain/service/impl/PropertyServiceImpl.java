@@ -128,12 +128,12 @@ public class PropertyServiceImpl implements PropertyService{
 				prop.setPropertyRate((PropertyRate)obj[3]);
 				PropertyUnit unit = (PropertyUnit)obj[2];
 				if(prop.getPropertyUnit().contains(unit.getPropertyUnitId())){
-					if(propertyList.size()==4) {
+					if(propertyList.size()==5) {
 						PropertyPhotos photos = (PropertyPhotos)obj[4];
 						unit.getPropertyPhotos().add(photos);
 					}
 				} else {
-					if(propertyList.size()==4) {
+					if(propertyList.size()==5) {
 						PropertyPhotos photos = (PropertyPhotos)obj[4];
 						unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
 						unit.getPropertyPhotos().add(photos);
@@ -146,7 +146,7 @@ public class PropertyServiceImpl implements PropertyService{
 				prop.setPropertyType(propertyType);
 				PropertyUnit unit = (PropertyUnit)obj[2];
 				prop.setPropertyRate((PropertyRate)obj[3]);
-				if(propertyList.size()==4) {
+				if(propertyList.size()==5) {
 					PropertyPhotos photos = (PropertyPhotos)obj[4];
 					unit.setPropertyPhotos(new ArrayList<PropertyPhotos>());
 					unit.getPropertyPhotos().add(photos);

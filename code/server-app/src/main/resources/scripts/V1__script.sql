@@ -161,9 +161,7 @@ CREATE TABLE `propertyownermapping` (
   `registerDate` datetime DEFAULT NULL,
   `updatedBy` int(11) DEFAULT NULL,
   `updatedOn` int(11) DEFAULT NULL,
-  PRIMARY KEY (`mappingId`),
-  KEY `OWNER_PROPERTY_MAPPING_OWNER_ID_idx` (`ownerId`),
-  CONSTRAINT `OWNER_PROPERTY_MAPPING_OWNER_ID` FOREIGN KEY (`ownerId`) REFERENCES `app_owner` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  PRIMARY KEY (`mappingId`)
 ) ENGINE=InnoDB  ;
 
 DROP TABLE IF EXISTS `rent`;
