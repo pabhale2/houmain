@@ -79,7 +79,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER', 'INSPECTOR'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER', 'INSPECTOR','TENANT'],
         submenu: []
       },
       {
