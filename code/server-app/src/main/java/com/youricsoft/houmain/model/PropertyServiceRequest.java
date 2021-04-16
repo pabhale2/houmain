@@ -27,7 +27,7 @@ public class PropertyServiceRequest {
 	@Column(name="property_id")
 	private long propertyId;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
 	@JoinColumn(name="service_id", referencedColumnName = "id")
 	private Services service;
 	

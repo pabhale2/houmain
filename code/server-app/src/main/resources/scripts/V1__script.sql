@@ -274,6 +274,14 @@ CREATE TABLE `property_status` (
   `remark` VARCHAR(500) NULL,
   `updated_date` DATETIME NULL,
   PRIMARY KEY (`id`));
+  
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('1', 'Plumbing', '1', '');
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('2', 'Electricity', '1', '');
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('3', 'Furtniture', '1', '');
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('4', 'AC Services', '1', '');
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('5', 'Water', '1', '');
+INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('6', 'Paste Control', '1', '');
+  
 
 
 

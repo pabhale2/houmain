@@ -25,8 +25,8 @@
                         <article *ngFor="let property of propertyList" class="mt-2">
                             <div class="card">
                                 <div class="body">
-                                    <div class="property-card">
-                                        <div class="property-img">
+                                    <div class="property-card" >
+                                        <div class="property-img pointer" (click)="redirectToProperty(property)">
                                             <img src="assets/images/property/property-big.jpg" class="img-fluid" />
                                             <div class="row">
                                                 <div class="col-md-2 border" *ngFor="let img of property.propertyUnit[0].propertyPhotos">
@@ -36,7 +36,7 @@
                                         </div>
                                         <div class="property-content p-2 pl-3">
                                             <div class="row">
-                                                <div class="col-md-9 col-lg-9 mb-0">
+                                                <div class="col-md-9 col-lg-9 mb-0 pointer" (click)="redirectToProperty(property)">
                                                     <div class="row">
                                                         <div class="col-md-12 col-lg-12 mb-0">
                                                             <span class="font-size-small"><h5>{{property.propertyName}} </h5></span>

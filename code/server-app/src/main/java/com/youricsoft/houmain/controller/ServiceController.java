@@ -5,11 +5,16 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.youricsoft.houmain.bo.ServerResponse;
+import com.youricsoft.houmain.dto.PropertyServiceRequestDTO;
+import com.youricsoft.houmain.enums.ServiceStatusEnum;
+import com.youricsoft.houmain.model.PropertyServiceRequest;
 import com.youricsoft.houmain.model.Services;
 import com.youricsoft.houmain.service.MaintainanceServices;
 
@@ -40,4 +45,35 @@ public class ServiceController {
 		}
 		return response;
 	}
+	
+	@RequestMapping(value="/createServiceRequest", method = RequestMethod.POST, consumes = "application/json")
+	public ServerResponse<List<PropertyServiceRequest>> createServiceRequest(@RequestBody PropertyServiceRequestDTO propertyServiceRequestDTO) {
+		ServerResponse<List<PropertyServiceRequest>> response = new ServerResponse<List<PropertyServiceRequest>>();
+		List<PropertyServiceRequest> list = maintainanceServices.createPropertyServiceRequest(propertyServiceRequestDTO);
+		if(list!=null && !list.isEmpty()) {
+			response.setData(list);
+			response.setStatus(HttpStatus.OK);
+			response.setResponseCode(HttpStatus.OK.value());
+		} else {
+			response.setStatus(HttpStatus.NOT_MODIFIED);
+			response.setResponseCode(HttpStatus.NOT_MODIFIED.value());
+		}
+		return response;
+	}
+	
+	@RequestMapping(value="/serviceRequestByStatus", method = RequestMethod.GET)
+	public ServerResponse<List<PropertyServiceRequest>> allNewServiceRequests(@RequestParam("status") ServiceStatusEnum serviceStatus) {
+		ServerResponse<List<PropertyServiceRequest>> response = new ServerResponse<List<PropertyServiceRequest>>();
+		List<PropertyServiceRequest> list = maintainanceServices.findALlServiceRequestByStatus(serviceStatus);
+		if(list!=null && !list.isEmpty()) {
+			response.setData(list);
+			response.setStatus(HttpStatus.OK);
+			response.setResponseCode(HttpStatus.OK.value());
+		} else {
+			response.setStatus(HttpStatus.NOT_MODIFIED);
+			response.setResponseCode(HttpStatus.NOT_MODIFIED.value());
+		}
+		return response;
+	}
+
 }
