@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.youricsoft.houmain.enums.RoleEnum;
 import com.youricsoft.houmain.model.User;
 
 public interface UserRepository extends CrudRepository<User, Long> {
