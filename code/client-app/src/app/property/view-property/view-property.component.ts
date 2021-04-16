@@ -20,30 +20,12 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from "@angular/forms";
 })
 export class ViewPropertyComponent implements OnInit {
 
-  servicesData = [
-    { name: 'Handyman', value: "Handyman" },
-    { name: 'Carpentry/Furniture Assembly', value: "Carpentry/Furniture Assembly" },
-    { name: 'Tiling', value: "Tiling" },
-    { name: 'Plumbing', value: "Plumbing" },
-    { name: 'Painting', value: "Painting" },
-    { name: 'Gardens', value: "Gardens" },
-    { name: 'Swimming Pool', value: "Swimming Pool" },
-    { name: 'Elevators and Escalators', value: "Elevators and Escalators" },
-    { name: 'Electrical', value: "Electrical" },
-    { name: 'AC Services', value: "AC Services" },
-    { name: 'House Cleaning', value: "House Cleaning" },
-    { name: 'Furniture Cleaning', value: "Furniture Cleaning" },
-    { name: 'Garden Cleaning', value: "Garden Cleaning" },
-    { name: 'Deep Cleaning', value: "Deep Cleaning" },
-    { name: 'Office Cleaning', value: "Office Cleaning" },
-    { name: 'Water Tank Cleaning', value: "Water Tank Cleaning" },
-    { name: 'AC Duct Cleaning', value: "AC Duct Cleaning" },
-    { name: 'Odor Removal', value: "Odor Removal" },
-    { name: 'Pest Control', value: "Pest Control" },
-  ];
+  servicesData: any;
   serviceForm: FormGroup;
   container = new MatTableDataSource();
-  displayedColumns = ["unit", "address", "tenant", "recentEvent"];
+  displayedColumns = [];
+  displayedColumnsforServiceRequestHistroy: string[] = ['id', 'service.id', 'comment', 'vendorId', 'status'];
+
   public property = [];
   dialog: any;
   constructor(
@@ -53,11 +35,10 @@ export class ViewPropertyComponent implements OnInit {
     private formBuilder: FormBuilder
   ) {
     this.serviceForm = this.formBuilder.group({
-      services: new FormArray([]),
-      remark: String,
+      propertyId: [''],
+      serviceId: new FormArray([]),
+      comment: [''],
     });
-
-    this.addCheckboxes();
   }
   dataInfo: any;
   iconText: string;
@@ -66,9 +47,9 @@ export class ViewPropertyComponent implements OnInit {
   pageIndex = 1;
   pageSize: number = 1;
   pageSizeOptions = [1, 5, 10, 50];
-
+  serviceRequestHistory = [];
   get servicesFormArray() {
-    return this.serviceForm.controls.services as FormArray;
+    return this.serviceForm.controls.serviceId as FormArray;
   }
 
   private addCheckboxes() {
@@ -76,21 +57,19 @@ export class ViewPropertyComponent implements OnInit {
   }
 
   requestForService() {
-    const selectedServiceNames = this.serviceForm.value.services
-      .map((checked, i) => checked ? this.servicesData[i].name : null)
+    const selectedServiceNames = this.serviceForm.value.serviceId
+      .map((checked, i) => checked ? this.servicesData[i].id : null)
       .filter(v => v !== null);
-    console.log(selectedServiceNames);
-  }
-
-  ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
-    this.propertyService.getProperty(id)
-      .subscribe
+    this.serviceForm.value.serviceId = selectedServiceNames;
+    this.serviceForm.value.propertyId = this.route.snapshot.params['id'];
+    this.propertyService.createServiceRequest(this.serviceForm.value).subscribe
       (
         data => {
-          if (data && data.responseCode === 200) {
-            this.dataInfo = data.data;
-            console.log(this.dataInfo);
+          if (data && data['responseCode'] === 200) {
+            this.iconText = "success";
+            this.popupText = "Service request added successfully";
+            this.openDialog(this.popupText, this.iconText);
+            this.serviceForm.reset();
           }
           else {
             this.popupText = "Please try again";
@@ -106,6 +85,93 @@ export class ViewPropertyComponent implements OnInit {
             this.popupText = "Not Found - The Authentication URL is not valid";
             this.openDialog(this.popupText, this.iconText);
           } else if (err.status === 500) {
+            this.popupText = "Internal Server Error at Server Side.";
+            this.openDialog(this.popupText, this.iconText);
+          }
+          else {
+            this.popupText = "Application Problem Please contact to Application Administrator ";
+            this.openDialog(this.popupText, this.iconText);
+          }
+        }
+      )
+  }
+
+  ngOnInit() {
+    const id = +this.route.snapshot.params['id'];
+    this.propertyService.getProperty(id)
+      .subscribe
+      (
+        data => {
+          if (data && data.responseCode === 200) {
+            this.dataInfo = data.data;
+            this.getServicesbyTypeId(this.dataInfo.propertyId);
+          }
+          else {
+            this.popupText = "Please try again";
+            this.openDialog(this.popupText, this.iconText);
+          }
+        },
+        err => {
+          this.iconText = "error";
+          if (err.status === 401) {
+            this.popupText = " Unauthorized - Username or Password is Incorrect";
+            this.openDialog(this.popupText, this.iconText);
+          } else if (err.status === 404) {
+            this.popupText = "Not Found - The Authentication URL is not valid";
+            this.openDialog(this.popupText, this.iconText);
+          } else if (err.status === 500) {
+            this.popupText = "Internal Server Error at Server Side.";
+            this.openDialog(this.popupText, this.iconText);
+          }
+          else {
+            this.popupText = "Application Problem Please contact to Application Administrator ";
+            this.openDialog(this.popupText, this.iconText);
+          }
+        }
+      );
+
+    this.propertyService.serviceRequestByStatus('CREATED').subscribe(
+      data => {
+        if (data && data['responseCode'] === 200) {
+          this.serviceRequestHistory = data['data'];
+        }
+        else {
+          this.popupText = "Please try again";
+          this.openDialog(this.popupText, this.iconText);
+        }
+      },
+      err => {
+        this.iconText = "error";
+        if (err.status === 401) {
+          this.popupText = " Unauthorized - Username or Password is Incorrect";
+          this.openDialog(this.popupText, this.iconText);
+        } else if (err.status === 404) {
+          this.popupText = "Not Found - The Authentication URL is not valid";
+          this.openDialog(this.popupText, this.iconText);
+        } else if (err.status === 500) {
+          this.popupText = "Internal Server Error at Server Side.";
+          this.openDialog(this.popupText, this.iconText);
+        }
+        else {
+          this.popupText = "Application Problem Please contact to Application Administrator ";
+          this.openDialog(this.popupText, this.iconText);
+        }
+      }
+    );
+  }
+
+  getServicesbyTypeId(typeId) {
+    this.propertyService.getServicesbyTypeId(typeId).subscribe
+      (
+        data => {
+          if (data && data['responseCode'] === 200) {
+            this.servicesData = data['data'];
+            this.addCheckboxes();
+          }
+        },
+        err => {
+          this.iconText = "error";
+          if (err.status === 500) {
             this.popupText = "Internal Server Error at Server Side.";
             this.openDialog(this.popupText, this.iconText);
           }

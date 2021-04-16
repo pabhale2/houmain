@@ -18,7 +18,13 @@
   opacity: 0;
   cursor: pointer;
 }
-
+.remark-field {
+  width: 100%;
+  height: 120px;
+}
+table {
+  width: 100%;
+}
 /* Create a custom checkbox */
 .container-checkbox .checkmark {
   position: absolute;

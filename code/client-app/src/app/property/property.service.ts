@@ -20,13 +20,13 @@ export class PropertyService {
     return this.dialogData;
   }
   getAllProperty(startIndex, pageSize): Observable<Property[]> {
-    return this.httpClient.get<Property[]>(serverURL + 'service/property/getAll?startIndex='+startIndex+'&pageSize=100');
+    return this.httpClient.get<Property[]>(serverURL + 'service/property/getAll?startIndex=' + startIndex + '&pageSize=100');
   }
 
   getUnSoldProperties(): Observable<Property[]> {
     return this.httpClient.get<Property[]>(serverURL + 'service/property/getUnsoldProperties?startIndex=0&pageSize=100');
   }
-  
+
   addProperty(Property) {
     const body = Property;
     return this.httpClient.post(serverURL + 'service/property/save', body);
@@ -34,5 +34,15 @@ export class PropertyService {
   predictPrice(data): Observable<any> {
     const body = data;
     return this.httpClient.post(this.predictionUrl, body);
+  }
+  getServicesbyTypeId(typeId: any) {
+    return this.httpClient.get(serverURL + 'service/getByTypeId?typeId=' + typeId);
+  }
+  createServiceRequest(serviceRequest: any) {
+    const body = serviceRequest;
+    return this.httpClient.post(serverURL + 'service/createServiceRequest', body);
+  }
+  serviceRequestByStatus(type: string) {
+    return this.httpClient.get(serverURL + 'service/serviceRequestByStatus?status=' + type);
   }
 }

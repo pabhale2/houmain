@@ -477,121 +477,7 @@
                                 <h2> Units</h2>
                             </div> -->
                                 <div class="body">
-                                    <div class="profile-tab-box">
-                                        <div class="p-l-20">
-                                            <ul class="nav ">
-                                                <li class="nav-item tab-all">
-                                                    <a class="nav-link active show" href="#unitlist"
-                                                        data-toggle="tab">Unit list</a>
-                                                </li>
-                                                <li class="nav-item tab-all p-l-20">
-                                                    <a class="nav-link" href="#meter" data-toggle="tab">Meter
-                                                        readings</a>
-                                                </li>
-                                                <li class="nav-item tab-all p-l-20">
-                                                    <a class="nav-link" href="#common" data-toggle="tab">Commom expense
-                                                        allocations</a>
-                                                </li>
 
-                                            </ul>
-                                            <hr>
-                                        </div>
-                                    </div>
-
-                                    <div class="tab-content">
-                                        <ng-container>
-                                            <div role="tabpanel" class="tab-pane active" id="unitlist"
-                                                aria-expanded="true">
-                                                <div class="body">
-                                                    <div class="table-responsive">
-                                                        <div class="materialTableHeader">
-                                                            <div class="row">
-                                                                <div class="col-6">
-                                                                    <ul class="header-buttons-left ml-0">
-                                                                        <li>
-                                                                            <h2>
-                                                                                <strong>Unit list</strong>
-                                                                            </h2>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="col-6">
-                                                                    <ul class="header-buttons">
-                                                                        <li>
-                                                                            <a href="#"><button mat-button>
-                                                                                    Add Unit
-                                                                                </button></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#"><button mat-button>
-                                                                                    Enter bulk charges
-                                                                                </button></a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="#"><button mat-button>
-                                                                                    Enter bulk credits
-                                                                                </button></a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <!-- <mat-table [dataSource]="container" matSort class="mat-cell">
-                                                            <ng-container matColumnDef="unit">
-                                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Units</mat-header-cell>
-                                                                <mat-cell *matCellDef="let row">{{row.unit}}</mat-cell>
-                                                            </ng-container>
-                                                            <ng-container matColumnDef="address">
-                                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Address</mat-header-cell>
-                                                                <mat-cell *matCellDef="let row"> {{row.address}}</mat-cell>
-                                                            </ng-container>
-                                                            <ng-container matColumnDef="tenant">
-                                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Tenants</mat-header-cell>
-                                                                <mat-cell *matCellDef="let row"> {{row.tenant}}</mat-cell>
-                                                            </ng-container>
-                                                            <ng-container matColumnDef="recentEvent">
-                                                                <mat-header-cell *matHeaderCellDef mat-sort-header>Most Recent Event</mat-header-cell>
-                                                                <mat-cell *matCellDef="let row"> {{row.recentEvent}}</mat-cell>
-                                                            </ng-container>
-
-                                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                                                            <mat-row *matRowDef="let row; columns: displayedColumns;">
-                                                            </mat-row>
-                                                        </mat-table>
-                                                        <mat-paginator  #paginator
-                                                                        [length]="length"
-                                                                        [pageIndex]="0"
-                                                                        [pageSize]="pageSize"
-                                                                        [pageSizeOptions]="pageSizeOptions">
-                                                        </mat-paginator> -->
-                                                    </div>
-                                                </div>
-
-
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="meter" aria-expanded="false">
-                                                <div class="card">
-                                                    <div class="header">
-                                                        <h2> Meter Reading</h2>
-                                                    </div>
-                                                    <div class="body">
-
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                            <div role="tabpanel" class="tab-pane" id="common" aria-expanded="false">
-                                                <div class="card">
-                                                    <div class="header">
-                                                        <h2> Common expense allocation</h2>
-                                                    </div>
-                                                    <div class="body">
-                                                    </div>
-                                                </div>
-
-                                            </div>
-                                        </ng-container>
-                                    </div>
                                 </div>
                             </div>
 
@@ -601,15 +487,26 @@
                                 <div class="header">
                                     <h2>Request for service</h2>
                                 </div>
+                                <div style="display:none;">{{ servicesData[1] | json}}</div>
                                 <div class="body">
                                     <form class="form-group" [formGroup]="serviceForm" (ngSubmit)="requestForService()">
-                                        <label class="container-checkbox" formArrayName="services"
-                                            *ngFor="let service of servicesFormArray.controls; let i = index">
+                                        <label class="container-checkbox" formArrayName="serviceId"
+                                            *ngFor="let ser of servicesFormArray.controls; let i = index">
                                             <input type="checkbox" [formControlName]="i">
-                                            {{servicesData[i].name}}
+                                            {{servicesData[i].service}}
                                             <span class="checkmark"></span>
                                         </label>
+
+                                        <!-- <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Remark</mat-label> -->
+                                        <textarea placeholder="Describe here..." class="remark-field"
+                                            formControlName="comment"></textarea>
+                                        <!-- </mat-form-field>
+                                        <mat-form-field class="example-full-width" appearance="outline"> -->
+
                                         <button class="mr-6" mat-raised-button color="primary">submit</button>
+                                        <!-- </mat-form-field> -->
+
                                     </form>
                                 </div>
                             </div>
@@ -621,10 +518,39 @@
                                     <h2> Events History</h2>
                                 </div>
                                 <div class="body">
+                                    <mat-table [dataSource]="serviceRequestHistory" matSort class="mat-cell">
+                                        <ng-container matColumnDef="id">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>No</mat-header-cell>
+                                            <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="service.id">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Service Name
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.service.service}}</mat-cell>
+                                        </ng-container>
 
+                                        <ng-container matColumnDef="comment">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>comment</mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.comment}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="vendorId">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>vendorId
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.vendorId == 0 ? "Not assign"
+                                                : element.vendorId }}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="status">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.status}}</mat-cell>
+                                        </ng-container>
+                                        <mat-header-row *matHeaderRowDef="displayedColumnsforServiceRequestHistroy">
+                                        </mat-header-row>
+                                        <mat-row
+                                            *matRowDef="let row; columns: displayedColumnsforServiceRequestHistroy;">
+                                        </mat-row>
+                                    </mat-table>
                                 </div>
                             </div>
-
                         </div>
                         <div role="tabpanel" class="tab-pane" id="files" aria-expanded="false">
                             <div class="body">

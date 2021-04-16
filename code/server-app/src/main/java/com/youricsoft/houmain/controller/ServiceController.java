@@ -19,7 +19,7 @@ import com.youricsoft.houmain.model.Services;
 import com.youricsoft.houmain.service.MaintainanceServices;
 
 @RestController
-@RequestMapping(value="/service/")
+@RequestMapping(value="/service")
 public class ServiceController {
 	
 	@Resource MaintainanceServices maintainanceServices;
