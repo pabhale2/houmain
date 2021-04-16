@@ -1,6 +1,6 @@
 import { MatTableDataSource } from '@angular/material/table';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PropertyService } from '../property.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,6 +22,7 @@ export class ShowcasePropertyComponent implements OnInit {
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public propertyService: PropertyService,
+    private route: ActivatedRoute,
     private router: Router,
     private tokenStorageService: TokenStorageService,
     private authenticationService: AuthenticationService
@@ -56,5 +57,9 @@ export class ShowcasePropertyComponent implements OnInit {
   
   bookProperty(property){
     console.log(property);
+  }
+
+  redirectToProperty(property) {
+    this.router.navigate(['property/displayPropertyInfo/'+property['propertyId']]);
   }
 }

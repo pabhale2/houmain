@@ -33,4 +33,11 @@ public class Services {
 	@Column(name="description")
 	private String description;
 	
+	public Services() {
+		super();
+	}
+	
+	public Services(long id) {
+		this.id = id;
+	}
 }
