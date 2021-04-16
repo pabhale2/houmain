@@ -11,4 +11,6 @@ public interface MaintainanceServices {
 	public List<Services> findTypeId(long typeId);
 	public List<PropertyServiceRequest> createPropertyServiceRequest(PropertyServiceRequestDTO propertyServiceRequestDTO);
 	public List<PropertyServiceRequest> findALlServiceRequestByStatus(ServiceStatusEnum serviceStatusEnum);
+	public List<PropertyServiceRequest> findAllServiceRequestByPropertyIdAndStatus(long property, ServiceStatusEnum serviceStatusEnum);
+	
 }

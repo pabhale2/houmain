@@ -235,6 +235,20 @@ CREATE TABLE `property_rate` (
  ALTER TABLE `property` 
 CHANGE COLUMN `status` `status` ENUM('ACTIVE', 'INACTIVE', 'PENDING', 'UNDERCONSTRUCTION', 'INSPECTION', 'REJECTED') NULL DEFAULT NULL ;
 
+ALTER TABLE `propertyownermapping` 
+CHANGE COLUMN `mappingId` `mappingId` INT(11) NOT NULL AUTO_INCREMENT ,
+CHANGE COLUMN `ownerId` `ownerId` INT(11) NOT NULL ,
+CHANGE COLUMN `propertyId` `propertyId` INT(11) NOT NULL ,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`mappingId`, `ownerId`, `propertyId`);
+
+ALTER TABLE `propertyownermapping` 
+CHANGE COLUMN `registerDate` `registerDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ;
+
+ALTER TABLE `app_owner` 
+CHANGE COLUMN `street_address` `street_address` VARCHAR(500) NULL DEFAULT NULL ;
+
+
 CREATE TABLE `services` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `service` VARCHAR(100) NOT NULL,
@@ -250,21 +264,6 @@ CREATE TABLE `property_service_request` (
   `comment` VARCHAR(500) NULL,
   `status` VARCHAR(100) NULL,
   PRIMARY KEY (`id`, `property_id`, `service_id`));
-
-
-
-ALTER TABLE `propertyownermapping` 
-CHANGE COLUMN `mappingId` `mappingId` INT(11) NOT NULL AUTO_INCREMENT ,
-CHANGE COLUMN `ownerId` `ownerId` INT(11) NOT NULL ,
-CHANGE COLUMN `propertyId` `propertyId` INT(11) NOT NULL ,
-DROP PRIMARY KEY,
-ADD PRIMARY KEY (`mappingId`, `ownerId`, `propertyId`);
-
-ALTER TABLE `propertyownermapping` 
-CHANGE COLUMN `registerDate` `registerDate` DATETIME NULL DEFAULT CURRENT_TIMESTAMP ;
-
-ALTER TABLE `app_owner` 
-CHANGE COLUMN `street_address` `street_address` VARCHAR(500) NULL DEFAULT NULL ;
 
 CREATE TABLE `property_status` (
   `id` INT NOT NULL AUTO_INCREMENT,

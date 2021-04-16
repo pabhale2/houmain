@@ -8,4 +8,5 @@ import com.youricsoft.houmain.model.PropertyServiceRequest;
 
 public interface PropertyServiceRequestRepository extends CrudRepository<PropertyServiceRequest, Long> {
 	public List<PropertyServiceRequest> findAllServiceRequestByStatus(String status); 
+	public List<PropertyServiceRequest> findAllServiceRequestByPropertyIdAndStatus(long propertyId, String status);
 }

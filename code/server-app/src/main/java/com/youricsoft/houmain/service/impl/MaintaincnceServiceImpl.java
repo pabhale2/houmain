@@ -41,10 +41,12 @@ public class MaintaincnceServiceImpl implements MaintainanceServices {
 		List<PropertyServiceRequest> propertyServiceRequest = new ArrayList<PropertyServiceRequest>();
 		for(long serviceId : propertyServiceRequestDTO.getServiceId()) {
 			PropertyServiceRequest serviceRequest = new PropertyServiceRequest();
+			serviceRequest.setId(propertyServiceRequestDTO.getId());
 			serviceRequest.setPropertyId(propertyServiceRequestDTO.getPropertyId());
-			serviceRequest.setService(new Services(serviceId));
+			serviceRequest.setService(serviceRepository.findById(serviceId).get());
 			serviceRequest.setComment(propertyServiceRequestDTO.getComment());
-			serviceRequest.setStatus(ServiceStatusEnum.CREATED.getValue());
+			serviceRequest.setVendorId(propertyServiceRequestDTO.getVendorId());
+			serviceRequest.setStatus(propertyServiceRequestDTO.getStatus());
 			serviceRequest = propertyServiceRequestRepository.save(serviceRequest);
 			propertyServiceRequest.add(serviceRequest);
 		}
@@ -54,6 +56,11 @@ public class MaintaincnceServiceImpl implements MaintainanceServices {
 	@Override
 	public List<PropertyServiceRequest> findALlServiceRequestByStatus(ServiceStatusEnum serviceStatusEnum) {
 		return propertyServiceRequestRepository.findAllServiceRequestByStatus(serviceStatusEnum.getValue());
+	}
+
+	@Override
+	public List<PropertyServiceRequest> findAllServiceRequestByPropertyIdAndStatus(long propertyId, ServiceStatusEnum serviceStatusEnum) {
+		return propertyServiceRequestRepository.findAllServiceRequestByPropertyIdAndStatus(propertyId, serviceStatusEnum.getValue());
 	}
 	
 }
