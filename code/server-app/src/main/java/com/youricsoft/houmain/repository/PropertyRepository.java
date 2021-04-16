@@ -6,7 +6,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import com.youricsoft.houmain.dto.PropertyDTO;
 import com.youricsoft.houmain.model.Property;
 
 public interface PropertyRepository extends CrudRepository<Property, Long> {

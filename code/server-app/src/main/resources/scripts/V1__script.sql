@@ -31,10 +31,6 @@ CREATE TABLE `app_owner` (
   PRIMARY KEY (`id`,`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=31  ;
 
-LOCK TABLES `app_owner` WRITE;
-INSERT INTO `app_owner` VALUES (30,36,'ABC','amol23@gmail.com',NULL,'+9187676565467',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1);
-UNLOCK TABLES;
-
 DROP TABLE IF EXISTS `app_role`;
 CREATE TABLE `app_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -62,7 +58,7 @@ CREATE TABLE `app_user` (
 
 
 LOCK TABLES `app_user` WRITE;
-INSERT INTO `app_user` VALUES (1,'Admin','Admin','$2a$10$sap2uktmHhe1baACj2JkkOJt5TgfUY89.mf9.0AWaaHkhhGCc8Fsi','admin@system.com',NULL,NULL,1),(36,'Amol','Marathe4','$2a$10$rOC8v5Ms1NbtIPeD3Iw6n.IdJNZl7pw8RdQYIn2svSSnE4G1XVl7q','amol23@gmail.com',NULL,NULL,1),(37,'Pravin','Abhale','$2a$10$x8xu2eWxemBXVHgztZ4RiOZfV2LFSwxowubDgl2.snPwLzyx4ijCS','amo321@gmail.com',NULL,NULL,1);
+INSERT INTO `app_user` VALUES (1,'Admin','Admin','$2a$10$sap2uktmHhe1baACj2JkkOJt5TgfUY89.mf9.0AWaaHkhhGCc8Fsi','admin@system.com',NULL,NULL,1);
 UNLOCK TABLES;
 
 
@@ -190,10 +186,6 @@ CREATE TABLE `tenant` (
   CONSTRAINT `FK_TANENT_USER_USER_ID` FOREIGN KEY (`user_id`) REFERENCES `app_user` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2  ;
 
-LOCK TABLES `tenant` WRITE;
-INSERT INTO `tenant` VALUES (1,37,NULL,NULL,NULL,NULL,'+918888888888');
-UNLOCK TABLES;
-
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -203,9 +195,8 @@ CREATE TABLE `user_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3  ;
 
 LOCK TABLES `user_role` WRITE;
-INSERT INTO `user_role` VALUES (1,36,6),(2,37,7);
+INSERT INTO `user_role` VALUES (1,1,1);
 UNLOCK TABLES;
-
 
 ALTER TABLE `property_photos` 
 DROP COLUMN `parking_area`,
@@ -243,6 +234,24 @@ CREATE TABLE `property_rate` (
  
  ALTER TABLE `property` 
 CHANGE COLUMN `status` `status` ENUM('ACTIVE', 'INACTIVE', 'PENDING', 'UNDERCONSTRUCTION', 'INSPECTION', 'REJECTED') NULL DEFAULT NULL ;
+
+CREATE TABLE `services` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `service` VARCHAR(100) NOT NULL,
+  `type_id` INT NULL,
+  `description` VARCHAR(1000) NULL,
+  PRIMARY KEY (`id`, `service`));
+
+CREATE TABLE `property_service_request` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `property_id` INT NOT NULL,
+  `service_id` INT NOT NULL,
+  `vendor_id` INT NULL,
+  `comment` VARCHAR(500) NULL,
+  `status` VARCHAR(100) NULL,
+  PRIMARY KEY (`id`, `property_id`, `service_id`));
+
+
 
 ALTER TABLE `propertyownermapping` 
 CHANGE COLUMN `mappingId` `mappingId` INT(11) NOT NULL AUTO_INCREMENT ,
