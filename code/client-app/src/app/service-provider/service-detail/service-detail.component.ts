@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-service-detail',
   templateUrl: './service-detail.component.html',
-  styleUrls: ['./service-detail.component.sass']
+  styleUrls: ['./service-detail.component.scss']
 })
 export class ServiceDetailComponent implements OnInit {
 

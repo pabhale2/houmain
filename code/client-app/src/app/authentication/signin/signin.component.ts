@@ -46,10 +46,8 @@ export class SigninComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
        username: ["",[Validators.required , Validators.pattern("^[a-zA-Z0-9._%-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$")]],
        password:["",[Validators.required
-        // ,Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
       ]],
     });
-    // get return url from route parameters or default to '/'
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   get f() {
@@ -97,7 +95,8 @@ export class SigninComponent implements OnInit {
           'ADMIN_USER' : '/dashboard/applicant',
           'INSPECTOR': '/dashboard/applicant',
           'OWNER': '/dashboard/applicant',
-          'TENANT': '/property/showcase-property'
+          'TENANT': '/property/showcase-property',
+          'VENDOR': '/services/vendor-service'
         }
         this.tokenStorage.saveUser(data['data']);
         this.isLoginFailed = false;

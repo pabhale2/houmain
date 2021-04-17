@@ -487,7 +487,6 @@
                                 <div class="header">
                                     <h2>Request for service</h2>
                                 </div>
-                                <div style="display:none;">{{ servicesData[1] | json}}</div>
                                 <div class="body">
                                     <form class="form-group" [formGroup]="serviceForm" (ngSubmit)="requestForService()">
                                         <label class="container-checkbox" formArrayName="serviceId"
@@ -514,41 +513,59 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="eventhistory" aria-expanded="false">
                             <div class="card">
-                                <div class="header">
-                                    <h2> Events History</h2>
-                                </div>
-                                <div class="body">
+                                <div class="table-responsive">
+                                    <div class="materialTableHeader">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <ul class="header-buttons-left ml-0">
+                                                    <li class="dropdown">
+                                                        <h2>
+                                                            <strong>Events History</strong></h2>
+                                                    </li>
+                                                    <li class="dropdown m-l-20">
+                                                     <mat-form-field>
+                                                        <input matInput  placeholder="Filter"> <!-- (keyup)="applyFilter($event.target.value)" -->
+                                                      </mat-form-field>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <mat-table [dataSource]="serviceRequestHistory" matSort class="mat-cell">
                                         <ng-container matColumnDef="id">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header>No</mat-header-cell>
-                                            <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Id</mat-header-cell>
+                                            <mat-cell *matCellDef="let row" >{{row.id}}</mat-cell>
                                         </ng-container>
-                                        <ng-container matColumnDef="service.id">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Service Name
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.service.service}}</mat-cell>
-                                        </ng-container>
-
+                                        <ng-container matColumnDef="serviceName">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Service Name</mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.service.service}}</mat-cell>
+                                        </ng-container> 
                                         <ng-container matColumnDef="comment">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header>comment</mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.comment}}</mat-cell>
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Comment</mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.comment}}</mat-cell>
                                         </ng-container>
                                         <ng-container matColumnDef="vendorId">
-                                            <mat-header-cell *matHeaderCellDef mat-sort-header>vendorId
-                                            </mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.vendorId == 0 ? "Not assign"
-                                                : element.vendorId }}</mat-cell>
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Assigned Vendor Id</mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.vendorId}}</mat-cell>
+                                        </ng-container>
+                                        <ng-container matColumnDef="registerDate">
+                                            <mat-header-cell *matHeaderCellDef mat-sort-header>Register Date</mat-header-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.registerDate | date}}</mat-cell>
                                         </ng-container>
                                         <ng-container matColumnDef="status">
                                             <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.status}}</mat-cell>
+                                            <mat-cell *matCellDef="let row"> {{row.status}}</mat-cell>
                                         </ng-container>
-                                        <mat-header-row *matHeaderRowDef="displayedColumnsforServiceRequestHistroy">
-                                        </mat-header-row>
-                                        <mat-row
-                                            *matRowDef="let row; columns: displayedColumnsforServiceRequestHistroy;">
+                                        <mat-header-row *matHeaderRowDef="displayedColumnsforServiceRequestHistroy"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumnsforServiceRequestHistroy;">
                                         </mat-row>
                                     </mat-table>
+                                    <mat-paginator  #paginator
+                                                    [length]="length"
+                                                    [pageIndex]="0"
+                                                    [pageSize]="pageSize"
+                                                    [pageSizeOptions]="pageSizeOptions">
+                                    </mat-paginator>
                                 </div>
                             </div>
                         </div>

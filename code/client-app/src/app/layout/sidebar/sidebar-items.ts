@@ -95,6 +95,34 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: '',
+    title: 'Services',
+    icon: 'fas fa-user-md',
+    class: 'menu-toggle',
+    groupTitle: false,
+    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'VENDOR'],
+    submenu: [
+      {
+        path: '../services/assign-services',
+        title: 'Service Request',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+        submenu: []
+      },
+      {
+        path: '../services/listService',
+        title: 'Services',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['VENDOR'],
+        submenu: []
+      }
+    ]
+  },
+  {
+    path: '',
     title: 'User',
     icon: 'fas fa-user-md',
     class: 'menu-toggle',

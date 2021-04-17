@@ -1,5 +1,7 @@
 package com.youricsoft.houmain.model;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,7 +31,7 @@ public class PropertyServiceRequest {
 	@Column(name="property_id")
 	private long propertyId;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="service_id", referencedColumnName = "id")
 	private Services service;
 	
@@ -39,6 +43,12 @@ public class PropertyServiceRequest {
 	
 	@Column(name="status")
 	private String status;
+	
+	@Column(name="register_date")
+	private Date registerDate;
+	
+	@Column(name="updated_date")
+	private Date updatedDate;
 	
 }
 	

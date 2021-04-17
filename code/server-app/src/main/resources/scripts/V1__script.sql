@@ -281,6 +281,9 @@ INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('4', 
 INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('5', 'Water', '1', '');
 INSERT INTO `services` (`id`, `service`, `type_id`, `description`) VALUES ('6', 'Paste Control', '1', '');
   
+ALTER TABLE `property_service_request` 
+ADD COLUMN `register_date` DATETIME NULL AFTER `status`,
+ADD COLUMN `updated_date` DATETIME NULL AFTER `register_date`;
 
 
 
