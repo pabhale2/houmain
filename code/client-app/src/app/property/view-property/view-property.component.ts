@@ -24,7 +24,7 @@ export class ViewPropertyComponent implements OnInit {
   serviceForm: FormGroup;
   container = new MatTableDataSource();
   displayedColumns = [];
-  displayedColumnsforServiceRequestHistroy: string[] = ['id', 'service.id', 'comment', 'vendorId', 'status'];
+  displayedColumnsforServiceRequestHistroy: string[] = ['id', 'serviceName', 'comment', 'vendorId', 'registerDate', 'status'];
 
   public property = [];
   dialog: any;
@@ -38,6 +38,7 @@ export class ViewPropertyComponent implements OnInit {
       propertyId: [''],
       serviceId: new FormArray([]),
       comment: [''],
+      status: ['CREATED']
     });
   }
   dataInfo: any;
@@ -48,6 +49,7 @@ export class ViewPropertyComponent implements OnInit {
   pageSize: number = 1;
   pageSizeOptions = [1, 5, 10, 50];
   serviceRequestHistory = [];
+  propertyId;
   get servicesFormArray() {
     return this.serviceForm.controls.serviceId as FormArray;
   }
@@ -56,51 +58,9 @@ export class ViewPropertyComponent implements OnInit {
     this.servicesData.forEach(() => this.servicesFormArray.push(new FormControl(false)));
   }
 
-  requestForService() {
-    const selectedServiceNames = this.serviceForm.value.serviceId
-      .map((checked, i) => checked ? this.servicesData[i].id : null)
-      .filter(v => v !== null);
-    this.serviceForm.value.serviceId = selectedServiceNames;
-    this.serviceForm.value.propertyId = this.route.snapshot.params['id'];
-    this.propertyService.createServiceRequest(this.serviceForm.value).subscribe
-      (
-        data => {
-          if (data && data['responseCode'] === 200) {
-            this.iconText = "success";
-            this.popupText = "Service request added successfully";
-            this.openDialog(this.popupText, this.iconText);
-            this.serviceForm.reset();
-          }
-          else {
-            this.popupText = "Please try again";
-            this.openDialog(this.popupText, this.iconText);
-          }
-        },
-        err => {
-          this.iconText = "error";
-          if (err.status === 401) {
-            this.popupText = " Unauthorized - Username or Password is Incorrect";
-            this.openDialog(this.popupText, this.iconText);
-          } else if (err.status === 404) {
-            this.popupText = "Not Found - The Authentication URL is not valid";
-            this.openDialog(this.popupText, this.iconText);
-          } else if (err.status === 500) {
-            this.popupText = "Internal Server Error at Server Side.";
-            this.openDialog(this.popupText, this.iconText);
-          }
-          else {
-            this.popupText = "Application Problem Please contact to Application Administrator ";
-            this.openDialog(this.popupText, this.iconText);
-          }
-        }
-      )
-  }
-
   ngOnInit() {
-    const id = +this.route.snapshot.params['id'];
-    this.propertyService.getProperty(id)
-      .subscribe
-      (
+    this.propertyId = +this.route.snapshot.params['id'];
+    this.propertyService.getProperty(this.propertyId).subscribe(
         data => {
           if (data && data.responseCode === 200) {
             this.dataInfo = data.data;
@@ -130,7 +90,11 @@ export class ViewPropertyComponent implements OnInit {
         }
       );
 
-    this.propertyService.serviceRequestByStatus('CREATED').subscribe(
+      this.findServiceTicket();
+  }
+
+  findServiceTicket(){
+    this.propertyService.serviceRequestByStatus(this.propertyId, 'CREATED').subscribe(
       data => {
         if (data && data['responseCode'] === 200) {
           this.serviceRequestHistory = data['data'];
@@ -158,6 +122,48 @@ export class ViewPropertyComponent implements OnInit {
         }
       }
     );
+  }
+
+  requestForService() {
+    const selectedServiceNames = this.serviceForm.value.serviceId
+      .map((checked, i) => checked ? this.servicesData[i].id : null)
+      .filter(v => v !== null);
+    this.serviceForm.value.serviceId = selectedServiceNames;
+    this.serviceForm.value.propertyId = this.route.snapshot.params['id'];
+
+    this.propertyService.createServiceRequest(this.serviceForm.value).subscribe
+      (
+        data => {
+          if (data && data['responseCode'] === 200) {
+            this.iconText = "success";
+            this.popupText = "Service request added successfully";
+            this.openDialog(this.popupText, this.iconText);
+            this.serviceForm.reset();
+            this.findServiceTicket();
+          }
+          else {
+            this.popupText = "Please try again";
+            this.openDialog(this.popupText, this.iconText);
+          }
+        },
+        err => {
+          this.iconText = "error";
+          if (err.status === 401) {
+            this.popupText = " Unauthorized - Username or Password is Incorrect";
+            this.openDialog(this.popupText, this.iconText);
+          } else if (err.status === 404) {
+            this.popupText = "Not Found - The Authentication URL is not valid";
+            this.openDialog(this.popupText, this.iconText);
+          } else if (err.status === 500) {
+            this.popupText = "Internal Server Error at Server Side.";
+            this.openDialog(this.popupText, this.iconText);
+          }
+          else {
+            this.popupText = "Application Problem Please contact to Application Administrator ";
+            this.openDialog(this.popupText, this.iconText);
+          }
+        }
+      )
   }
 
   getServicesbyTypeId(typeId) {

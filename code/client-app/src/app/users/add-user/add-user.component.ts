@@ -16,6 +16,7 @@ export class AddUserComponent implements OnInit {
     { value: 'INSPECTOR', role_name: 'INSPECTOR' },
     { value: 'LOCAL_GUIDE', role_name: 'LOCAL_GUIDE' },
     { value: 'STANDARD_USER', role_name: 'STANDARD_USER' },
+    { value: 'VENDOR', role_name: 'VENDOR' },
   ];
   dataInfo: any;
   constructor(private fb: FormBuilder, private httpClient: HttpClient, private userService: UserService, private dialog: MatDialog, private tokenStorageService: TokenStorageService) {

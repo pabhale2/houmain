@@ -1,5 +1,4 @@
 import { ServiceProviderRoutingModule } from './service-provider-routing.module';
-import { ListServiceComponent } from './list-services/list-services.component';
 
 import { MatTabsModule } from '@angular/material/tabs';
 import { NgModule } from '@angular/core';
@@ -22,11 +21,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
+import { AssignServiceComponent } from './assign-services/assign-services.component';
+import { VendorServiceComponent } from './vendor-services/vendor-services.component';
 
 @NgModule({
   declarations: [
-    ListServiceComponent,
-    ServiceDetailComponent
+    ServiceDetailComponent,
+    AssignServiceComponent,
+    VendorServiceComponent
 ],
   imports: [
     MatTabsModule,

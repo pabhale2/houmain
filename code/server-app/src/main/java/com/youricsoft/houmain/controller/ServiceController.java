@@ -90,4 +90,19 @@ public class ServiceController {
 		}
 		return response;
 	}
+	
+	@RequestMapping(value="/propertyAssignToVendor", method = RequestMethod.GET)
+	public ServerResponse<List<PropertyServiceRequest>> propertyAssignToVendor(@RequestParam("vendorId") long vendorId) {
+		ServerResponse<List<PropertyServiceRequest>> response = new ServerResponse<List<PropertyServiceRequest>>();
+		List<PropertyServiceRequest> list = maintainanceServices.findAllServiceRequestByPropertyIdAndStatus(1, ServiceStatusEnum.ASSIGNED);
+		if(list!=null && !list.isEmpty()) {
+			response.setData(list);
+			response.setStatus(HttpStatus.OK);
+			response.setResponseCode(HttpStatus.OK.value());
+		} else {
+			response.setStatus(HttpStatus.NOT_MODIFIED);
+			response.setResponseCode(HttpStatus.NOT_MODIFIED.value());
+		}
+		return response;
+	}
 }

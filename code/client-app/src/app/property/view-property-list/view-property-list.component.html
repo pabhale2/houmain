@@ -78,7 +78,7 @@
                                     <mat-cell *matCellDef="let row" [routerLink]="['../displayPropertyInfo', row.propertyId]"> {{row.address}}</mat-cell>
                                 </ng-container> 
                                    <!-- actions -->
-                                   <ng-container matColumnDef="actions" *ngIf="userRole=='INSPECTOR'">
+                                <ng-container matColumnDef="actions" *ngIf="userRole=='INSPECTOR'">
                                     <mat-header-cell class="pr-0" *matHeaderCellDef>Actions</mat-header-cell>
                                     <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
                                         <button mat-icon-button color="accent" class="btn-tbl-delete"

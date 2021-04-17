@@ -1,6 +1,7 @@
 package com.youricsoft.houmain.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,6 +48,10 @@ public class MaintaincnceServiceImpl implements MaintainanceServices {
 			serviceRequest.setComment(propertyServiceRequestDTO.getComment());
 			serviceRequest.setVendorId(propertyServiceRequestDTO.getVendorId());
 			serviceRequest.setStatus(propertyServiceRequestDTO.getStatus());
+			if(propertyServiceRequestDTO.getId()==0) {
+				serviceRequest.setRegisterDate(new Date());
+			}
+			serviceRequest.setUpdatedDate(new Date());
 			serviceRequest = propertyServiceRequestRepository.save(serviceRequest);
 			propertyServiceRequest.add(serviceRequest);
 		}

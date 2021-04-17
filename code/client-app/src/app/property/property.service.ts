@@ -42,7 +42,7 @@ export class PropertyService {
     const body = serviceRequest;
     return this.httpClient.post(serverURL + 'service/createServiceRequest', body);
   }
-  serviceRequestByStatus(type: string) {
-    return this.httpClient.get(serverURL + 'service/serviceRequestByStatus?status=' + type);
+  serviceRequestByStatus(propertyId: number, type: string) {
+    return this.httpClient.get(serverURL + 'service/propertyServiceRequests?propertyId=' + propertyId + '&status=' + type);
   }
 }

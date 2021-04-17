@@ -1,21 +1,30 @@
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
-import { ListServiceComponent } from './list-services/list-services.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AssignServiceComponent } from './assign-services/assign-services.component';
+import { VendorServiceComponent } from './vendor-services/vendor-services.component';
 
 const routes: Routes = [
   {
-    path: 'listService',
-    component: ListServiceComponent
+    path: '',
+    redirectTo: 'assign-services',
+    pathMatch: 'full'
+  },
+  {
+    path: 'vendor-service',
+    component: VendorServiceComponent
+  },
+  {
+    path: 'assign-services',
+    component: AssignServiceComponent
   },
   {
     path: 'detailServiceInfo/:id',
     component: ServiceDetailComponent
   },
   {
-    path: '',
-    redirectTo: 'listService',
-    pathMatch: 'full'
+    path: 'assign-services',
+    component: AssignServiceComponent
   }
 ];
 @NgModule({
