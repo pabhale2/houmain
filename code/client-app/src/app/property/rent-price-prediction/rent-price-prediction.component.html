@@ -53,9 +53,16 @@
                     </div>
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                            
+                            
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>security</mat-label>
-                                <input matInput formControlName="security">
+                                <mat-label>Security</mat-label>
+                                <mat-select formControlName="security">
+                                  <mat-option *ngFor="let x of flags"
+                                    [value]="x.flag">
+                                    {{x.flag}}
+                                  </mat-option>
+                                </mat-select>
                                 <mat-icon matSuffix>security</mat-icon>
                                 <mat-error *ngFor="let error of errormessage.security">
                                     <ng-container *ngIf="propertyDetails.get('security').hasError(error.type)">
@@ -66,8 +73,13 @@
                         </div>
                         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
                             <mat-form-field class="example-full-width" appearance="outline">
-                                <mat-label>maintenanceStaff</mat-label>
-                                <input matInput formControlName="maintenanceStaff">
+                                <mat-label>Maintenance Staff</mat-label>
+                                <mat-select formControlName="maintenanceStaff">
+                                  <mat-option *ngFor="let x of flags"
+                                    [value]="x.flag">
+                                    {{x.flag}}
+                                  </mat-option>
+                                </mat-select>
                                 <mat-icon matSuffix>portrait</mat-icon>
                                 <mat-error *ngFor="let error of errormessage.maintenanceStaff">
                                     <ng-container *ngIf="propertyDetails.get('maintenanceStaff').hasError(error.type)">
@@ -116,8 +128,8 @@
                         <div class="row">
                             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                                 <h1 class="page-title">Result {{result}} lakhs</h1>
-                                <h1 class="page-title">Rent should be 2.5% - 3% of market value per month </h1>
-                                <h1 class="page-title">i.e between {{minRent}}₹ - {{maxRent}}₹</h1>
+                                <h3 class="page-title">Rent should be 2.5% - 3% of market value per month </h3>
+                                <h3 class="page-title">i.e between {{minRent}}₹ - {{maxRent}}₹</h3>
                             </div>
                         </div>
                     </div></div>

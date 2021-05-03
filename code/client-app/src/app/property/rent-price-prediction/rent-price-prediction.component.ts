@@ -16,6 +16,10 @@ export class RentPricePredictionComponent implements OnInit {
   popupText: string;
   minRent: any;
   maxRent: any;
+  flags = [
+    { "flag": "Yes" },
+    { "flag": "No" }
+   ]
   constructor(private fb : FormBuilder,private httpClient: HttpClient ,private propertyService:PropertyService,private dialog: MatDialog) { }
   propertyDetails : FormGroup;
   resultFlag: boolean;
@@ -52,7 +56,7 @@ export class RentPricePredictionComponent implements OnInit {
     this.propertyDetails = this.fb.group({
       area: ['', [Validators.required,Validators.pattern('[0-9]{1,10}')]],
       bedroomCount: ['', [Validators.required,Validators.pattern('[0-9]{1,2}')]],
-      maintenanceStaff: ['',[Validators.required,Validators.pattern('[0-9]{1,3}')]],
+      maintenanceStaff: ['',[Validators.required]],
       security : ['',[Validators.required]],
       latitude : ['',[Validators.required]],
       longitude : ['',[Validators.required]]
@@ -61,6 +65,8 @@ export class RentPricePredictionComponent implements OnInit {
 
   onSubmit(){
     console.log(this.propertyDetails.value);
+    this.propertyDetails.value.maintenanceStaff =  this.propertyDetails.value.maintenanceStaff === "Yes"?"1":"0";
+    this.propertyDetails.value.security =  this.propertyDetails.value.security === "Yes"?"1":"0";
     this.propertyService.predictPrice(this.propertyDetails.value).subscribe(
       data => {
         this.result = data.price;
