@@ -149,4 +149,32 @@ export const ROUTES: RouteInfo[] = [
       }
     ]
   },
+  {
+    path: '',
+    title: 'Property Evaluation',
+    icon: 'fas fa-user-md',
+    class: 'menu-toggle',
+    groupTitle: false,
+    accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+    submenu: [
+      {
+        path: '../property/rentPrediction',
+        title: 'Evaluate',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+        submenu: []
+      },
+      {
+        path: 'http://127.0.0.1:5000/chennai',
+        title: 'Analysis',
+        icon: '',
+        class: 'ml-menu',
+        groupTitle: false,
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+        submenu: []
+      }
+    ]
+  },
 ];

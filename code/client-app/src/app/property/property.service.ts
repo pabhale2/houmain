@@ -9,6 +9,7 @@ export class PropertyService {
   dataChange: BehaviorSubject<Property[]> = new BehaviorSubject<Property[]>([]);
   dialogData: any;
   predictionUrl = "http://127.0.0.1:5000/predict";
+  topPredictUrl = "http://127.0.0.1:5000/topPredict"
   constructor(private httpClient: HttpClient) { }
 
   getProperty(id): Observable<any> {
@@ -35,6 +36,13 @@ export class PropertyService {
     const body = data;
     return this.httpClient.post(this.predictionUrl, body);
   }
+
+  topPredictPrice(data): Observable<any> {
+    const body = data;
+    return this.httpClient.post(this.topPredictUrl, body);
+  }
+
+  
   getServicesbyTypeId(typeId: any) {
     return this.httpClient.get(serverURL + 'service/getByTypeId?typeId=' + typeId);
   }
@@ -45,4 +53,48 @@ export class PropertyService {
   serviceRequestByStatus(propertyId: number, type: string) {
     return this.httpClient.get(serverURL + 'service/propertyServiceRequests?propertyId=' + propertyId + '&status=' + type);
   }
+
+  getAllServices() {
+    // return this.httpClient.get<Request[]>(serverURL+'service/owner/getAll');
+    return [{
+     "id_property":"1",
+     "property_name":"ABCD pvt.ltd",
+     "property_type":"Commercial",
+     "property_description":"ABC",
+     "address":"ABC company , Xyz road, pqr_nagar,near abc shop",
+     "city":"Pune",
+     "state":"Maharashtra"
+ },
+ {
+      "id_property":"1",
+      "property_name":"ABCD pvt.ltd",
+      "property_type":" ",
+      "property_description":"ABC",
+      "address":"ABC company , Xyz road, pqr_nagar,near abc shop",
+      "city":"Pune",
+      "state":"Maharashtra" 
+ },
+ {
+      "id_property":"1",
+      "property_name":"ABCD pvt.ltd",
+      "property_type":" ",
+      "property_description":"ABC",
+      "address":"ABC company , Xyz road, pqr_nagar,near abc shop",
+      "city":"Pune",
+      "state":"Maharashtra"  
+ },
+ {
+      "id_property":"1",
+      "property_name":"ABCD pvt.ltd",
+      "property_type":" ",
+      "property_description":"ABC",
+      "address":"ABC company , Xyz road, pqr_nagar,near abc shop",
+      "city":"Pune",
+      "state":"Maharashtra" 
+ }
+ ];
+ 
+   }
+
+
 }

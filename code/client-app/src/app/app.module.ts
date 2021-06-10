@@ -54,6 +54,7 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { AuthGuard } from './authentication/auth.guard';
 import { TokenInterceptorService } from './authentication/token-interceptor.service';
 import { AddPropertyComponent } from './property/add-property/add-property.component';
+import { MatCardModule } from '@angular/material/card';
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
   wheelPropagation: false,
@@ -97,6 +98,7 @@ export function tokenGetter() {
     MatSlideToggleModule,
     MatMenuModule,
     ClickOutsideModule,
+    MatCardModule,
     NgxMaskModule.forRoot(),
     AgmCoreModule.forRoot({
       apiKey: 'YOUR API KEY',
