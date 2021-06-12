@@ -98,6 +98,11 @@ export class AssignServiceComponent implements OnInit,AfterViewInit {
   assignPropertyToVendor(row, propertyId, event){
     row.vendorId = event.target.value;
     row.serviceId = [row.service.id];
+    if(row.status!="Assign Vendor")
+      {row.status="ASSIGNED"}
+    else
+      row.status="CREATED";
+    
     this.propertyService.createServiceRequest(row).subscribe
         (
           data => {

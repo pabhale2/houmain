@@ -57,15 +57,16 @@ export class VendorServiceComponent implements OnInit,AfterViewInit {
   ngAfterViewInit() {
     this.container.sort = this.sort;
     this.container.paginator = this.paginator;
-    setTimeout(()=>this.paginator.length = this.length);
+    
   }
   refresh() {
     this.loadData();
   }
   private refreshTable(response) {
     this.container.data=response;
+    console.log(response);
     this.length=this.container.data.length;
-    console.log(this.container);
+    
   }
   applyFilter(filterValue: string) {
     this.container.filter = filterValue.trim().toLowerCase();
@@ -75,12 +76,14 @@ export class VendorServiceComponent implements OnInit,AfterViewInit {
     this.serviceProvider.getPrpertyAssignedToVendor(user.id).subscribe(
       data =>{
         this.refreshTable(data['data']);
+        console.log(data);
         this.container.sort = this.sort;
         this.applyFilter('');
       }, error =>{
 
       }
     );
+    
   }
 
   addOwner() {
