@@ -10,11 +10,11 @@ export const ROUTES: RouteInfo[] = [
     submenu: [
       {
         path: '../rentals/addOwner',
-        title: 'Add Owner',
+        title: 'Edit Profile',
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
+        accessControl: ['STANDARD_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -23,7 +23,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
         submenu: []
       }
     ]
@@ -33,7 +33,7 @@ export const ROUTES: RouteInfo[] = [
     title: 'Tenant',
     icon: 'fas fa-clipboard-list',
     class: 'menu-toggle',
-    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
     groupTitle: false,
     submenu: [
       {
@@ -42,7 +42,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
         submenu: []
       },
       {
@@ -51,7 +51,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'TENANT'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER', 'OWNER'],
         submenu: []
       }
     ]
@@ -155,7 +155,7 @@ export const ROUTES: RouteInfo[] = [
     icon: 'fas fa-user-md',
     class: 'menu-toggle',
     groupTitle: false,
-    accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+    accessControl: ['ADMIN_USER', 'STANDARD_USER','OWNER'],
     submenu: [
       {
         path: '../property/rentPrediction',
@@ -163,7 +163,7 @@ export const ROUTES: RouteInfo[] = [
         icon: '',
         class: 'ml-menu',
         groupTitle: false,
-        accessControl: ['ADMIN_USER', 'STANDARD_USER'],
+        accessControl: ['ADMIN_USER', 'STANDARD_USER','OWNER'],
         submenu: []
       },
       {

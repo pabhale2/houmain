@@ -78,6 +78,17 @@ export class ViewPropertyListComponent implements OnInit {
   applyFilter(filterValue: string) {
     this.container.filter = filterValue.trim().toLowerCase();
   }
+
+  editCall(row){
+    this.container.data.splice(row,1);
+    this.applyFilter('');
+  }
+
+  deleteItem(i, row){
+    this.container.data.splice(row,1);
+    this.applyFilter('');
+  }
+
   public loadData() {
     this.propertyService.getAllProperty(((this.pageIndex*this.pageSize) - this.pageSize), this.pageSize).subscribe(response=>this.refreshTable(response));
     this.container.sort = this.sort;

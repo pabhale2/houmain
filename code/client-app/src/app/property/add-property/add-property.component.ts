@@ -201,8 +201,15 @@ export class AddPropertyComponent implements OnInit {
     this.propertyUnit.push(this.createPropertyUnit());
   }
 
+  applyFilter(filterValue: string) {
+    this.container.filter = filterValue.trim().toLowerCase();
+  }
+
+  
+
   onSubmit(){
       this.addPropertyForm.value['typeId'] = this.addPropertyForm.value['propertyType'];
+      this.addPropertyForm.value['status'] = "INACTIVE";
       this.proService.addProperty(this.addPropertyForm.value).subscribe(
       data => {
         this.iconText="success";

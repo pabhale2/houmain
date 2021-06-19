@@ -18,6 +18,7 @@ export class OwnersService {
   }
   addOwners(owner) {
     const body = owner;
+    console.log(body);
     return this.httpClient.post(serverURL + 'service/owner/save', body);
   }
   getOwner(id): Observable<any> {
