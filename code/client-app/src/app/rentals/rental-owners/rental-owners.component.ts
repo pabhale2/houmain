@@ -60,7 +60,7 @@ export class RentalOwnersComponent implements OnInit,AfterViewInit {
     this.ownersService.getAllOwners().subscribe(response=>this.refreshTable(response));
     this.container.sort = this.sort;
     this.applyFilter('');
-    console.log(this.container);
+    
   }
   addOwner() {
 

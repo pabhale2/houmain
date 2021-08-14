@@ -83,7 +83,7 @@
                                     <mat-header-cell class="pr-0" *matHeaderCellDef>Vendor Id</mat-header-cell>
                                     <mat-cell *matCellDef="let row; let i=index;" class="pr-0">
                                         <select (change)="assignPropertyToVendor(row, row.propertyId, $event)">
-                                            <option>Assign Inspector</option>
+                                            <option>Assign Vendor</option>
                                             <option *ngFor="let vendor of vendors.data" [value]="vendor.id">{{ vendor.firstName+" "+vendor.lastName }}</option>
                                         </select>
                                     </mat-cell>

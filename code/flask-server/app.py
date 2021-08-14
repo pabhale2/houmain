@@ -1,5 +1,6 @@
 from flask import Flask , jsonify , json , Response,send_file,render_template
 from flask import request
+from pandas.core.frame import DataFrame
 from flask_restless import APIManager
 from flask_cors import CORS
 from sklearn.ensemble import ExtraTreesRegressor
@@ -35,7 +36,7 @@ from matplotlib import pyplot as plt
 from string import ascii_letters
 from colorama import Fore, Back, Style
 
-app = Flask(__name__,template_folder = 'templates')
+app = Flask(__name__,static_url_path='',static_folder='templates/',template_folder = 'templates')
 CORS(app)
 
 
@@ -98,14 +99,18 @@ class TrainModel:
 
    
 class Graph:
+    def box_plot(self,x, title,c):
+        fig, ax = plt.subplots(1,1,figsize=(20,10),sharex=True)
+        sns.boxplot(x, ax=ax,color=c)
+        ax.set(xlabel=None)
+        ax.set_title('Boxplot')
+        return fig
+
     def double_plot(self,x, title,c):
-        fig, ax = plt.subplots(2,1,figsize=(20,10),sharex=True)
-        sns.distplot(x, ax=ax[0],color=c)
-        ax[0].set(xlabel=None)
-        ax[0].set_title('Histogram')
-        sns.boxplot(x, ax=ax[1],color=c)
-        ax[1].set(xlabel=None)
-        ax[1].set_title('Boxplot')
+        fig, ax = plt.subplots(1,1,figsize=(20,10),sharex=True)
+        sns.distplot(x, ax=ax,color=c)
+        ax.set(xlabel=None)
+        ax.set_title('Histogram')
         return fig
 
     def count_plot(self,data,title,p):
@@ -130,6 +135,11 @@ class Graph:
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
+@app.route('/analysis')
+def getAnalysis():
+    return render_template('analysis.html')
 
 @app.route('/mumbai')
 def getMumbai():
@@ -173,12 +183,48 @@ def index():
     response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
 
+@app.route('/topPredict', methods=['POST'])
+def topPredict():
+    data = request.get_json()
+    pArea = 500
+    pBedroomCount = 0
+    pMaintenanceStaff = 0
+    pSecurity = 0
+    pLatitude = 12.0
+    pLongitude = 80.0
+    topData = merged
+    topData.query('Area < ({0} + 500) and Area >({0} -500) '.format(pArea),inplace = True)
+    topData.query('MaintenanceStaff == {0}'.format(pMaintenanceStaff),inplace = True )
+    topData.query('Latitude > ({0}-10) and Latitude <({0}+10)'.format(pLatitude),inplace = True )
+    topData.query('Longitude > ({0}-10) and Longitude <({0}+10)'.format(pLongitude),inplace = True )
+    resultData = topData[['Location','Area','Price']].head(n=10)
+    resultData = resultData.reset_index(drop=True)
+    topData = {
+        'data' : resultData.to_json(),
+    }
+
+    df=DataFrame.to_dict(resultData)
+    js = json.dumps(topData)
+    
+    return df
+
 
 @app.route('/mumbaiDoublePlot', methods=['GET'])   
 def mumbaiDoublePlot(): 
     graphObject = Graph() 
     # if name == "mumbai"
     fig = graphObject.double_plot(df2['Price'],'Distribution of Price(in lakhs) in Delhi',custom_colors[1])
+    canvas = FigureCanvas(fig)
+    img = io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+    return send_file(img,mimetype='img/png')
+
+@app.route('/mumbaiBoxPlot', methods=['GET'])   
+def mumbaiBoxPlot(): 
+    graphObject = Graph() 
+    # if name == "mumbai"
+    fig = graphObject.box_plot(df2['Price'],'Distribution of Price(in lakhs) in Delhi',custom_colors[1])
     canvas = FigureCanvas(fig)
     img = io.BytesIO()
     fig.savefig(img)
@@ -219,6 +265,17 @@ def chennaiDoublePlot():
     img.seek(0)
     return send_file(img,mimetype='img/png')
 
+@app.route('/chennaiBoxPlot', methods=['GET'])   
+def chennaiBoxPlot(): 
+    graphObject = Graph() 
+    # if name == "mumbai"
+    fig = graphObject.box_plot(df3['Price'],'Distribution of Price(in lakhs) in Chennai',custom_colors[2])
+    canvas = FigureCanvas(fig)
+    img = io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+    return send_file(img,mimetype='img/png')
+
 @app.route('/chennaiCountPlot', methods=['GET'])   
 def chennaiCountPlot(): 
     graphObject = Graph() 
@@ -252,6 +309,19 @@ def hyderabadDoublePlot():
     fig.savefig(img)
     img.seek(0)
     return send_file(img,mimetype='img/png')
+
+@app.route('/hyderabadBoxPlot', methods=['GET'])   
+def hyderabadBoxPlot(): 
+    graphObject = Graph() 
+    # if name == "mumbai"
+    fig = graphObject.box_plot(df4['Price'],'Distribution of Price(in lakhs) in Hyderabad',custom_colors[3])
+    canvas = FigureCanvas(fig)
+    img = io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+    return send_file(img,mimetype='img/png')
+
+
 
 @app.route('/hyderabadCountPlot', methods=['GET'])   
 def hyderabadCountPlot(): 
@@ -287,6 +357,17 @@ def delhiDoublePlot():
     img.seek(0)
     return send_file(img,mimetype='img/png')
 
+@app.route('/delhiBoxPlot', methods=['GET'])   
+def delhiBoxPlot(): 
+    graphObject = Graph() 
+    # if name == "mumbai"
+    fig = graphObject.box_plot(df2['Price'],'Distribution of Price(in lakhs) in Delhi',custom_colors[1])
+    canvas = FigureCanvas(fig)
+    img = io.BytesIO()
+    fig.savefig(img)
+    img.seek(0)
+    return send_file(img,mimetype='img/png')    
+
 @app.route('/delhiCountPlot', methods=['GET'])   
 def delhiCountPlot(): 
     graphObject = Graph() 
@@ -309,6 +390,74 @@ def delhiScatterPlot():
     img.seek(0)
     return send_file(img,mimetype='img/png')
 
+def preprocess(df) :
+    df = df[['Location','Latitude','Longitude','Price']]
+    df = df.replace('NA', np.nan)
+    df.dropna(subset=['Latitude'], inplace=True)
+    df.dropna(subset=['Price'], inplace=True)
+    df["Latitude"] = df["Latitude"].astype(float)
+    df["Longitude"] = df["Longitude"].astype(float)
+    return df
+
+@app.route('/chennaiMap', methods=['GET'])  
+def chennaiMap():
+    map3_df = preprocess(df3)
+    city_map = folium.Map(location=[13.04,80], zoom_start=10.5, tiles='Stamen Terrain')
+    mc = MarkerCluster()
+    for idx, row in map3_df.iterrows():
+        if not math.isnan(row['Longitude']) and not math.isnan(row['Latitude']):
+            popup = """
+            Location : <b>%s</b><br>
+            Price : <b>%s</b><br>
+            """ % (row['Location'], row['Price'])
+            mc.add_child(Marker([row['Latitude'], row['Longitude']],tooltip=popup))
+        city_map.add_child(mc)
+    return city_map._repr_html_()
+
+@app.route('/mumbaiMap', methods=['GET'])  
+def mumbaiMap():
+    map1_df = preprocess(df1)
+    city_map = folium.Map(location=[19.08,72.74], zoom_start=11.2, tiles='Stamen Terrain')
+    mc = MarkerCluster()
+    for idx, row in map1_df.iterrows():
+        if not math.isnan(row['Longitude']) and not math.isnan(row['Latitude']):
+            popup = """
+            Location : <b>%s</b><br>
+            Price : <b>%s</b><br>
+            """ % (row['Location'], row['Price'])
+            mc.add_child(Marker([row['Latitude'], row['Longitude']],tooltip=popup))
+        city_map.add_child(mc)
+    return city_map._repr_html_()
+
+@app.route('/delhiMap', methods=['GET'])  
+def delhiMap():
+    map2_df = preprocess(df2)
+    city_map = folium.Map(location=[28.69,76.95], zoom_start=10, tiles='Stamen Terrain')
+    mc = MarkerCluster()
+    for idx, row in map2_df.iterrows():
+        if not math.isnan(row['Longitude']) and not math.isnan(row['Latitude']):
+            popup = """
+            Location : <b>%s</b><br>
+            Price : <b>%s</b><br>
+            """ % (row['Location'], row['Price'])
+            mc.add_child(Marker([row['Latitude'], row['Longitude']],tooltip=popup))
+        city_map.add_child(mc)
+    return city_map._repr_html_()
+
+@app.route('/hyderabadMap', methods=['GET'])  
+def hyderabadMap():
+    map4_df = preprocess(df4)
+    city_map = folium.Map(location=[17.4,78.2], zoom_start=10, tiles='Stamen Terrain')
+    mc = MarkerCluster()
+    for idx, row in map4_df.iterrows():
+        if not math.isnan(row['Longitude']) and not math.isnan(row['Latitude']):
+            popup = """
+            Location : <b>%s</b><br>
+            Price : <b>%s</b><br>
+            """ % (row['Location'], row['Price'])
+            mc.add_child(Marker([row['Latitude'], row['Longitude']],tooltip=popup))
+        city_map.add_child(mc)
+    return city_map._repr_html_()
 
 if __name__ == "__main__":
     app.run(debug=True)

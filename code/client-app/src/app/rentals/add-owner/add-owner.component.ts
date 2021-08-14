@@ -121,7 +121,7 @@ export class AddOwnerComponent implements OnInit {
     this.ownerService.addOwners(this.ownerDetails.value).subscribe(
       data => {
         this.iconText="success";
-        this.popupText=" User added successfully";
+        this.popupText=" Profile Updated successfully";
         this.openDialog(this.popupText,this.iconText);
         this.ownerDetails.reset();
       },

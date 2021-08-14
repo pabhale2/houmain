@@ -51,11 +51,12 @@ export class UsersComponent implements OnInit, AfterViewInit {
     let newResponse = [];
     response.data.forEach(function (element) {
       //Filter data based on requirement 
-      if (element.roles.some(e => e.roleName != "OWNER") && element.roles.some(e => e.roleName != "TENANT") && element.roles.some(e => e.roleName != "VENDOR")) {
+      if (element.roles.some(e => e.roleName != "ADMIN_USER")) {
         newResponse.push(element);
       }
     });
     this.container.data = newResponse;
+    console.log(this.container);
     this.length = this.container.data.length;
   }
   applyFilter(filterValue: string) {
@@ -65,7 +66,7 @@ export class UsersComponent implements OnInit, AfterViewInit {
     this.userService.getAllUser().subscribe(response => this.refreshTable(response));
     this.container.sort = this.sort;
     this.applyFilter('');
-    console.log(this.container);
+    
   }
   addOwner() {
 

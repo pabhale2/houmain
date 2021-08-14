@@ -28,7 +28,9 @@ export class ServiceProviderService {
   }
 
   getPrpertyAssignedToVendor(vendorId){
-    return this.http.get(serverURL + 'service/propertyAssignToVendor?vendorId=' +vendorId);
+    console.log(vendorId);
+    return this.http.get(serverURL + 'service/propertyAssignToVendor?vendorId='+vendorId);
+    
   }
 
 }

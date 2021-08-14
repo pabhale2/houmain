@@ -108,11 +108,11 @@ export class EditOwnerComponent implements OnInit {
   );
   }
   onSubmit(){
-      console.log(this.ownerDetails.value);
+      
       this.ownerService.addOwners(this.ownerDetails.value).subscribe(
         data => {
           this.iconText="success";
-          this.popupText=" User added successfully";
+          this.popupText="Profile updated successfully";
           this.openDialog(this.popupText,this.iconText);
         },
         err => {
